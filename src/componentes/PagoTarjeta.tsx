@@ -118,7 +118,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
   return (
     <Box sx={{ width: "100%", maxWidth: 600, margin: "0 auto" }}>
       {/* ❌ BOTÓN CERRAR */}
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end"}}>
         <Button
           onClick={() => {
             resetForm();
@@ -127,9 +127,10 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
           sx={{
             bgcolor: "red",
             color: "white",
-            px: 2,
+            px: 0.5,
             py: 0.5,
             borderRadius: 2,
+            marginBottom: 2,
             "&:hover": { bgcolor: "#b30000" },
           }}
         >

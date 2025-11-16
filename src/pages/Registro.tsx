@@ -1,4 +1,3 @@
-
 import {
     Box,
     Button,
@@ -66,8 +65,6 @@ export const Registro = () => {
                 : null
 
         return { [name]: errorMessage }
-
-        setErrors((prev) => ({ ...prev, ...validations(name, value) }))
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,6 +74,7 @@ export const Registro = () => {
         const validationResult = validations(name, value)
         setErrors((prev) => ({ ...prev, ...validationResult }))
     }
+
     const navigate = useNavigate()
 
     const senData = async () => {
@@ -99,8 +97,6 @@ export const Registro = () => {
                     )
                 setErrors(errorMessages)
                 throw new Error('Error al enviar los datos de registro')
-
-                console.log(errorMessages)
             }
 
             navigate('/login')
@@ -165,18 +161,16 @@ export const Registro = () => {
                                     label="Usuario"
                                     type="text"
                                     variant="outlined"
-                                    //sx={{ width: 239 }}
                                     fullWidth
                                     onChange={handleChange}
                                     value={objData.user}
                                 />
                                 {errors.user && (
-                                <span style={{ color: 'red' }}>
-                                    {errors.user}
-                                </span>
-                            )}
+                                    <span style={{ color: 'red' }}>
+                                        {errors.user}
+                                    </span>
+                                )}
                             </Grid>
-                            
 
                             {/* Contraseña */}
                             <Grid size={{ xs: 12, sm: 6 }}>
@@ -185,12 +179,9 @@ export const Registro = () => {
                                         Contraseña
                                     </InputLabel>
                                     <OutlinedInput
-                                        sx={{ marginRight: 3 }}
                                         name="password"
                                         onChange={handleChange}
-                                        type={
-                                            showPassword ? 'text' : 'password'
-                                        }
+                                        type={showPassword ? 'text' : 'password'}
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -199,22 +190,12 @@ export const Registro = () => {
                                                             ? 'hide the password'
                                                             : 'display the password'
                                                     }
-                                                    onClick={
-                                                        handleClickShowPassword
-                                                    }
-                                                    onMouseDown={
-                                                        handleMouseDownPassword
-                                                    }
-                                                    onMouseUp={
-                                                        handleMouseUpPassword
-                                                    }
+                                                    onClick={handleClickShowPassword}
+                                                    onMouseDown={handleMouseDownPassword}
+                                                    onMouseUp={handleMouseUpPassword}
                                                     edge="end"
                                                 >
-                                                    {showPassword ? (
-                                                        <VisibilityOff />
-                                                    ) : (
-                                                        <Visibility />
-                                                    )}
+                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
                                                 </IconButton>
                                             </InputAdornment>
                                         }
@@ -222,20 +203,17 @@ export const Registro = () => {
                                         value={objData.password}
                                     />
                                 </FormControl>
-                                {errors.user && (
-                                <span style={{ color: 'red' }}>
-                                    {errors.password}
-                                </span>
-                            )}
+                                {errors.password && (
+                                    <span style={{ color: 'red' }}>
+                                        {errors.password}
+                                    </span>
+                                )}
                             </Grid>
 
                             {/* Nombre */}
                             <Grid
                                 size={{ xs: 12, sm: 6 }}
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}
+                                sx={{ display: 'flex', justifyContent: 'center' }}
                             >
                                 <TextField
                                     required
@@ -273,13 +251,12 @@ export const Registro = () => {
                                     onChange={handleChange}
                                     value={objData.email}
                                 />
+                                {errors.email && (
+                                    <span style={{ color: 'red' }}>
+                                        {errors.email}
+                                    </span>
+                                )}
                             </Grid>
-
-                            {errors.user && (
-                                <span style={{ color: 'red' }}>
-                                    {errors.email}
-                                </span>
-                            )}
 
                             {/* Teléfono */}
                             <Grid size={{ xs: 12, sm: 6 }}>
