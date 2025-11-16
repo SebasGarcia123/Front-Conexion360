@@ -11,7 +11,7 @@ import Box from '@mui/material/Box'
 import type { ISpace } from '../types'
 import { ReservaForm } from '../componentes/ReservaForm' // <-- tu formulario exportado como componente
 import CloseIcon from '@mui/icons-material/Close'
-import { IconButton } from '@mui/material'
+import { IconButton, CircularProgress } from '@mui/material'
 import '../styles/Amenities.css'
 import WifiRoundedIcon from '@mui/icons-material/WifiRounded'
 import WeekendRoundedIcon from '@mui/icons-material/WeekendRounded'
@@ -27,260 +27,248 @@ import FreeBreakfastRoundedIcon from '@mui/icons-material/FreeBreakfastRounded'
 import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenterRounded'
 import DirectionsCarFilledRoundedIcon from '@mui/icons-material/DirectionsCarFilledRounded'
 import { PagoTarjeta } from './PagoTarjeta'
+import type { ReservationRequest } from'../types';
+import axios, { AxiosError } from 'axios'
 
 type Props = {
-    space: ISpace
+  space: ISpace
 }
 
 export default function CardAlternativas({ space }: Props) {
-    const [open, setOpen] = useState(false)
-    const [openInfo, setOpenInfo] = useState(false)
-    const [openPayment, setOpenPayment] = useState(false)
-    const handleOpenInfo = () => setOpenInfo(true)
-    const handleCloseInfo = () => setOpenInfo(false)
-    const [reservationData, setReservationData] = useState(null);
+  const [open, setOpen] = useState(false)
+  const [openInfo, setOpenInfo] = useState(false)
+  const [openPayment, setOpenPayment] = useState(false)
+  const [reservationData, setReservationData] = useState<ReservationRequest | null>(null);
 
-    const handleFinishReservation = () => {
-    setOpen(false)
-    setOpenPayment(false)
+  // estados para crear reserva
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleFinishReservation = async () => {
+  if (!reservationData) {
+    console.error("No hay datos de reserva disponibles")
+    setIsSubmitting(false)
+    return
+  }
+
+  try {
+      setIsSubmitting(true)
+      const token = sessionStorage.getItem('authToken')
+      await axios.post(
+          'http://localhost:4000/reservations',
+          reservationData,
+          { headers: { Authorization: `Bearer ${token}` } }
+      )
+      setIsSubmitting(false)
+      setOpenPayment(false)
+      setReservationData(null)
+  } catch (error) {
+      const err = error as AxiosError
+      console.error('Error al enviar los datos:', err.response?.data || err.message)
+      setIsSubmitting(false) // <--- importante, para quitar el spinner
+  }
 }
 
-    return (
-        <>
-            {/* ----------------- CARD ----------------- */}
-            <Card
-                sx={{
-                    maxWidth: 300,
-                    height: 480,
-                    border: 1,
-                    marginInline: 1,
-                    transition: '0.2s',
-                    '&:hover': { transform: 'scale(1.05)' },
-                }}
-            >
-                <CardActionArea onClick={handleOpenInfo}>
-                    <CardMedia
-                        component="img"
-                        height="250"
-                        image={space.pictureUrl}
-                        alt={space.spaceType}
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5">
-                            {typeof space.building === 'object'
-                                ? space.building.name
-                                : 'Nombre edificio no disponible'}
-                        </Typography>
 
-                        <Typography
-                            variant="body2"
-                            sx={{ color: 'text.secondary' }}
-                        >
-                            {space.description}
-                        </Typography>
+  return (
+    <>
+      {/* card */}
+      <Card
+        sx={{
+          maxWidth: 300,
+          height: 480,
+          border: 1,
+          marginInline: 1,
+          transition: '0.2s',
+          '&:hover': { transform: 'scale(1.05)' },
+        }}
+      >
+        <CardActionArea onClick={() => setOpenInfo(true)}>
+          <CardMedia component="img" height="250" image={space.pictureUrl} alt={space.spaceType} />
+          <CardContent>
+            <Typography gutterBottom variant="h5">
+              {typeof space.building === 'object' ? space.building.name : 'Nombre edificio no disponible'}
+            </Typography>
 
-                        <Typography
-                            variant="subtitle2"
-                            sx={{ color: 'text.secondary' }}
-                        >
-                            Capacidad: {space.capacity}
-                        </Typography>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              {space.description}
+            </Typography>
 
-                        <Typography
-                            variant="subtitle2"
-                            sx={{ color: 'text.secondary' }}
-                        >
-                            ${space.pricePerDay} / día
-                        </Typography>
-                    </CardContent>
-                </CardActionArea>
+            <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+              Capacidad: {space.capacity}
+            </Typography>
 
-                <CardActions>
-                    <Button
-                        size="small"
-                        color="primary"
-                        variant="outlined"
-                        onClick={() => setOpen(true)}
-                    >
-                        Lo quiero!
-                    </Button>
-                </CardActions>
-            </Card>
+            <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+              ${space.pricePerDay} / día
+            </Typography>
+          </CardContent>
+        </CardActionArea>
 
-            {/* ----------------- MODAL ----------------- */}
-            <Modal open={open} onClose={() => setOpen(false)}>
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 700,
-                        bgcolor: 'background.paper',
-                        borderRadius: 2,
-                        boxShadow: 24,
-                        p: 3,
-                    }}
-                >
-                    <IconButton
-                        onClick={() => setOpen(false)}
-                        sx={{ position: 'absolute', top: 8, right: 8 }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
+        <CardActions>
+          <Button size="small" color="primary" variant="outlined" onClick={() => setOpen(true)}>
+            Lo quiero!
+          </Button>
+        </CardActions>
+      </Card>
 
-                    <ReservaForm
-                      space={space}
-                      onClose={() => setOpen(false)}
-                      onGoToPayment={(data) => {
-                          setReservationData(data)       // ← guardo los datos
-                          setOpen(false)
-                          setOpenPayment(true)
-                      }}
-                  />
+      {/* ----------------- MODAL RESERVA ----------------- */}
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 700,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 3,
+          }}
+        >
+          <IconButton onClick={() => setOpen(false)} sx={{ position: 'absolute', top: 8, right: 8 }}>
+            <CloseIcon />
+          </IconButton>
 
-                </Box>
-            </Modal>
+          <ReservaForm
+            space={space}
+            //onClose={() => setOpen(false)}
+            onGoToPayment={(data) => {
+              setReservationData(data) // ← guardo los datos
+              setOpen(false)
+              setOpenPayment(true)
+            }}
+          />
+        </Box>
+      </Modal>
 
-            {/* 🔹 MODAL DE INFO */}
-            <Modal open={openInfo} onClose={handleCloseInfo}>
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 1000,
-                        height: 550,
-                        bgcolor: 'background.paper',
-                        p: 4,
-                        borderRadius: 2,
-                        boxShadow: 24,
-                    }}
-                >
-                    <Button
-                        onClick={handleCloseInfo}
-                        sx={{
-                            position: 'absolute',
-                            top: 30,
-                            right: 30,
-                            minWidth: '30px',
-                            height: '30px',
-                            bgcolor: 'red',
-                            color: 'white',
-                            fontWeight: 'bold',
-                            borderRadius: '50%',
-                            '&:hover': {
-                                bgcolor: '#f40505ff',
-                            },
-                        }}
-                    >
-                        X
-                    </Button>
-                    <Typography variant="h6" mb={2}>
-                        Servicios
-                    </Typography>
-                    <div className="services-container">
-                        <div className="service-card">
-                            <WifiRoundedIcon className="service-icon" />
-                            <span className="service-title">
-                                Wifi de alta velocidad
-                            </span>
-                        </div>
+      {/* 🔹 MODAL DE INFO */}
+      <Modal open={openInfo} onClose={() => setOpenInfo(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 1000,
+            height: 550,
+            bgcolor: 'background.paper',
+            p: 4,
+            borderRadius: 2,
+            boxShadow: 24,
+          }}
+        >
+          <Button
+            onClick={() => setOpenInfo(false)}
+            sx={{
+              position: 'absolute',
+              top: 30,
+              right: 30,
+              minWidth: '30px',
+              height: '30px',
+              bgcolor: 'red',
+              color: 'white',
+              fontWeight: 'bold',
+              borderRadius: '50%',
+              '&:hover': {
+                bgcolor: '#f40505ff',
+              },
+            }}
+          >
+            X
+          </Button>
+          <Typography variant="h6" mb={2}>
+            Servicios
+          </Typography>
+          <div className="services-container">
+            {/* ... tus service-cards (idénticos a los tuyos) */}
+            <div className="service-card">
+              <WifiRoundedIcon className="service-icon" />
+              <span className="service-title">Wifi de alta velocidad</span>
+            </div>
+            <div className="service-card">
+              <WeekendRoundedIcon className="service-icon" />
+              <span className="service-title">Sala de estar</span>
+            </div>
+            <div className="service-card">
+              <VpnKeyRoundedIcon className="service-icon" />
+              <span className="service-title">Lockers</span>
+            </div>
+            <div className="service-card">
+              <SportsEsportsRoundedIcon className="service-icon" />
+              <span className="service-title">Sector esparcimiento</span>
+            </div>
+            <div className="service-card">
+              <RestaurantRoundedIcon className="service-icon" />
+              <span className="service-title">Comedor</span>
+            </div>
+            <div className="service-card">
+              <SmokingRoomsRoundedIcon className="service-icon" />
+              <span className="service-title">Area fumadores</span>
+            </div>
+            <div className="service-card">
+              <ShowerRoundedIcon className="service-icon" />
+              <span className="service-title">Duchas</span>
+            </div>
+            <div className="service-card">
+              <PrintRoundedIcon className="service-icon" />
+              <span className="service-title">Impresoras</span>
+            </div>
+            <div className="service-card">
+              <MedicalServicesRoundedIcon className="service-icon" />
+              <span className="service-title">Servicio médico</span>
+            </div>
+            <div className="service-card">
+              <LocalPoliceRoundedIcon className="service-icon" />
+              <span className="service-title">Seguridad 24 hs</span>
+            </div>
+            <div className="service-card">
+              <FreeBreakfastRoundedIcon className="service-icon" />
+              <span className="service-title">Cafeteria</span>
+            </div>
+            <div className="service-card">
+              <FitnessCenterRoundedIcon className="service-icon" />
+              <span className="service-title">Gimnasio</span>
+            </div>
+            <div className="service-card">
+              <DirectionsCarFilledRoundedIcon className="service-icon" />
+              <span className="service-title">Estacionamiento</span>
+            </div>
+          </div>
+        </Box>
+      </Modal>
 
-                        <div className="service-card">
-                            <WeekendRoundedIcon className="service-icon" />
-                            <span className="service-title">Sala de estar</span>
-                        </div>
+      {/* MODAL PAGO */}
+      <Modal open={openPayment} onClose={() => setOpenPayment(false)}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            borderRadius: 2,
+            boxShadow: 24,
+            p: 3,
+          }}
+        >
+          <PagoTarjeta
+            onCancel={() => {
+              setOpenPayment(false)
+            }}
+            onFinish={() => {
+              // Pago confirmado: creamos la reserva en el backend
+              handleFinishReservation()
+            }}
+          />
 
-                        <div className="service-card">
-                            <VpnKeyRoundedIcon className="service-icon" />
-                            <span className="service-title">Lockers</span>
-                        </div>
-
-                        <div className="service-card">
-                            <SportsEsportsRoundedIcon className="service-icon" />
-                            <span className="service-title">
-                                Sector esparcimiento
-                            </span>
-                        </div>
-
-                        <div className="service-card">
-                            <RestaurantRoundedIcon className="service-icon" />
-                            <span className="service-title">Comedor</span>
-                        </div>
-
-                        <div className="service-card">
-                            <SmokingRoomsRoundedIcon className="service-icon" />
-                            <span className="service-title">
-                                Area fumadores
-                            </span>
-                        </div>
-
-                        <div className="service-card">
-                            <ShowerRoundedIcon className="service-icon" />
-                            <span className="service-title">Duchas</span>
-                        </div>
-
-                        <div className="service-card">
-                            <PrintRoundedIcon className="service-icon" />
-                            <span className="service-title">Impresoras</span>
-                        </div>
-
-                        <div className="service-card">
-                            <MedicalServicesRoundedIcon className="service-icon" />
-                            <span className="service-title">
-                                Servicio médico
-                            </span>
-                        </div>
-
-                        <div className="service-card">
-                            <LocalPoliceRoundedIcon className="service-icon" />
-                            <span className="service-title">
-                                Seguridad 24 hs
-                            </span>
-                        </div>
-
-                        <div className="service-card">
-                            <FreeBreakfastRoundedIcon className="service-icon" />
-                            <span className="service-title">Cafeteria</span>
-                        </div>
-
-                        <div className="service-card">
-                            <FitnessCenterRoundedIcon className="service-icon" />
-                            <span className="service-title">Gimnasio</span>
-                        </div>
-
-                        <div className="service-card">
-                            <DirectionsCarFilledRoundedIcon className="service-icon" />
-                            <span className="service-title">
-                                Estacionamiento
-                            </span>
-                        </div>
-                    </div>
-                </Box>
-            </Modal>
-            <Modal open={openPayment} onClose={() => setOpenPayment(false)}>
-              <Box
-                  sx={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: 400,
-                      bgcolor: 'background.paper',
-                      borderRadius: 2,
-                      boxShadow: 24,
-                      p: 3,
-                  }}
-              >
-                  <PagoTarjeta
-                      onCancel={() => setOpenPayment(false)}
-                      onFinish={handleFinishReservation}
-                  />
-              </Box>
-          </Modal>
-
-        </>
-    )
+          {isSubmitting && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+              <CircularProgress />
+            </Box>
+          )}
+        </Box>
+      </Modal>
+    </>
+  )
 }

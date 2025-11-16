@@ -26,7 +26,20 @@ export interface Reservation {
   }
   totalPrice: number;
   isActive: boolean;
-  rentTipe: RentType;
+  rentType: RentType;
+}
+
+export interface ReservationRequest {
+  userId: string;
+  dateFrom: string;
+  dateTo: string;
+  spaceId: string | {
+    _id: string;
+    spaceType: string;
+    building: Building | string;
+  }
+  totalPrice: number;
+  rentType: RentType;
 }
 
 export type RentType = 'Dia' | 'Semana' | 'Mes' | 'Año';
