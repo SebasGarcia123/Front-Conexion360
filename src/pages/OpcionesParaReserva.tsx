@@ -9,6 +9,7 @@ import AlternativaEdificios from "../componentes/AlternativaEdificios";
 import AlternativaEspacios from "../componentes/AlternativaEspacios";
 import { Divider } from "@mui/material";
 import AlternativaCapacidad from "../componentes/AlternativaCapacidad";
+import AlternativaFechas from "../componentes/AlternativaFechas";
 
 
 export const OpcionesParaReserva = () => {
@@ -18,6 +19,8 @@ export const OpcionesParaReserva = () => {
   const [filtroEdificios, setFiltroEdificio] = useState<string[]>([]);
   const [filtroEspacios, setFiltroEspacio] = useState<string[]>([]);
   const [filtroCapacidad, setFiltroCapacidad] = useState<string[]>([]);
+  const [dateDesde, setDateDesde] = useState<Date | null>(null);
+  const [dateHasta, setDateHasta] = useState<Date | null>(null);
 
   const filteredSpaces = spaces.filter((s) => {
     // Filtrar por edificio
@@ -159,6 +162,12 @@ export const OpcionesParaReserva = () => {
                           }}>
             Filtros
           </Typography>
+        <AlternativaFechas
+          desde={dateDesde}
+          hasta={dateHasta}
+          onChangeDesde={setDateDesde}
+          onChangeHasta={setDateHasta}
+        />
         <AlternativaEdificios 
           value={filtroEdificios}
           onChange={setFiltroEdificio}

@@ -111,6 +111,10 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
     setErrors({}); // válido: {} es PaymentErrors vacío
   };
 
+  const formatCardNumber = (num: string) => {
+  return num.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+};
+
   return (
     <Box sx={{ width: "100%", maxWidth: 600, margin: "0 auto" }}>
       {/* ❌ BOTÓN CERRAR */}
@@ -144,7 +148,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
       >
         <CardContent>
           <Typography sx={{ letterSpacing: 2, fontSize: "1.3rem" }}>
-            {cardNumber.padEnd(16, "0")}
+            {formatCardNumber(cardNumber.padEnd(16, "0"))}
           </Typography>
 
           <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
@@ -185,16 +189,17 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
           {/* NÚMERO */}
           <Grid size={{ xs: 12 }}>
             <TextField
-              label="Número de tarjeta"
-              value={cardNumber}
-              onChange={(e) => {
-                const val = e.target.value.replace(/\D/g, "");
+            label="Número de tarjeta"
+            value={formatCardNumber(cardNumber)}
+            onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, ""); // solo números
                 if (val.length <= 16) setCardNumber(val);
-              }}
-              error={!!errors.cardNumber}
-              helperText={errors.cardNumber ?? ""}
-              fullWidth
+            }}
+            error={!!errors.cardNumber}
+            helperText={errors.cardNumber ?? ""}
+            fullWidth
             />
+
           </Grid>
 
           {/* MES */}
