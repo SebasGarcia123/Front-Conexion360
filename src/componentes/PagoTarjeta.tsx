@@ -34,13 +34,9 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
   const [year, setYear] = useState("");
   const [cvv, setCvv] = useState("");
   const [completed, setCompleted] = useState(false);
-
-  // <- TIPADO CORRECTO del estado de errores
   const [errors, setErrors] = useState<PaymentErrors>({});
 
-  // --------------------------
-  // 🔍 VALIDACIÓN
-  // --------------------------
+  //Validacion de datos cargados
   const validate = () => {
     const newErrors: PaymentErrors = {};
 

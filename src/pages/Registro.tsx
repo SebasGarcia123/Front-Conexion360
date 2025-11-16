@@ -43,7 +43,7 @@ export const Registro = () => {
         email: '',
         phone: '',
         document: '',
-        role: 'client',
+        role: 'cliente',
     })
     const [errors, setErrors] = useState<ErrorMessages>({})
 
@@ -111,7 +111,6 @@ export const Registro = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        // Aquí puedes manejar el envío del formulario, por ejemplo, enviando objData a una API
         console.log('Datos del formulario:', objData)
         senData()
     }

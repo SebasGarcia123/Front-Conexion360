@@ -12,7 +12,7 @@ import { PrivateRoutesCliente } from './PrivateRoutesCliente'
 import { PrivateRoutesAdmin } from './PrivateRoutesAdmin'
 import { Administrador } from '../pages/Administrador'
 import { AdminNuevoRecurso } from '../pages/AdminNuevoRecurso'
-import { AdminEstadisticas } from '../pages/AdminEstadisticas'
+import { AdminEstadisticas } from '../pages/AdminStatistics'
 import { AdminManageUsers } from '../pages/AdminManageUsers'
 import { OpcionesParaReserva } from '../pages/OpcionesParaReserva'  
 
