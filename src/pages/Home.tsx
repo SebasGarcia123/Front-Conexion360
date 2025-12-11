@@ -1,18 +1,30 @@
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import foto from '../assets/foto_portada.jpg'
 import { NavInicio } from '../componentes/NavInicio'
 import { Footer } from '../componentes/Footer'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 export const Home = () => {
+
+    const carouselSettings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+    };
+
     return (
         <>
             <NavInicio />
             <Box
                 sx={{
                     width: '100%',
-                    gap: 6,
-                    backgroundColor: '#c9c6c6ff',
+                    backgroundColor: '#f5f5f5',
                     py: 6,
                     display: 'flex',
                     flexWrap: 'wrap',
@@ -21,23 +33,27 @@ export const Home = () => {
                     px: { xs: 2, md: 8 },
                 }}
             >
+
+                {/* Texto institucional */}
                 <Box
                     sx={{
-                        width: { xs: '100%', sm: '40%' },
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        p: { xs: 2, md: 4 },
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        p: { xs: 2 },
                     }}
-                >
+                    >
                     <Typography
                         variant="body1"
                         sx={{
-                            whiteSpace: 'pre-line',
-                            lineHeight: 1.7,
-                            color: '#333',
+                        textAlign: "justify",
+                        maxWidth: '95%',
+                        whiteSpace: "pre-line",
+                        lineHeight: 1.7,
+                        color: "#333",
                         }}
-                    >
+                >
                         En nuestra empresa creemos que trabajar bien empieza por
                         sentirse bien. Por eso creamos espacios de trabajo
                         diseñados para inspirar, conectar y potenciar tu
@@ -56,7 +72,49 @@ export const Home = () => {
                         nueva forma de trabajar.
                     </Typography>
                 </Box>
-                <Box
+
+                {/* Carrousel */}
+                <Box sx={{ width: "65%", mt: 3 }}>
+                    <Slider {...carouselSettings}>
+                        <Box>
+                            <img
+                            src="/src/assets/Comedor.png"
+                            alt="Comedor"
+                            style={{ width: "100%", height: "500px", objectFit: "cover" }}
+                            />
+                        </Box>
+                        <Box>
+                            <img
+                            src="/src/assets/Esparcimiento.png"
+                            alt="Esparcimiento"
+                            style={{ width: "100%", height: "500px", objectFit: "cover" }}
+                            />
+                        </Box>
+                        <Box>
+                            <img
+                            src="/src/assets/Sala de reuniones 1.png"
+                            alt="Sala"
+                            style={{ width: "100%", height: "500px", objectFit: "cover" }}
+                            />
+                        </Box>
+                        <Box>
+                            <img
+                            src="/src/assets/Espacio3.png"
+                            alt="Espacio3"
+                            style={{ width: "100%", height: "500px", objectFit: "cover" }}
+                            />
+                        </Box>
+                        <Box>
+                            <img
+                            src="/src/assets/Espacio4.png"
+                            alt="Espacio4"
+                            style={{ width: "100%", height: "500px", objectFit: "cover" }}
+                            />
+                        </Box>
+                    </Slider>
+              </Box>
+                
+                {/* <Box
                     sx={{
                         width: { xs: '100%', sm: '50%' },
                     }}
@@ -73,7 +131,7 @@ export const Home = () => {
                             boxShadow: 2,
                         }}
                     />
-                </Box>
+                </Box> */}
             </Box>
             <Footer />
         </>
