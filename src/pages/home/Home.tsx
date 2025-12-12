@@ -1,10 +1,12 @@
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
-import { NavInicio } from '../componentes/NavInicio'
-import { Footer } from '../componentes/Footer'
+import { NavInicio } from '../../componentes/NavInicio'
+import { Footer } from '../../componentes/Footer'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { Divider } from '@mui/material';
+import { MapaEdificios } from '../../componentes/home/mapaEdificios';
 
 export const Home = () => {
 
@@ -21,6 +23,20 @@ export const Home = () => {
     return (
         <>
             <NavInicio />
+            <Divider />
+            <MapaEdificios />
+            <Typography 
+                            variant = 'h1'
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                textAlign: 'center',
+                                fontFamily: 'Arizonia',
+                                marginTop: '20px',
+                            }}>
+                Viví la experiencia Conexion 360° 
+            </Typography>
             <Box
                 sx={{
                     width: '100%',
