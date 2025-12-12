@@ -19,8 +19,11 @@ export const MapaEdificios = () => {
         lat: -34.6037, // Buenos Aires
         lng: -58.3816
     };
+    
+    const myMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
+
     return (
-    <LoadScript googleMapsApiKey="AIzaSyAc0Rryo07Bhvo_e61aC6cVGcpDO1ktu4A">
+    <LoadScript googleMapsApiKey = {myMapsApiKey}>
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
         
         {inmuebles.map((item) => (
