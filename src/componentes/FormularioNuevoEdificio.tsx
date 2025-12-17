@@ -9,6 +9,8 @@ export const FormularioNuevoEdificio = () => {
     city: "",
     country: "",
     postalCode: "",
+    latitude: "",
+    longitude: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +38,8 @@ export const FormularioNuevoEdificio = () => {
         city: "",
         country: "",
         postalCode: "",
+        latitude:"",
+        longitude:""
         })
     }
     } catch (error: unknown) {
@@ -82,6 +86,22 @@ export const FormularioNuevoEdificio = () => {
           label="País"
           name="country"
           value={formData.country}
+          onChange={handleChange}
+          fullWidth
+        />
+
+        <TextField
+          label="Latitud"
+          name="latitude"
+          value={formData.latitude}
+          onChange={handleChange}
+          fullWidth
+        />
+
+        <TextField
+          label="Longitud"
+          name="longitude"
+          value={formData.longitude}
           onChange={handleChange}
           fullWidth
         />

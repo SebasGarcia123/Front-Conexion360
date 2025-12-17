@@ -71,7 +71,7 @@ export default function AlternativaEdificios({ value, onChange }: AlternativaEdi
           key={b._id}
           control={
             <Checkbox
-              checked={value.includes(b._id)}     // <- ahora usa value del padre
+              checked={value.includes(b._id)}
               onChange={() => handleToggle(b._id)}
             />
           }

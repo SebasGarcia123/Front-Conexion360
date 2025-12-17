@@ -1,52 +1,129 @@
-import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-import { useState } from "react";
+import { GoogleMap, InfoWindow, Marker } from "@react-google-maps/api";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import type { Building } from "../../types";
+
+const center = { lat: -34.6037, lng: -58.3816 };
 
 export const MapaEdificios = () => {
-    const inmuebles = [
-        { id: 1, nombre: "Edificio Central", lat: -34.555, lng: -58.450 },
-        { id: 2, nombre: "Oficinas Barracas", lat: -34.640, lng: -58.370 },
-        { id: 3, nombre: "Depósito Sur", lat: -34.720, lng: -58.300 }
-    ];
+  const [buildings, setBuildings] = useState<Building[]>([]);
+  const [selected, setSelected] = useState<Building | null>(null);
 
-    const [selected, setSelected] = useState(null);
+  useEffect(() => {
+    axios
+      .get<Building[]>("http://localhost:4000/buildingHome")
+      .then(res => setBuildings(res.data.filter(b => b.isActive)))
+      .catch(err => console.error(err));
+  }, []);
 
-    const containerStyle = {
-        width: "100%",
-        height: "400px"
-    };
+  return (
+    <GoogleMap
+      mapContainerStyle={{ width: "100%", height: "100%" }}
+      center={center}
+      zoom={13}
+    >
+      {buildings.map(building => (
+        <Marker
+          key={building._id}
+          position={{ lat: building.latitude, lng: building.longitude }}
+          onClick={() => setSelected(building)}
+        />
+      ))}
 
-    const center = {
-        lat: -34.6037, // Buenos Aires
-        lng: -58.3816
-    };
-    
-    const myMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
+      {selected && (
+        <InfoWindow
+          position={{ lat: selected.latitude, lng: selected.longitude }}
+          onCloseClick={() => setSelected(null)}
+        >
+          <div>
+            <h3>{selected.name}</h3>
+            <p>{selected.address}</p>
+          </div>
+        </InfoWindow>
+      )}
+    </GoogleMap>
+  );
+};
 
-    return (
-    <LoadScript googleMapsApiKey = {myMapsApiKey}>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={11}>
-        
-        {inmuebles.map((item) => (
-          <Marker
-            key={item.id}
-            position={{ lat: item.lat, lng: item.lng }}
-            onClick={() => setSelected(item)}
-          />
-        ))}
 
-        {selected && (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => setSelected(null)}
-          >
-            <div>
-              <h3>{selected.nombre}</h3>
-              <p>Coordenadas: {selected.lat}, {selected.lng}</p>
-            </div>
-          </InfoWindow>
-        )}
+// import { GoogleMap, LoadScript, InfoWindow, Marker } from "@react-google-maps/api";
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+// import type { Building } from "../../types";
 
-      </GoogleMap>
-    </LoadScript>
-  )
-}
+// export const MapaEdificios = () => {
+//   const [buildings, setBuildings] = useState<Building[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [selected, setSelected] = useState<Building | null>(null);
+
+//   useEffect(() => {
+//     const fetchBuildings = async () => {
+//       try {
+//         const res = await axios.get<Building[]>(
+//           "http://localhost:4000/buildingHome",
+//         );
+
+//         setBuildings(res.data.filter((b) => b.isActive));
+//       } catch (error) {
+//         console.error("Error al obtener edificios:", error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchBuildings();
+//   }, []);
+
+//   const containerStyle = {
+//     width: "100%",
+//     height: "100%",
+//   };
+
+//   const center = {
+//     lat: -34.6037,
+//     lng: -58.3816,
+//   };
+
+//   const myMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_KEY;
+
+//   if (loading) {
+//     return <p>Cargando mapa...</p>;
+//   }
+
+//   return (
+//     <LoadScript googleMapsApiKey={myMapsApiKey}>
+      
+//       <GoogleMap
+//         mapContainerStyle={containerStyle}
+//         center={center}
+//         zoom={13}
+//       >
+//         {buildings.map((building) => (
+//           <Marker
+//             key={building._id}
+//             position={{
+//               lat: building.latitude,
+//               lng: building.longitude,
+//             }}
+//             onClick={() => setSelected(building)}
+//           />
+//         ))}
+
+//         {selected && (
+//           <InfoWindow
+//             position={{
+//               lat: selected.latitude,
+//               lng: selected.longitude,
+//             }}
+//             onCloseClick={() => setSelected(null)}
+//           >
+//             <div>
+//               <h3>{selected.name}</h3>
+//               <p>{selected.address}</p>
+//             </div>
+//           </InfoWindow>
+//         )}
+//       </GoogleMap>
+//     </LoadScript>
+//   );
+// };

@@ -5,6 +5,8 @@ export interface Building {
   address: string;
   city: string;
   country: string;
+  latitude: number;
+  longitude: number;
   postalCode: string;
   isActive: boolean;
 }
@@ -82,4 +84,6 @@ export interface CreateBuildingRequest {
   city: string
   country: string
   postalCode: string
+  latitude: number
+  longitude: number
 }
