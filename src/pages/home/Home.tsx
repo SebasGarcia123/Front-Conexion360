@@ -2,12 +2,11 @@ import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 import { NavInicio } from '../../componentes/NavInicio'
 import { Footer } from '../../componentes/Footer'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { Divider } from '@mui/material';
-//import { MapaEdificios } from '../../componentes/home/MapaEdificios';
+import { MapaEdificios } from '../../componentes/home/MapaEdificios';
 import { useLoadScript } from "@react-google-maps/api";
+import { CarrouselOpinion } from "./CarrouselOpinion";
 
 
 export const Home = () => {
@@ -34,17 +33,17 @@ export const Home = () => {
             <Divider />
             
             <Typography 
-                            variant = 'h1'
+                            variant = 'h2'
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
                                 textAlign: 'center',
-                                fontFamily: 'Arizonia',
-                                marginTop: '20px',
+                                fontFamily: 'Michroma',
+                                marginTop: '40px',
                                 marginBottom: '10px',
                             }}>
-                Viví la experiencia Conexion 360° 
+                Viví la experiencia Conexión 360° 
             </Typography>
 
             
@@ -146,14 +145,14 @@ export const Home = () => {
 
             {/* Ubicaciones */}
 
-            {/* <Box sx = {{ marginTop: '60px' }}>
+            <Box sx = {{ marginTop: '60px' }}>
                     <Typography 
-                                variant = 'h2'
+                                variant = 'h3'
                                 sx={{
                                     textAlign: 'center',
-                                    fontFamily: 'Arizonia',
+                                    fontFamily: 'Michroma',
                                     mt: '20px',
-                                    mb: '30px',
+                                    mb: '80px',
                                     textDecoration: 'underline',
                                 }}>
                         Nuestras ubicaciones 
@@ -180,7 +179,7 @@ export const Home = () => {
                         <MapaEdificios />
                     </Box>
                 </Box>
-            </Box> */}
+            </Box>
 
             <Box sx={{ width: '100%', mt: 15 }}>
                 <Divider />
@@ -189,16 +188,17 @@ export const Home = () => {
             {/* Comentarios */}
             <Box>
                 <Typography 
-                                variant = 'h2'
+                                variant = 'h3'
                                 sx={{
                                     textAlign: 'center',
-                                    fontFamily: 'Arizonia',
+                                    fontFamily: 'Michroma',
                                     mt: '20px',
                                     mb: '30px',
                                     textDecoration: 'underline',
                                 }}>
                         Lo que dicen quienes nos eligen 
                     </Typography>
+                <CarrouselOpinion />
             </Box>
         </Box>
         <Footer />
