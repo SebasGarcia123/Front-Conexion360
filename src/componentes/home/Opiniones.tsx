@@ -10,9 +10,8 @@ export const Opiniones = () => {
                                 sx={{
                                     textAlign: 'center',
                                     fontFamily: 'Michroma',
-                                    mt: '20px',
-                                    mb: '30px',
-                                    textDecoration: 'underline',
+                                    mt: '100px',
+                                    mb: '100px',
                                 }}>
                         Lo que dicen quienes nos eligen 
                     </Typography>

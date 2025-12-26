@@ -1,4 +1,4 @@
-.services-container {
+/* .services-container {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -23,6 +23,46 @@
 }
 
 .service-title {
-  font-size: 1rem;     /* equivalente a Typography h4 */
+  font-size: 1rem;
   font-weight: bold;
+} */
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 16px;
 }
+
+.service-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 160px;
+
+  padding: 24px;
+  border-radius: 20px;
+
+  background: #ffffff;
+  border: 1px solid #c5c1c1;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.service-icon {
+  font-size: 150px; /* ~50% más grande */
+  color: #1976d2; /* color MUI primary */
+}
+
+.service-title {
+  font-size: 2rem; /* más grande */
+  font-weight: 600;
+  color: #333;
+}
+

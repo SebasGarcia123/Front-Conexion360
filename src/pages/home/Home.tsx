@@ -19,42 +19,61 @@ export const Home = () => {
 
     return (
         <>
-            <NavInicio />
-            <Divider />
+            <NavInicio/>
             {/* Titulo */}
-            <Typography 
+            <Typography     
                             variant = 'h2'
                             sx={{
                                 display: 'flex',
-                                flexDirection: 'column',
                                 alignItems: 'center',
+                                justifyContent: 'center',
                                 textAlign: 'center',
+
                                 fontFamily: 'Michroma',
-                                marginTop: '40px',
-                                marginBottom: '10px',
+                                fontWeight: 600,
+
+                                mt: '100px',
+                                mb: '10px',
+                                py: 6, // padding vertical para que el fondo se luzca
+                                px: 4,
+
+                                background: 'linear-gradient(135deg, #1976d2 0%, #b0b0b0 50%, #ffffff 100%)',
+                                color: '#1f1f1f',
+                                boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
                             }}>
                 Viví la experiencia Conexión 360° 
             </Typography>
-
-            {/* Soluciones */}
-            <Soluciones />
 
             <Box sx={{ width: '100%', mt: 15 }}>
                 <Divider />
             </Box>
 
-            {/* Comentarios */}
-            <Opiniones />
-            
+            {/* Soluciones */}
+            <section id="soluciones">
+                <Soluciones />
+            </section>
+
+            <Box sx={{ width: '100%', mt: 15 }}>
+                <Divider />
+            </Box>
+
+            {/* Opiniones */}
+            <section id="opiniones">
+                <Opiniones />
+            </section>
             <Box sx={{ width: '100%', mt: 15 }}>
                 <Divider />
             </Box>
 
             {/* Ubicaciones */}
+            <section id="ubicaciones">
             {/* < Ubicaciones /> */}
+            </section>
 
             {/* Servicios */}
-            <Servicios />
+            <section id="servicios">
+                <Servicios />
+            </section>
 
             <Footer />
         </>

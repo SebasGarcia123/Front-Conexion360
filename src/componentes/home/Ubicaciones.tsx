@@ -11,8 +11,7 @@ export const Ubicaciones = () => {
                                     textAlign: 'center',
                                     fontFamily: 'Michroma',
                                     mt: '20px',
-                                    mb: '80px',
-                                    textDecoration: 'underline',
+                                    mb: '100px',
                                 }}>
                         Nuestras ubicaciones 
                     </Typography>

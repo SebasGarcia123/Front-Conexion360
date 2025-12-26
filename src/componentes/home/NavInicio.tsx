@@ -4,7 +4,7 @@ import logo from '../../assets/logo.png'
 
 export const NavInicio = () => {
     return (
-        <AppBar position="static" sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}>
+        <AppBar position="fixed" sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}>
             <Toolbar sx={{ height: 70, alignItems: 'center' }}>
                 {/* Logo */}
                     <img
@@ -17,18 +17,18 @@ export const NavInicio = () => {
                 {/* </Button> */}
                 {/* Links izquierda */}
                 <Box sx={{ flexGrow: 1 }}>
-                    <Button component={Link} to="/ubicaciones" color="inherit">
-                        Ubicaciones
-                    </Button>
-                    <Button component={Link} to="/soluciones" color="inherit">
+                    
+                    <Button href = "#soluciones" color="inherit">
                         Soluciones
                     </Button>
-                    <Button
-                        component={Link}
-                        to="/grandes-empresas"
-                        color="inherit"
-                    >
-                        Grandes empresas
+                    <Button href = "#opiniones" color="inherit">
+                        Opiniones
+                    </Button>
+                    <Button href = "#ubicaciones" color="inherit">
+                        Ubicaciones
+                    </Button>
+                    <Button href = "#servicios" color="inherit">
+                        Servicios
                     </Button>
                 </Box>
 

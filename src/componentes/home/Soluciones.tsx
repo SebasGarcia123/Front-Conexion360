@@ -16,6 +16,17 @@ export const Soluciones = () => {
 
     return (
     <>
+            <Box>
+              <Typography 
+                                variant = 'h3'
+                                sx={{
+                                    textAlign: 'center',
+                                    fontFamily: 'Michroma',
+                                    mt: '100px',
+                                }}>
+                        Nuestras soluciones 
+                    </Typography>  
+            </Box>
             <Box
                 sx={{
                     width: '100%',
