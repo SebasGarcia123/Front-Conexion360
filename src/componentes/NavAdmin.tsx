@@ -8,27 +8,13 @@ export const NavAdmin = () => {
         <AppBar position="static" sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}>
             <Toolbar sx={{ height: 70, alignItems: 'center' }}>
                 {/* Logo */}
-                <Button
-                    component={Link}
-                    to="/"
-                    sx={{
-                        mr: 4,
-                        p: 2,
-                        display: 'flex',
-                        alignItems: 'center',
-                        minWidth: 0,
-                        padding: 0,
-                        borderRadius: 2,
-                        '&:hover': { backgroundColor: 'transparent' },
-                    }}
-                >
-                    <img
+                <img
                         src={logo}
                         alt="Logo"
                         width="200"
-                        style={{ borderRadius: '5px' }}
+                        style={{ borderRadius: '5px', marginRight: 30 }}
                     />
-                </Button>
+
                 {/* Links izquierda */}
                 <Box sx={{ flexGrow: 1, marginRight: 3 }}>
                     <Button

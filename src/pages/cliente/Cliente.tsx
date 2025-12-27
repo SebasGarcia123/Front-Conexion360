@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
-import { Footer } from '../componentes/Footer'
-import { NavCliente } from '../componentes/NavCliente'
-import fondo from '../assets/foto-registro.jpg'
+import { Footer } from '../../componentes/Footer'
+import { NavCliente } from '../../componentes/NavCliente'
+import fondo from '../../assets/foto-registro.jpg'
 
 export const Cliente = () => {
     return (

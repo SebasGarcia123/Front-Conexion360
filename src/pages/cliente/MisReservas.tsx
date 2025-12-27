@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, Box } from "@mui/material";
 import dayjs from "dayjs";
-import type { Reservation } from "../types"
-import { NavCliente } from "../componentes/NavCliente"
-import { Footer } from "../componentes/Footer"
+import type { Reservation } from "../../types"
+import { NavCliente } from "../../componentes/NavCliente"
+import { Footer } from "../../componentes/Footer"
 
 export const MisReservas = () => {
   const [reservas, setReservas] = useState<Reservation[]>([]);

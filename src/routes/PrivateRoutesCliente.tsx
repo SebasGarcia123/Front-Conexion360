@@ -1,15 +1,43 @@
-import { Navigate, Outlet} from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 import { jwtDecode } from "jwt-decode"
-
+import { useEffect, useState } from "react"
 
 export const PrivateRoutesCliente = () => {
-  const token = sessionStorage.getItem("authToken")
-  if(!token) return <Navigate to="/login" />
+  const [loading, setLoading] = useState(true)
+  const [authorized, setAuthorized] = useState(false)
 
-  const decoded = jwtDecode(token) as { role:string, exp:number }
+  useEffect(() => {
+    const token = sessionStorage.getItem("authToken")
 
-  if(decoded.exp * 1000 < Date.now()) return <Navigate to="/login" />
-  if(decoded.role !== "cliente") return <Navigate to="/" />
+    if (!token) {
+      setLoading(false)
+      return
+    }
 
-  return <Outlet/>
+    try {
+      const decoded = jwtDecode<{ role: string; exp: number }>(token)
+
+      if (decoded.exp * 1000 < Date.now()) {
+        setLoading(false)
+        return
+      }
+
+      if (decoded.role !== "cliente") {
+        setLoading(false)
+        return
+      }
+
+      setAuthorized(true)
+    } catch (error) {
+      console.error("Token inválido", error)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  if (loading) return null // o un spinner
+
+  if (!authorized) return <Navigate to="/login" replace />
+
+  return <Outlet />
 }
