@@ -1,13 +1,13 @@
-import { NavAdmin } from "../componentes/NavAdmin"
-import { Footer } from "../componentes/Footer"
-import { Box } from "@mui/material"
+import { NavAdmin } from '../componentes/NavAdmin'
+import { Footer } from '../componentes/Footer'
+import { Box } from '@mui/material'
 import fondo from '../assets/foto-registro.jpg'
 
 export const Administrador = () => {
-  return (
-    <>
-        <NavAdmin />
-        <Box
+    return (
+        <>
+            <NavAdmin />
+            <Box
                 sx={{
                     backgroundImage: `url(${fondo})`,
                     backgroundSize: 'cover',
@@ -22,7 +22,7 @@ export const Administrador = () => {
                     flexGrow: 1,
                 }}
             ></Box>
-        <Footer />
-    </>
-  )
+            <Footer />
+        </>
+    )
 }

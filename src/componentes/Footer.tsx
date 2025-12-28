@@ -11,7 +11,7 @@ export const Footer = () => {
                 py: 3,
                 backgroundColor: '#efeaeaff',
                 //width: '100%',
-                height: '10vh'
+                height: '10vh',
             }}
         >
             <Typography variant="body2">

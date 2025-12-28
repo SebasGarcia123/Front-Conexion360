@@ -181,7 +181,9 @@ export const Registro = () => {
                                     <OutlinedInput
                                         name="password"
                                         onChange={handleChange}
-                                        type={showPassword ? 'text' : 'password'}
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
                                         endAdornment={
                                             <InputAdornment position="end">
                                                 <IconButton
@@ -190,12 +192,22 @@ export const Registro = () => {
                                                             ? 'hide the password'
                                                             : 'display the password'
                                                     }
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
-                                                    onMouseUp={handleMouseUpPassword}
+                                                    onClick={
+                                                        handleClickShowPassword
+                                                    }
+                                                    onMouseDown={
+                                                        handleMouseDownPassword
+                                                    }
+                                                    onMouseUp={
+                                                        handleMouseUpPassword
+                                                    }
                                                     edge="end"
                                                 >
-                                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                                    {showPassword ? (
+                                                        <VisibilityOff />
+                                                    ) : (
+                                                        <Visibility />
+                                                    )}
                                                 </IconButton>
                                             </InputAdornment>
                                         }
@@ -213,7 +225,10 @@ export const Registro = () => {
                             {/* Nombre */}
                             <Grid
                                 size={{ xs: 12, sm: 6 }}
-                                sx={{ display: 'flex', justifyContent: 'center' }}
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                }}
                             >
                                 <TextField
                                     required

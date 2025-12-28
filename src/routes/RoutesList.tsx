@@ -1,7 +1,6 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import { Home } from '../pages/home/Home'
 import { Login } from '../pages/Login'
-import { GrandesEmpresas } from '../pages/GrandesEmpresas'
 import { Registro } from '../pages/Registro'
 import { Cliente } from '../pages/cliente/Cliente'
 import { NuevaReserva } from '../pages/NuevaReserva'
@@ -12,33 +11,40 @@ import { Administrador } from '../pages/Administrador'
 import { AdminNuevoRecurso } from '../pages/AdminNuevoRecurso'
 import { AdminEstadisticas } from '../pages/AdminEstadisticas'
 import { AdminManageUsers } from '../pages/AdminManageUsers'
-import { OpcionesParaReserva } from '../pages/OpcionesParaReserva'  
+import { OpcionesParaReserva } from '../pages/OpcionesParaReserva'
 
 export const RoutesList = () => {
-  return (
+    return (
         <>
-        <BrowserRouter>
+            <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    <Route
-                        path="/grandes_empresas"
-                        element={<GrandesEmpresas />}
-                    />
                     <Route path="/registro" element={<Registro />} />
                     <Route path="/login" element={<Login />} />
-                    <Route element = { <PrivateRoutesCliente />} >
+                    <Route element={<PrivateRoutesCliente />}>
                         <Route path="/cliente" element={<Cliente />} />
                         <Route path="/reserva" element={<NuevaReserva />} />
                         <Route path="/mis-reservas" element={<MisReservas />} />
-                        <Route path="/espacios" element={<OpcionesParaReserva />} />
+                        <Route
+                            path="/espacios"
+                            element={<OpcionesParaReserva />}
+                        />
                     </Route>
-                    <Route element = { <PrivateRoutesAdmin />} >
+                    <Route element={<PrivateRoutesAdmin />}>
                         <Route path="/admin" element={<Administrador />} />
-                        <Route path="/manageUsers" element={<AdminManageUsers />} />
-                        <Route path="/nuevoRecurso" element={<AdminNuevoRecurso />} />
-                        <Route path="/estadisticas" element={<AdminEstadisticas />} />
+                        <Route
+                            path="/manageUsers"
+                            element={<AdminManageUsers />}
+                        />
+                        <Route
+                            path="/nuevoRecurso"
+                            element={<AdminNuevoRecurso />}
+                        />
+                        <Route
+                            path="/estadisticas"
+                            element={<AdminEstadisticas />}
+                        />
                     </Route>
-                    
                 </Routes>
             </BrowserRouter>
         </>

@@ -5,15 +5,18 @@ import { BotonLogout } from './BotonLogout'
 
 export const NavAdmin = () => {
     return (
-        <AppBar position="static" sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}>
+        <AppBar
+            position="static"
+            sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}
+        >
             <Toolbar sx={{ height: 70, alignItems: 'center' }}>
                 {/* Logo */}
                 <img
-                        src={logo}
-                        alt="Logo"
-                        width="200"
-                        style={{ borderRadius: '5px', marginRight: 30 }}
-                    />
+                    src={logo}
+                    alt="Logo"
+                    width="200"
+                    style={{ borderRadius: '5px', marginRight: 30 }}
+                />
 
                 {/* Links izquierda */}
                 <Box sx={{ flexGrow: 1, marginRight: 3 }}>

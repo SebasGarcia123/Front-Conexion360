@@ -1,6 +1,3 @@
-
 export const AdminEstadisticas = () => {
-  return (
-    <div>Estadisticas</div>
-  )
+    return <div>Estadisticas</div>
 }

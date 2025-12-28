@@ -18,24 +18,29 @@ export const Login = () => {
     const navigate = useNavigate()
 
     const senData = async () => {
-    try {
-        const { data } = await axios.post('http://localhost:4000/login', objData)
+        try {
+            const { data } = await axios.post(
+                'http://localhost:4000/login',
+                objData
+            )
 
-        console.log('Respuesta del servidor:', data)
-        sessionStorage.setItem('authToken', data.token)
+            console.log('Respuesta del servidor:', data)
+            sessionStorage.setItem('authToken', data.token)
 
             if (data.user.role === 'cliente') {
-            navigate('/cliente')
+                navigate('/cliente', { replace: true })
             }
             if (data.user.role === 'admin') {
-            navigate('/admin')
+                navigate('/admin', { replace: true })
             }
-
-    } catch (error) {
-    const err = error as AxiosError
-    console.error('Error al enviar los datos:', err.response?.data || err.message)
-}
-}
+        } catch (error) {
+            const err = error as AxiosError
+            console.error(
+                'Error al enviar los datos:',
+                err.response?.data || err.message
+            )
+        }
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
