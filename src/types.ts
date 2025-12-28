@@ -13,6 +13,7 @@ export interface Building {
 export interface IBuildingBySpace {
     _id: string
     name: string
+    address: string
 }
 
 export interface Reservation {

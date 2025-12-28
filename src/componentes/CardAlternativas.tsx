@@ -30,6 +30,11 @@ export default function CardAlternativas({ space }: Props) {
     // estados para crear reserva
     const [isSubmitting, setIsSubmitting] = useState(false)
 
+    const building = typeof space.building === 'object'
+                    ? space.building
+                    : null
+
+
     const handleFinishReservation = async () => {
         if (!reservationData) {
             console.error('No hay datos de reserva disponibles')
@@ -86,7 +91,14 @@ export default function CardAlternativas({ space }: Props) {
                         </Typography>
 
                         <Typography
-                            variant="body2"
+                            variant="subtitle2"
+                            sx={{ color: 'text.secondary' }}
+                        >
+                            {building?.address ?? '—'}
+                        </Typography>
+
+                        <Typography
+                            variant="h6"
                             sx={{ color: 'text.secondary' }}
                         >
                             {space.description}

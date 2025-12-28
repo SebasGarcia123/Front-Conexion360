@@ -209,10 +209,10 @@ export const MisReservas = () => {
                                               px: 2,
                                               py: 0.5,
                                               borderRadius: 1,
-                                              //fontStyle: 'italic',
+                                              width:'108px',
                                               display: 'inline-block',
                                             }}>
-                                              Cumplida
+                                              CUMPLIDA
                                             </Typography>
                                           )}
 
@@ -234,8 +234,9 @@ export const MisReservas = () => {
 
                                           {r.status === 'PorValorar' && (
                                             <Button
+                                              sx={{width:'108px'}}
                                               variant="contained"
-                                              color="success"
+                                              color="info"
                                               onClick={() => valorarReserva(r)}
                                             >
                                               Valorar
