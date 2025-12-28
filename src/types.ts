@@ -30,7 +30,10 @@ export interface Reservation {
     totalPrice: number
     isActive: boolean
     rentType: RentType
+    status: status
 }
+
+export type status = 'Pendiente'| 'PorValorar' | 'Cancelada' | 'Cumplida'
 
 export interface ReservationRequest {
     userId: string
