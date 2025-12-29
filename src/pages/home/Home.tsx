@@ -8,6 +8,8 @@ import { Opiniones } from '../../componentes/home/Opiniones'
 import { Soluciones } from '../../componentes/home/Soluciones'
 //import { Ubicaciones } from './Ubicaciones';
 import { Servicios } from '../../componentes/home/Servicios'
+//import principal from '../../assets/principal.jpg'
+import foto_portada from '../../assets/foto_portada1.jpg'
 
 export const Home = () => {
     const { isLoaded } = useLoadScript({
@@ -43,6 +45,25 @@ export const Home = () => {
             >
                 Viví la experiencia Conexión 360°
             </Typography>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    mt: 3,
+                }}
+                >
+                <Box
+                    component="img"
+                    src={foto_portada}
+                    alt="Imagen principal"
+                    sx={{
+                    width: '100%',
+                    maxWidth: '1600px',
+                    //borderRadius: '12px',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                    }}
+                />
+                </Box>
 
             <Box sx={{ width: '100%', mt: 15 }}>
                 <Divider />

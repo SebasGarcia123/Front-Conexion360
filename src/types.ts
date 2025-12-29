@@ -14,6 +14,7 @@ export interface IBuildingBySpace {
     _id: string
     name: string
     address: string
+    city: string
 }
 
 export interface Reservation {

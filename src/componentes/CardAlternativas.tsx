@@ -53,13 +53,15 @@ export default function CardAlternativas({ space }: Props) {
             setIsSubmitting(false)
             setOpenPayment(false)
             setReservationData(null)
+            console.log('building raw:', space.building)
+
         } catch (error) {
             const err = error as AxiosError
             console.error(
                 'Error al enviar los datos:',
                 err.response?.data || err.message
             )
-            setIsSubmitting(false) // <--- importante, para quitar el spinner
+            setIsSubmitting(false)
         }
     }
 
@@ -96,6 +98,14 @@ export default function CardAlternativas({ space }: Props) {
                         >
                             {building?.address ?? '—'}
                         </Typography>
+
+                        <Typography
+                            variant="subtitle2"
+                            sx={{ color: 'text.secondary' }}
+                        >
+                            {building?.city ?? '—'}
+                        </Typography>
+                        
 
                         <Typography
                             variant="h6"
