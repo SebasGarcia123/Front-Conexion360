@@ -1,37 +1,57 @@
-import { Card, CardContent, Typography, Box, Rating } from '@mui/material'
-
-interface Opinion {
-    name: string
-    role: string
-    company: string
-    comment: string
-    rating: number
-}
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box,
+  Rating,
+  CardMedia,
+} from '@mui/material'
+import type { IOpinion } from '../../types'
 
 interface CardOpinionProps {
-    opinion: Opinion
+  opinion: IOpinion
 }
 
 export const CardOpinion = ({ opinion }: CardOpinionProps) => {
-    return (
-        <Box px={1}>
-            <Card sx={{ height: '100%' }}>
-                <CardContent>
-                    <Rating value={opinion.rating} precision={0.5} readOnly />
+  const ratingValue = opinion.valoration / 2 // 1–10 → 0–5 estrellas
 
-                    <Typography variant="body2" sx={{ mt: 1, mb: 2 }}>
-                        “{opinion.comment}”
-                    </Typography>
+  return (
+    <Box px={1}>
+      <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        
+        {/* Imagen del espacio */}
+        <CardMedia
+          component="img"
+          height="140"
+        //   image={opinion.space.pictureUrl}
+          alt="Espacio"
+        />
 
-                    <Typography variant="subtitle1" fontWeight="bold">
-                        {opinion.name}
-                    </Typography>
+        <CardContent sx={{ flexGrow: 1 }}>
+          {/* Valoración */}
+          <Rating
+            value={ratingValue}
+            precision={0.5}
+            readOnly
+          />
 
-                    <Typography variant="body2" color="text.secondary">
-                        {opinion.role} · {opinion.company}
-                    </Typography>
-                </CardContent>
-            </Card>
-        </Box>
-    )
+          {/* Comentario */}
+          <Typography variant="body2" sx={{ mt: 1, mb: 2 }}>
+            “{opinion.comment}”
+          </Typography>
+
+          {/* Nombre */}
+          <Typography variant="subtitle1" fontWeight="bold">
+            {opinion.name}
+          </Typography>
+
+          {/* Cargo y empresa */}
+          <Typography variant="body2" color="text.secondary">
+            {opinion.position} · {opinion.company}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Box>
+  )
 }
+

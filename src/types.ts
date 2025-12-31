@@ -95,3 +95,15 @@ export interface CreateBuildingRequest {
     latitude: number
     longitude: number
 }
+
+export interface IOpinion {
+    _id: string
+    name: string
+    position: string
+    company: string
+    comment: string
+    date: Date
+    reservation: Reservation | string
+    space: ISpace
+    valoration: number
+}
