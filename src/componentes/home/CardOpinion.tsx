@@ -13,21 +13,21 @@ interface CardOpinionProps {
 }
 
 export const CardOpinion = ({ opinion }: CardOpinionProps) => {
-  const ratingValue = opinion.valoration / 2 // 1–10 → 0–5 estrellas
+  const ratingValue = opinion.valoration
 
   return (
     <Box px={1}>
-      <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Card sx={{ minHeight: 380, display: 'flex', flexDirection: 'column', maxWidth: 320 }}>
         
         {/* Imagen del espacio */}
         <CardMedia
           component="img"
           height="140"
-        //   image={opinion.space.pictureUrl}
+          image={opinion.space.pictureUrl}
           alt="Espacio"
         />
 
-        <CardContent sx={{ flexGrow: 1 }}>
+        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
           {/* Valoración */}
           <Rating
             value={ratingValue}
@@ -36,7 +36,15 @@ export const CardOpinion = ({ opinion }: CardOpinionProps) => {
           />
 
           {/* Comentario */}
-          <Typography variant="body2" sx={{ mt: 1, mb: 2 }}>
+          <Typography variant="body2" sx={{ 
+            mt: 1,
+            mb: 2,
+            flexGrow: 1,
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}>
             “{opinion.comment}”
           </Typography>
 

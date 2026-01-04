@@ -5,3 +5,31 @@ html {
 section {
     scroll-margin-top: 120px;
 }
+
+.slick-next {
+  width: 44px;
+  height: 44px;
+  background: rgba(25, 118, 210, 0.1);
+  border-radius: 50%;
+  z-index: 10;
+  right: -40px;
+}
+
+.slick-prev {
+  width: 44px;
+  height: 44px;
+  background: rgba(25, 118, 210, 0.1);
+  border-radius: 50%;
+  z-index: 10;
+  left: -40px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #1976d2;
+  font-size: 45px;
+  opacity: 1;
+}
+
+
+

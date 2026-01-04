@@ -12,13 +12,15 @@ const settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   arrows: true,
-  autoplay: false,
+  swipeToSlide: true,
+  adaptiveHeight: true,
   responsive: [
     { breakpoint: 1200, settings: { slidesToShow: 3 } },
     { breakpoint: 900, settings: { slidesToShow: 2 } },
     { breakpoint: 600, settings: { slidesToShow: 1 } },
   ],
 }
+
 
 export const CarrouselOpinion = () => {
   const [opinions, setOpinions] = useState<IOpinion[]>([])
@@ -42,10 +44,13 @@ export const CarrouselOpinion = () => {
   if (loading) return null // o un loader
 
   return (
-    <Box sx={{ width: '100%', px: { xs: 2, md: 8 } }}>
+    <Box sx={{ width: '100%', px: { xs: 2, md: 8 }, overflow: 'visible',   // 👈 CLAVE
+    position: 'relative',}}>
       <Slider {...settings}>
         {opinions.map((opinion) => (
+          <Box key={opinion._id} sx={{ px: 1 }}>
           <CardOpinion key={opinion._id} opinion={opinion} />
+          </Box>
         ))}
       </Slider>
     </Box>

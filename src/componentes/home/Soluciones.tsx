@@ -21,7 +21,9 @@ export const Soluciones = () => {
                     sx={{
                         textAlign: 'center',
                         fontFamily: 'Michroma',
-                        mt: '100px',
+                        mt: '60px',
+                        mb: '10px',
+                        p: 4,
                     }}
                 >
                     Nuestras soluciones
@@ -79,7 +81,7 @@ export const Soluciones = () => {
 
                 {/* Carrousel */}
                 <Box sx={{ width: '65%', mt: 3 }}>
-                    <Slider {...carouselSettings}>
+                    <Slider {...carouselSettings}  arrows={false}>
                         <Box>
                             <img
                                 src="/src/assets/Comedor.png"

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
+    // Table,
+    // TableBody,
+    // TableCell,
+    // TableContainer,
+    // TableHead,
+    // TableRow,
+    // Paper,
+
     Button,
     Box,
     Typography,
@@ -18,11 +19,12 @@ import {
   Rating,
   TextField
 } from '@mui/material'
-import dayjs from 'dayjs'
+//import dayjs from 'dayjs'
 import type { Reservation } from '../../types'
 import { NavCliente } from '../../componentes/NavCliente'
 import { Footer } from '../../componentes/Footer'
 import { Checkbox, FormControlLabel } from '@mui/material'
+import { CardMiReserva } from '../../componentes/cliente/CardMiReserva'
 
 
 export const MisReservas = () => {
@@ -148,7 +150,18 @@ export const MisReservas = () => {
                     <Box sx={{ width: '100%'}}>
                       <Divider />
                     </Box>
-                    <TableContainer component={Paper} sx={{ mt: 4 }}>
+                    <Box mt={4}>
+                    {reservasFiltradas.map((r) => (
+                      <CardMiReserva
+                        key={r._id}
+                        reservation={r}
+                        onCancel={abrirConfirmacion}
+                        onRate={valorarReserva}
+                      />
+                    ))}
+                  </Box>
+
+                    {/* <TableContainer component={Paper} sx={{ mt: 4 }}>
                         <Table>
                             <TableHead>
                                 <TableRow>
@@ -247,7 +260,8 @@ export const MisReservas = () => {
                                 ))}
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer> */}
+
                 </>
 
                 )}

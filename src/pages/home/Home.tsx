@@ -6,7 +6,7 @@ import { Divider } from '@mui/material'
 import { useLoadScript } from '@react-google-maps/api'
 import { Opiniones } from '../../componentes/home/Opiniones'
 import { Soluciones } from '../../componentes/home/Soluciones'
-//import { Ubicaciones } from './Ubicaciones';
+//import { Ubicaciones } from '../../componentes/home/Ubicaciones';
 import { Servicios } from '../../componentes/home/Servicios'
 //import principal from '../../assets/principal.jpg'
 import foto_portada from '../../assets/foto_portada1.jpg'
@@ -19,6 +19,9 @@ export const Home = () => {
 
     return (
         <>
+            <Box sx = {{ 
+                backgroundColor: '#f4f4f4ff'
+             }}>
             <NavInicio />
             {/* Titulo */}
             <Typography
@@ -65,16 +68,17 @@ export const Home = () => {
                 />
                 </Box>
 
-            <Box sx={{ width: '100%', mt: 15 }}>
+            <Box sx={{ width: '100%', mt: 5, backgroundColor: '#f4f4f4ff'}}>
                 <Divider />
             </Box>
 
             {/* Soluciones */}
-            <section id="soluciones">
-                <Soluciones />
-            </section>
-
-            <Box sx={{ width: '100%', mt: 15 }}>
+            <Box sx = {{backgroundColor: '#efe9e9ff' }}>
+                <section id="soluciones">
+                    <Soluciones />
+                </section>
+            </Box>
+            <Box sx={{ width: '100%', mt: 5 }}>
                 <Divider />
             </Box>
 
@@ -82,19 +86,28 @@ export const Home = () => {
             <section id="opiniones">
                 <Opiniones />
             </section>
-            <Box sx={{ width: '100%', mt: 15 }}>
+
+            <Box sx={{ width: '100%', mt: 5 }}>
                 <Divider />
             </Box>
 
             {/* Ubicaciones */}
-            <section id="ubicaciones">{/* < Ubicaciones /> */}</section>
+            <Box sx = {{backgroundColor: '#efe9e9ff' }}>
+                {/* <section id="ubicaciones">< Ubicaciones /></section> */}
+            </Box>
+
+            <Box sx={{ width: '100%', mt: 5 }}>
+                <Divider />
+            </Box>
 
             {/* Servicios */}
-            <section id="servicios">
-                <Servicios />
-            </section>
-
+            <Box sx = {{backgroundColor: '#efe9e9ff' }}>
+                <section id="servicios">
+                    <Servicios />
+                </section>
+            </Box>
             <Footer />
+            </Box>
         </>
     )
 }

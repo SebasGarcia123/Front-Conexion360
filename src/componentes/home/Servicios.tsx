@@ -22,7 +22,7 @@ export const Servicios = () => {
                 sx={{
                     bgcolor: 'background.paper',
                     p: 4,
-                    margin: 5,
+                    mt: '60px',
                     borderRadius: 2,
                     boxShadow: 24,
                 }}
@@ -32,8 +32,8 @@ export const Servicios = () => {
                     sx={{
                         textAlign: 'center',
                         fontFamily: 'Michroma',
-                        mt: '20px',
-                        marginBottom: '100px',
+                        mt: '60px',
+                        mb: '60px',
                     }}
                 >
                     Servicios

@@ -4,14 +4,15 @@ import { MapaEdificios } from './MapaEdificios'
 
 export const Ubicaciones = () => {
     return (
-        <Box sx={{ marginTop: '60px' }}>
+        <Box sx={{ marginTop: '60px', height: 600}}>
             <Typography
                 variant="h3"
                 sx={{
                     textAlign: 'center',
                     fontFamily: 'Michroma',
-                    mt: '20px',
-                    mb: '100px',
+                    mt: '60px',
+                    mb: '60px',
+                    p: 4,
                 }}
             >
                 Nuestras ubicaciones
@@ -23,6 +24,7 @@ export const Ubicaciones = () => {
                     gap: 4,
                     alignItems: 'flex-start',
                     width: '90%',
+                    mx: 'auto',
                 }}
             >
                 <Box sx={{ flex: 3 }}>
