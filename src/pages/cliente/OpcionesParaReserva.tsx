@@ -71,42 +71,50 @@ export const OpcionesParaReserva = () => {
     })
 
     useEffect(() => {
-        const getSpaces = async () => {
-            try {
-                const token = sessionStorage.getItem('authToken')
-                if (!token) {
-                    setError(
-                        'No se encontró token de cliente. Debes iniciar sesión.'
-                    )
-                    setLoading(false)
-                    return
-                }
-
-                const { data } = await axios.get<ISpace[]>(
-                    'http://localhost:4000/spaces',
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
-                )
-
-                setSpaces(data)
-            } catch (err) {
-                const error = err as AxiosError
-                console.error(error)
-                if (error.response?.status === 401) {
-                    setError('No autorizado. El token puede estar expirado.')
-                } else {
-                    setError('Ocurrió un error al cargar los espacios.')
-                }
-            } finally {
+    const getSpaces = async () => {
+        try {
+            setLoading(true)  // opcional: mostrar loading al cambiar fechas
+            const token = sessionStorage.getItem('authToken')
+            if (!token) {
+                setError('No se encontró token de cliente. Debes iniciar sesión.')
                 setLoading(false)
+                return
             }
-        }
 
-        getSpaces()
-    }, [])
+            let url = 'http://localhost:4000/spaces'
+            let params = {}
+
+            // Si hay fechas, usar la ruta de disponibilidad
+            if (dateDesde && dateHasta) {
+                url = 'http://localhost:4000/spaces/available'
+                params = {
+                    dateFrom: dateDesde.toISOString(), // 🔹 pasar como ISO
+                    dateTo: dateHasta.toISOString(),
+                }
+            }
+
+            const { data } = await axios.get<ISpace[]>(url, {
+                params,
+                headers: { Authorization: `Bearer ${token}` },
+            })
+
+            setSpaces(data)
+        } catch (err) {
+            const error = err as AxiosError
+            console.error(error)
+            if (error.response?.status === 401) {
+                setError('No autorizado. El token puede estar expirado.')
+            } else {
+                setError('Ocurrió un error al cargar los espacios.')
+            }
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    getSpaces()
+}, [dateDesde, dateHasta]) // 🔹 ahora se ejecuta cada vez que cambian las fechas
+
 
     // Agrega los tildes a todos los filtros
 
@@ -236,9 +244,14 @@ export const OpcionesParaReserva = () => {
                         flexGrow: 1,
                     }}
                 >
-                    {filteredSpaces.map((space) => (
+                    {filteredSpaces.length === 0 ? (
+                    <Typography>No hay espacios disponibles para estas fechas y filtros.</Typography>
+                ) : (
+                    filteredSpaces.map((space) => (
                         <CardAlternativas key={space._id} space={space} />
-                    ))}
+                    ))
+                )}
+
                 </Box>
             </Box>
 
