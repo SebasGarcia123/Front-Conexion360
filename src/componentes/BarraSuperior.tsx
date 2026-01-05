@@ -3,7 +3,16 @@ import logo from '../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
 
 export const BarraSuperior = () => {
+
     const navigate = useNavigate()
+
+    const handleBack = () => {
+    if (window.history.length > 1) {
+        navigate(-1)
+    } else {
+        navigate('/', { replace: true })
+    }
+}
 
     return (
         <AppBar
@@ -22,7 +31,7 @@ export const BarraSuperior = () => {
                 </Box>
                 <Button
                     color="primary"
-                    onClick={() => navigate(-1)}
+                    onClick={handleBack}
                     variant="contained"
                 >
                     Volver

@@ -1,15 +1,15 @@
 import { Box, CircularProgress, Typography } from '@mui/material'
-import { NavCliente } from '../componentes/NavCliente'
-import SpaceCard from '../componentes/CardAlternativas'
+import { NavCliente } from '../../componentes/NavCliente'
+import CardAlternativas from '../../componentes/CardAlternativas'
 import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
-import type { ISpace } from '../types'
-import { Footer } from '../componentes/Footer'
-import AlternativaEdificios from '../componentes/AlternativaEdificios'
-import AlternativaEspacios from '../componentes/AlternativaEspacios'
+import type { ISpace } from '../../types'
+import { Footer } from '../../componentes/Footer'
+import AlternativaEdificios from '../../componentes/AlternativaEdificios'
+import AlternativaEspacios from '../../componentes/AlternativaEspacios'
 import { Divider } from '@mui/material'
-import AlternativaCapacidad from '../componentes/AlternativaCapacidad'
-import AlternativaFechas from '../componentes/AlternativaFechas'
+import AlternativaCapacidad from '../../componentes/AlternativaCapacidad'
+import AlternativaFechas from '../../componentes/AlternativaFechas'
 
 export const OpcionesParaReserva = () => {
     const [spaces, setSpaces] = useState<ISpace[]>([])
@@ -23,7 +23,6 @@ export const OpcionesParaReserva = () => {
 
     const filteredSpaces = spaces.filter((s) => {
         // Filtrar por edificio
-
         const buildingId =
             typeof s.building === 'string' ? s.building : s.building._id
 
@@ -108,6 +107,33 @@ export const OpcionesParaReserva = () => {
 
         getSpaces()
     }, [])
+
+    // Agrega los tildes a todos los filtros
+
+    useEffect(() => {
+    if (spaces.length === 0) return
+
+    const edificios = Array.from(
+        new Set(
+            spaces.map((s) =>
+                typeof s.building === 'string'
+                    ? s.building
+                    : s.building._id
+            )
+        )
+    )
+
+    const tiposEspacio = Array.from(
+        new Set(spaces.map((s) => s.spaceType))
+    )
+
+    const capacidades = ['1', 'Entre 2 y 15', 'Entre 16 y 30', 'Más de 30']
+
+    setFiltroEdificio(edificios)
+    setFiltroEspacio(tiposEspacio)
+    setFiltroCapacidad(capacidades)
+    }, [spaces])
+
 
     if (loading) {
         return (
@@ -211,7 +237,7 @@ export const OpcionesParaReserva = () => {
                     }}
                 >
                     {filteredSpaces.map((space) => (
-                        <SpaceCard key={space._id} space={space} />
+                        <CardAlternativas key={space._id} space={space} />
                     ))}
                 </Box>
             </Box>

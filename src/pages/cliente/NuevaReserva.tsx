@@ -9,18 +9,18 @@ import {
 } from '@mui/material'
 import Tooltip from '@mui/material/Tooltip'
 import { PickersDay } from '@mui/x-date-pickers/PickersDay'
-import fondo from '../assets/foto-registro.jpg'
+import fondo from '../../assets/foto-registro.jpg'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Footer } from '../componentes/Footer'
-import { BarraSuperior } from '../componentes/BarraSuperior'
+import { Footer } from '../../componentes/Footer'
+import { BarraSuperior } from '../../componentes/BarraSuperior'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs, { Dayjs } from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
-import type { ISpace, RentType } from '../types'
+import type { ISpace, RentType } from '../../types'
 
 dayjs.extend(isBetween)
 

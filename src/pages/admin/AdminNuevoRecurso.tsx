@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Footer } from '../componentes/Footer'
-import { NavAdmin } from '../componentes/NavAdmin'
+import { Footer } from '../../componentes/Footer'
+import { NavAdmin } from '../../componentes/NavAdmin'
 import { Box, Drawer, List, ListItemButton, ListItemText } from '@mui/material'
-import { FormularioNuevoEdificio } from '../componentes/FormularioNuevoEdificio'
-import { FormularioNuevoEspacio } from '../componentes/FormularioNuevoEspacio'
+import { FormularioNuevoEdificio } from '../../componentes/FormularioNuevoEdificio'
+import { FormularioNuevoEspacio } from '../../componentes/FormularioNuevoEspacio'
 
 const drawerWidth = 240
 const navbarHeight = 0 // altura estándar de MUI AppBar

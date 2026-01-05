@@ -1,16 +1,15 @@
-import { NavAdmin } from '../componentes/NavAdmin'
-import { Footer } from '../componentes/Footer'
+import { NavAdmin } from '../../componentes/NavAdmin'
+import { Footer } from '../../componentes/Footer'
 import { Box } from '@mui/material'
-import { CustomerTable } from '../componentes/CustomerTable'
-//import fondo from '../assets/foto-registro.jpg'
+import fondo from '../../assets/foto-registro.jpg'
 
-export const AdminManageUsers = () => {
+export const Administrador = () => {
     return (
         <>
             <NavAdmin />
             <Box
                 sx={{
-                    //backgroundImage: `url(${fondo})`,
+                    backgroundImage: `url(${fondo})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -22,9 +21,7 @@ export const AdminManageUsers = () => {
                     pt: 4,
                     flexGrow: 1,
                 }}
-            >
-                <CustomerTable />
-            </Box>
+            ></Box>
             <Footer />
         </>
     )
