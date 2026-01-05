@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Button, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
-import { BotonLogout } from './BotonLogout'
+import logo from '../../assets/logo.png'
+import { BotonLogout } from './../BotonLogout'
 
 export const NavCliente = () => {
     return (
@@ -20,6 +20,14 @@ export const NavCliente = () => {
 
                 {/* Links izquierda */}
                 <Box sx={{ flexGrow: 1, marginRight: 3 }}>
+                    <Button
+                        component={Link}
+                        to="/editarPerfil"
+                        color="inherit"
+                        sx={{ marginRight: 3, fontSize: 15 }}
+                    >
+                        Mi perfil
+                    </Button>
                     <Button
                         component={Link}
                         to="/mis-reservas"

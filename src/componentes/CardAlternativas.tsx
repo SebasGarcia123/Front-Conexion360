@@ -71,21 +71,23 @@ export default function CardAlternativas({ space }: Props) {
             <Card
                 sx={{
                     maxWidth: 300,
-                    height: 480,
+                    height: 530,
                     border: 1,
                     marginInline: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
                     transition: '0.2s',
                     '&:hover': { transform: 'scale(1.05)' },
-                }}
+                                }}
             >
-                <CardActionArea>
+                <CardActionArea sx={{ flexGrow: 1 }}>
                     <CardMedia
                         component="img"
                         height="250"
                         image={space.pictureUrl}
                         alt={space.spaceType}
                     />
-                    <CardContent>
+                    <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5">
                             {typeof space.building === 'object'
                                 ? space.building.name
@@ -130,9 +132,13 @@ export default function CardAlternativas({ space }: Props) {
                     </CardContent>
                 </CardActionArea>
 
-                <CardActions>
+                <CardActions sx={{
+                                mt: 'auto',
+                                justifyContent: 'start',
+                                pb: 2,
+                                }}>
                     <Button
-                        size="small"
+                        size="large"
                         color="primary"
                         variant="outlined"
                         onClick={() => setOpen(true)}

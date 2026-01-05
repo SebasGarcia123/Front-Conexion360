@@ -12,6 +12,7 @@ import { AdminNuevoRecurso } from '../pages/admin/AdminNuevoRecurso'
 import { AdminEstadisticas } from '../pages/admin/AdminEstadisticas'
 import { AdminManageUsers } from '../pages/admin/AdminManageUsers'
 import { OpcionesParaReserva } from '../pages/cliente/OpcionesParaReserva'
+import { EditarPerfil } from '../pages/cliente/EditarPerfil'
 
 export const RoutesList = () => {
     return (
@@ -23,6 +24,7 @@ export const RoutesList = () => {
                     <Route path="/login" element={<Login />} />
                     <Route element={<PrivateRoutesCliente />}>
                         <Route path="/cliente" element={<Cliente />} />
+                        <Route path="/editarPerfil" element={<EditarPerfil />} />
                         <Route path="/reserva" element={<NuevaReserva />} />
                         <Route path="/mis-reservas" element={<MisReservas />} />
                         <Route

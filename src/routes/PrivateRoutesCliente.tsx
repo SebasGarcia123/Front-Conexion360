@@ -16,6 +16,13 @@ export const PrivateRoutesCliente = () => {
 
         try {
             const decoded = jwtDecode<{ role: string; exp: number }>(token)
+            console.log('TOKEN DECODIFICADO 👉', decoded)
+
+            if (!decoded.exp) {
+                console.log('NO TIENE EXP')
+                setLoading(false)
+                return
+            }
 
             if (decoded.exp * 1000 < Date.now()) {
                 setLoading(false)

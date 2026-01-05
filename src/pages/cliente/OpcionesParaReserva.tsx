@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material'
-import { NavCliente } from '../../componentes/NavCliente'
+import { NavCliente } from '../../componentes/cliente/NavCliente'
 import CardAlternativas from '../../componentes/CardAlternativas'
 import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'

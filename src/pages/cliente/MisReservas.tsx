@@ -21,7 +21,7 @@ import {
 } from '@mui/material'
 //import dayjs from 'dayjs'
 import type { Reservation } from '../../types'
-import { NavCliente } from '../../componentes/NavCliente'
+import { NavCliente } from '../../componentes/cliente/NavCliente'
 import { Footer } from '../../componentes/Footer'
 import { Checkbox, FormControlLabel } from '@mui/material'
 import { CardMiReserva } from '../../componentes/cliente/CardMiReserva'
