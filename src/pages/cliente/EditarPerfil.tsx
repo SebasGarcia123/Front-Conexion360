@@ -9,6 +9,10 @@ import {
   OutlinedInput,
   TextField,
   Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
@@ -18,9 +22,13 @@ import fondo from '../../assets/foto-registro.jpg'
 import axios, { AxiosError } from 'axios'
 import type { ErrorMessages, ValidationError } from '../../types'
 import { useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
+import type { JWTPayload } from '../../types'
+
 
 interface EditUserData {
   user: string
+  email: string
   password?: string
   firstName: string
   lastName: string
@@ -32,12 +40,14 @@ export const EditarPerfil = () => {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState<ErrorMessages>({})
+  const [userId, setUserId] = useState<string | null>(null)
+  const [openSuccess, setOpenSuccess] = useState(false)
 
-  const storedUser = JSON.parse(sessionStorage.getItem('user') || 'null')
   const token = sessionStorage.getItem('authToken')
 
   const [objData, setObjData] = useState<EditUserData>({
     user: '',
+    email: '',
     password: '',
     firstName: '',
     lastName: '',
@@ -45,72 +55,113 @@ export const EditarPerfil = () => {
     document: '',
   })
 
+  
+
+
   /* ----------------- CARGA INICIAL ----------------- */
-  useEffect(() => {
-    if (!storedUser || !token) {
+
+useEffect(() => {
+  const loadProfile = async () => {
+    if (!token) {
       navigate('/login')
       return
     }
 
-    setObjData((prev) => ({
-      ...prev,
-      user: storedUser.user ?? '',
-      firstName: storedUser.firstName ?? '',
-      lastName: storedUser.lastName ?? '',
-    }))
-  }, [])
+    const decoded = jwtDecode<JWTPayload>(token)
+    setUserId(decoded._id)
+
+    const res = await axios.get(
+      `http://localhost:4000/users/${decoded._id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+
+    setObjData({
+      user: res.data.user,
+      email: res.data.email,
+      password: '',
+      firstName: res.data.firstName,
+      lastName: res.data.lastName,
+      phone: res.data.phone ?? '',
+      document: res.data.document ?? '',
+    })
+  }
+
+  loadProfile()
+}, [])
+
+
 
   /* ----------------- VALIDACIONES ----------------- */
-  const validations = (name: string, value: string) => {
-    const errorMessages = {
-      user: 'Complete el campo de usuario',
-      password:
-        'La contraseña debe tener al menos 8 caracteres y una mayúscula',
-    }
-
-    const errorMessage =
-      !value.trim() && name !== 'password'
-        ? `El campo ${name} es obligatorio`
-        : name === 'password' && value.length > 0 &&
-          (value.length < 8 || !/[A-Z]/.test(value))
-        ? errorMessages.password
-        : null
-
-    return { [name]: errorMessage }
-  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+
     setObjData((prev) => ({ ...prev, [name]: value }))
 
-    const validationResult = validations(name, value)
-    setErrors((prev) => ({ ...prev, ...validationResult }))
+    // Limpia error solo del campo editado
+    if (errors[name as keyof EditUserData]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: undefined,
+      }))
+    }
   }
+   
+  //valida que los campos esten todos con algo que no sea vacio, si hay alguno vacio lo pone en modo error
+  const validateRequiredFields = (): boolean => {
+    const newErrors: ErrorMessages = {}
+
+    const requiredFields: (keyof EditUserData)[] = [
+      'user',
+      'email',
+      'firstName',
+      'lastName',
+      'document',
+    ]
+
+    requiredFields.forEach((field) => {
+      const value = objData[field]
+
+      if (!value || value.trim() === '') {
+        newErrors[field] = 'Este campo es obligatorio'
+      }
+    })
+
+    setErrors(newErrors)
+
+    return Object.keys(newErrors).length === 0
+  }
+
 
   /* ----------------- SUBMIT ----------------- */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    try {
-      const payload = { ...objData }
+  // ⛔ PRIMERO validar
+  if (!validateRequiredFields()) {
+    return
+  }
 
-      // Si password está vacío, no se envía
-      if (!payload.password) {
-        delete payload.password
+  try {
+    const payload = { ...objData }
+
+    if (!payload.password) {
+      delete payload.password
+    }
+
+    if (!userId) return
+
+    await axios.put(
+      `http://localhost:4000/users/${userId}`,
+      payload,
+      {
+        headers: { Authorization: `Bearer ${token}` },
       }
+    )
 
-      await axios.put(
-        `http://localhost:4000/users/${storedUser._id}`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-
-      alert('Perfil actualizado correctamente')
-      navigate(-1)
+    setOpenSuccess(true)
     } catch (error) {
       const err = error as AxiosError<{ errors: ValidationError[] }>
       if (err.response?.data?.errors) {
@@ -164,6 +215,8 @@ export const EditarPerfil = () => {
                   fullWidth
                   value={objData.user}
                   onChange={handleChange}
+                  error={!!errors.document}
+                  helperText={errors.document}
                 />
                 {errors.user && <span style={{ color: 'red' }}>{errors.user}</span>}
               </Grid>
@@ -196,11 +249,26 @@ export const EditarPerfil = () => {
 
               <Grid size={{ xs: 12, sm: 6 }}>
                 <TextField
+                  label="Email"
+                  name="email"
+                  type="email"
+                  fullWidth
+                  value={objData.email}
+                  onChange={handleChange}
+                  error={!!errors.document}
+                  helperText={errors.document}
+                />
+              </Grid>
+
+              <Grid size={{ xs: 12, sm: 6 }}>
+                <TextField
                   label="Nombre"
                   name="firstName"
                   fullWidth
                   value={objData.firstName}
                   onChange={handleChange}
+                  error={!!errors.document}
+                  helperText={errors.document}
                 />
               </Grid>
 
@@ -211,6 +279,8 @@ export const EditarPerfil = () => {
                   fullWidth
                   value={objData.lastName}
                   onChange={handleChange}
+                  error={!!errors.document}
+                  helperText={errors.document}
                 />
               </Grid>
 
@@ -221,6 +291,8 @@ export const EditarPerfil = () => {
                   fullWidth
                   value={objData.phone}
                   onChange={handleChange}
+                  error={!!errors.document}
+                  helperText={errors.document}
                 />
               </Grid>
 
@@ -231,6 +303,8 @@ export const EditarPerfil = () => {
                   fullWidth
                   value={objData.document}
                   onChange={handleChange}
+                  error={!!errors.document}
+                  helperText={errors.document}
                 />
               </Grid>
             </Grid>
@@ -247,6 +321,36 @@ export const EditarPerfil = () => {
       </Box>
 
       <Footer />
+
+      <Dialog
+        open={openSuccess}
+        onClose={() => setOpenSuccess(false)}
+        maxWidth="xs"
+        fullWidth
+      >
+        <DialogTitle sx={{ textAlign: 'center', fontWeight: 600 }}>
+          ✅ Perfil actualizado
+        </DialogTitle>
+
+        <DialogContent sx={{ textAlign: 'center', mt: 1 }}>
+          <Typography>
+            Tus datos fueron guardados correctamente.
+          </Typography>
+        </DialogContent>
+
+        <DialogActions sx={{ justifyContent: 'center', pb: 2 }}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              setOpenSuccess(false)
+              navigate(-1)
+            }}
+          >
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </>
   )
 }
