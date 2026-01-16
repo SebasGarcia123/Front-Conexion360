@@ -8,6 +8,7 @@ import {
     Button,
     Grid,
     Divider,
+    CircularProgress,
 } from '@mui/material'
 
 interface PagoTarjetaProps {
@@ -35,6 +36,8 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
     const [cvv, setCvv] = useState('')
     const [completed, setCompleted] = useState(false)
     const [errors, setErrors] = useState<PaymentErrors>({})
+    const [loading, setLoading] = useState(false)
+
 
     //Validacion de datos cargados
     const validate = () => {
@@ -95,8 +98,15 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
     const handleSubmit = () => {
         if (!validate()) return
 
-        setCompleted(true)
-    }
+        setLoading(true) // 🔄 Mostrar spinner
+
+        // Simular transacción de 2 segundos
+        setTimeout(() => {
+            setLoading(false)
+            setCompleted(true)
+        }, 2000)
+        }
+
 
     // --------------------------
     // 🔄 Reset cuando se cierra
@@ -281,10 +291,16 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
                             fullWidth
                             sx={{ py: 1.2 }}
                             onClick={handleSubmit}
+                            disabled={loading} // deshabilitar mientras carga
                         >
-                            Confirmar pago
+                            {loading ? (
+                            <CircularProgress size={24} sx={{ color: 'white' }} />
+                            ) : (
+                            'Confirmar pago'
+                            )}
                         </Button>
-                    </Grid>
+                        </Grid>
+
                 </Grid>
             ) : (
                 <Box sx={{ textAlign: 'center', py: 5 }}>

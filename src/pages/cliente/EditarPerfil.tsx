@@ -9,6 +9,9 @@ import {
   OutlinedInput,
   TextField,
   Typography,
+  Dialog,
+  DialogContent,
+  DialogActions,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { useEffect, useState } from 'react'
@@ -19,24 +22,23 @@ import axios, { AxiosError } from 'axios'
 import type { ErrorMessages, ValidationError } from '../../types'
 import { useNavigate } from 'react-router-dom'
 
-interface EditUserData {
-  user: string
+interface UpdateMeRequest {
+  user?: string
   password?: string
-  firstName: string
-  lastName: string
-  phone: string
-  document: string
+  firstName?: string
+  lastName?: string
+  phone?: string
+  document?: string
 }
 
 export const EditarPerfil = () => {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState<ErrorMessages>({})
-
-  const storedUser = JSON.parse(sessionStorage.getItem('user') || 'null')
+  const hasErrors = Object.values(errors).some(Boolean)
+  const [openSuccessModal, setOpenSuccessModal] = useState(false)
   const token = sessionStorage.getItem('authToken')
-
-  const [objData, setObjData] = useState<EditUserData>({
+  const [objData, setObjData] = useState<UpdateMeRequest>({
     user: '',
     password: '',
     firstName: '',
@@ -47,37 +49,64 @@ export const EditarPerfil = () => {
 
   /* ----------------- CARGA INICIAL ----------------- */
   useEffect(() => {
-    if (!storedUser || !token) {
-      navigate('/login')
-      return
-    }
+  const loadUser = async () => {
+    try {
+      if (!token) {
+        navigate('/login')
+        return
+      }
 
-    setObjData((prev) => ({
-      ...prev,
-      user: storedUser.user ?? '',
-      firstName: storedUser.firstName ?? '',
-      lastName: storedUser.lastName ?? '',
-    }))
-  }, [])
+      const { data } = await axios.get(
+        'http://localhost:4000/users/me',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      setObjData({
+        user: data.user ?? '',
+        firstName: data.firstName ?? '',
+        lastName: data.lastName ?? '',
+        phone: data.phone ?? '',
+        document: data.document ?? '',
+      })
+
+    } catch {
+      navigate('/login')
+    }
+  }
+
+  loadUser()
+}, [token, navigate])
+
+
 
   /* ----------------- VALIDACIONES ----------------- */
   const validations = (name: string, value: string) => {
-    const errorMessages = {
-      user: 'Complete el campo de usuario',
-      password:
-        'La contraseña debe tener al menos 8 caracteres y una mayúscula',
+  if (name === 'password') {
+    if (
+      value.length > 0 &&
+      (value.length < 8 || !/[A-Z]/.test(value))
+    ) {
+      return {
+        [name]:
+          'La contraseña debe tener al menos 8 caracteres y una mayúscula',
+      }
     }
-
-    const errorMessage =
-      !value.trim() && name !== 'password'
-        ? `El campo ${name} es obligatorio`
-        : name === 'password' && value.length > 0 &&
-          (value.length < 8 || !/[A-Z]/.test(value))
-        ? errorMessages.password
-        : null
-
-    return { [name]: errorMessage }
+    return { [name]: undefined }
   }
+
+  if (!value.trim()) {
+    return {
+      [name]: 'Complete el campo para poder enviar los cambios',
+    }
+  }
+
+  return { [name]: undefined }
+}
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -87,20 +116,20 @@ export const EditarPerfil = () => {
     setErrors((prev) => ({ ...prev, ...validationResult }))
   }
 
+
   /* ----------------- SUBMIT ----------------- */
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     try {
-      const payload = { ...objData }
+      const payload: UpdateMeRequest = { ...objData }
+        Object.keys(payload).forEach((key) => {
+          if (!payload[key as keyof UpdateMeRequest]) {
+            delete payload[key as keyof UpdateMeRequest]
+          }
+        })
 
-      // Si password está vacío, no se envía
-      if (!payload.password) {
-        delete payload.password
-      }
-
-      await axios.put(
-        `http://localhost:4000/users/${storedUser._id}`,
+      await axios.put(`http://localhost:4000/users/me`,
         payload,
         {
           headers: {
@@ -109,8 +138,7 @@ export const EditarPerfil = () => {
         }
       )
 
-      alert('Perfil actualizado correctamente')
-      navigate(-1)
+      setOpenSuccessModal(true)
     } catch (error) {
       const err = error as AxiosError<{ errors: ValidationError[] }>
       if (err.response?.data?.errors) {
@@ -124,6 +152,12 @@ export const EditarPerfil = () => {
       }
     }
   }
+
+  const handleCloseModal = () => {
+  setOpenSuccessModal(false)
+  navigate('/cliente') // Reemplazá con la ruta principal de tu cliente
+}
+
 
   /* ----------------- UI ----------------- */
   return (
@@ -202,6 +236,9 @@ export const EditarPerfil = () => {
                   value={objData.firstName}
                   onChange={handleChange}
                 />
+                {errors.firstName && (
+                  <span style={{ color: 'red' }}>{errors.firstName}</span>
+                )}
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
@@ -212,6 +249,9 @@ export const EditarPerfil = () => {
                   value={objData.lastName}
                   onChange={handleChange}
                 />
+                {errors.lastName && (
+                  <span style={{ color: 'red' }}>{errors.lastName}</span>
+                )}
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
@@ -222,6 +262,9 @@ export const EditarPerfil = () => {
                   value={objData.phone}
                   onChange={handleChange}
                 />
+                {errors.phone && (
+                  <span style={{ color: 'red' }}>{errors.phone}</span>
+                )}
               </Grid>
 
               <Grid size={{ xs: 12, sm: 6 }}>
@@ -232,12 +275,16 @@ export const EditarPerfil = () => {
                   value={objData.document}
                   onChange={handleChange}
                 />
+                {errors.document && (
+                  <span style={{ color: 'red' }}>{errors.document}</span>
+                )}
               </Grid>
             </Grid>
 
             <Button
               variant="contained"
               type="submit"
+              disabled={hasErrors}
               sx={{ mt: 4, mx: 'auto', display: 'block', px: 4 }}
             >
               Guardar cambios
@@ -245,6 +292,19 @@ export const EditarPerfil = () => {
           </Box>
         </Box>
       </Box>
+
+      <Dialog open={openSuccessModal} onClose={handleCloseModal}>
+        <DialogContent>
+          <Typography>
+            El perfil se modificó correctamente.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} variant="contained" color="primary">
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Footer />
     </>
