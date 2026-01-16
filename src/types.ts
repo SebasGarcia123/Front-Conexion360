@@ -107,3 +107,13 @@ export interface IOpinion {
     space: ISpace
     valoration: number
 }
+
+// JWT Payload
+export interface JWTPayload {
+  _id: string
+  email: string
+  role: string
+  iat?: number
+  exp?: number
+  iss?: string
+}
