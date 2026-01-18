@@ -28,7 +28,12 @@ export const CardMiReserva = ({ reservation, onCancel, onRate }: Props) => {
       ? space.building
       : null
 
-
+  const chipStyles = {
+    Cumplida: { bgcolor: 'success.main' },
+    Pendiente: { bgcolor: 'warning.main' },
+    'Por Valorar': { bgcolor: '#f9e74a', color: '#000' },
+    Cancelada: { bgcolor: 'grey.400' },
+  }
   return (
     <Card
       sx={{
@@ -89,18 +94,13 @@ export const CardMiReserva = ({ reservation, onCancel, onRate }: Props) => {
             justifyContent="space-between"
             alignItems="flex-end"
           >
-            <Chip
+
+              <Chip
               label={reservation.status.toUpperCase()}
-              color={
-                reservation.status === 'Cumplida'
-                  ? 'success'
-                  : reservation.status === 'Pendiente'
-                  ? 'warning'
-                  : reservation.status === 'Cancelada'
-                  ? 'default'
-                  : 'info'
-              }
-              sx={{ mb: 2 }}
+              sx={{
+                mb: 2,
+                ...chipStyles[reservation.status as keyof typeof chipStyles],
+              }}
             />
 
             {reservation.status === 'Pendiente' && (
@@ -113,7 +113,7 @@ export const CardMiReserva = ({ reservation, onCancel, onRate }: Props) => {
               </Button>
             )}
 
-            {reservation.status === 'PorValorar' && (
+            {reservation.status === 'Por Valorar' && (
               <Button
                 color="info"
                 variant="contained"

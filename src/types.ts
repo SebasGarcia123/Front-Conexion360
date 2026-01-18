@@ -35,7 +35,7 @@ export interface Reservation {
     status: status
 }
 
-export type status = 'Pendiente'| 'PorValorar' | 'Cancelada' | 'Cumplida'
+export type status = 'Pendiente'| 'Por Valorar' | 'Cancelada' | 'Cumplida'
 
 export interface ReservationRequest {
     userId: string

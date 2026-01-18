@@ -1,14 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import {
-    // Table,
-    // TableBody,
-    // TableCell,
-    // TableContainer,
-    // TableHead,
-    // TableRow,
-    // Paper,
-
     Button,
     Box,
     Typography,
@@ -19,7 +11,6 @@ import {
   Rating,
   TextField
 } from '@mui/material'
-//import dayjs from 'dayjs'
 import type { Reservation } from '../../types'
 import { NavCliente } from '../../componentes/cliente/NavCliente'
 import { Footer } from '../../componentes/Footer'
@@ -84,38 +75,38 @@ export const MisReservas = () => {
     }
 
     const enviarValoracion = async () => {
-  if (!selectedReservation) return
+      if (!selectedReservation) return
 
-  const token = sessionStorage.getItem("authToken")
+      const token = sessionStorage.getItem("authToken")
 
-  await axios.post(
-    "http://localhost:4000/opinions",
-    {
-      reservation: selectedReservation._id,
-      space: typeof selectedReservation.spaceId === 'object'
-        ? selectedReservation.spaceId._id
-        : selectedReservation.spaceId,
-      name: nombre,
-      position: cargo,
-      company: empresa,
-      comment: comentario,
-      valoration: rating,
-    },
-    {
-      headers: { Authorization: `Bearer ${token}` },
+      await axios.post(
+        "http://localhost:4000/opinions",
+        {
+          reservation: selectedReservation._id,
+          space: typeof selectedReservation.spaceId === 'object'
+            ? selectedReservation.spaceId._id
+            : selectedReservation.spaceId,
+          name: nombre,
+          position: cargo,
+          company: empresa,
+          comment: comentario,
+          valoration: rating,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+
+      // limpiar
+      setOpen(false)
+      setNombre('')
+      setCargo('')
+      setEmpresa('')
+      setComentario('')
+      setRating(5)
+
+      getData()
     }
-  )
-
-  // limpiar
-  setOpen(false)
-  setNombre('')
-  setCargo('')
-  setEmpresa('')
-  setComentario('')
-  setRating(5)
-
-  getData()
-}
 
 
     useEffect(() => {
@@ -125,6 +116,18 @@ export const MisReservas = () => {
     const reservasFiltradas = verTodas
     ? reservas
     : reservas.filter(r => r.status === 'Pendiente')
+
+    const faltaMenosDe24Hs = (fechaInicio: string | Date) => {
+      const inicio = new Date(fechaInicio).getTime()
+      const ahora = Date.now()
+
+      return inicio - ahora < 24 * 60 * 60 * 1000
+    }
+
+    const reservaActual = reservas.find(
+      (r) => r._id === reservaSeleccionada
+    )
+
 
     return (
         <>
@@ -160,108 +163,6 @@ export const MisReservas = () => {
                       />
                     ))}
                   </Box>
-
-                    {/* <TableContainer component={Paper} sx={{ mt: 4 }}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Edificio</TableCell>
-                                    <TableCell>Dirección</TableCell>
-                                    <TableCell>Espacio</TableCell>
-                                    <TableCell>Desde</TableCell>
-                                    <TableCell>Hasta</TableCell>
-                                    <TableCell>Total</TableCell>
-                                    <TableCell>Acciones</TableCell>
-                                </TableRow>
-                            </TableHead>
-
-                            <TableBody>
-                                {reservasFiltradas.map((r) => (
-                                    <TableRow key={r._id}>
-                                        <TableCell>
-                                            {typeof r.spaceId === 'object' &&
-                                            typeof r.spaceId.building ===
-                                                'object'
-                                                ? r.spaceId.building.name
-                                                : '—'}
-                                        </TableCell>
-
-                                        <TableCell>
-                                            {typeof r.spaceId === 'object' &&
-                                            typeof r.spaceId.building ===
-                                                'object'
-                                                ? r.spaceId.building.address
-                                                : '—'}
-                                        </TableCell>
-
-                                        <TableCell>
-                                            {typeof r.spaceId === 'object'
-                                                ? r.spaceId.spaceType
-                                                : '—'}
-                                        </TableCell>
-
-                                        <TableCell>
-                                            {dayjs(r.dateFrom).format(
-                                                'DD/MM/YYYY'
-                                            )}
-                                        </TableCell>
-
-                                        <TableCell>
-                                            {dayjs(r.dateTo).format(
-                                                'DD/MM/YYYY'
-                                            )}
-                                        </TableCell>
-
-                                        <TableCell>{r.totalPrice}</TableCell>
-
-                                        <TableCell>
-                                          {r.status === 'Cumplida' && (
-                                            <Typography sx={{
-                                              backgroundColor: 'success.main',
-                                              color: 'white',
-                                              px: 2,
-                                              py: 0.5,
-                                              borderRadius: 1,
-                                              width:'108px',
-                                              display: 'inline-block',
-                                            }}>
-                                              CUMPLIDA
-                                            </Typography>
-                                          )}
-
-                                          {r.status === 'Cancelada' && (
-                                            <Typography color="text.secondary" fontStyle="italic">
-                                              Reserva cancelada
-                                            </Typography>
-                                          )}
-
-                                          {r.status === 'Pendiente' && (
-                                            <Button
-                                              variant="contained"
-                                              color="error"
-                                              onClick={() => abrirConfirmacion(r._id)}
-                                            >
-                                              Cancelar
-                                            </Button>
-                                          )}
-
-                                          {r.status === 'PorValorar' && (
-                                            <Button
-                                              sx={{width:'108px'}}
-                                              variant="contained"
-                                              color="info"
-                                              onClick={() => valorarReserva(r)}
-                                            >
-                                              Valorar
-                                            </Button>
-                                          )}
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer> */}
-
                 </>
 
                 )}
@@ -269,9 +170,33 @@ export const MisReservas = () => {
   <DialogTitle>Cancelar reserva</DialogTitle>
 
   <DialogContent>
-    ¿Estás seguro de que querés cancelar esta reserva?
-    Esta acción no se puede deshacer.
-  </DialogContent>
+  {reservaActual &&
+  faltaMenosDe24Hs(reservaActual.dateFrom) ? (
+    <>
+      <Typography color="error" fontWeight="bold" mb={1}>
+        ⚠️ Faltan menos de 24 hs para el inicio de la reserva.
+      </Typography>
+
+      <Typography mb={1}>
+        No se reintegrará el dinero.
+      </Typography>
+
+      <Typography>
+        ¿Deseás cancelar la reserva de todas maneras?
+      </Typography>
+    </>
+  ) : (
+    <>
+      <Typography>
+        ¿Estás seguro de que querés cancelar esta reserva?
+      </Typography>
+
+      <Typography>
+        Esta acción no se puede deshacer.
+      </Typography>
+    </>
+  )}
+</DialogContent>
 
   <DialogActions>
     <Button onClick={cerrarConfirmacion}>
