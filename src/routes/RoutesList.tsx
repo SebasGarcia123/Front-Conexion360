@@ -8,11 +8,12 @@ import { MisReservas } from '../pages/cliente/MisReservas'
 import { PrivateRoutesCliente } from './PrivateRoutesCliente'
 import { PrivateRoutesAdmin } from './PrivateRoutesAdmin'
 import { Administrador } from '../pages/admin/Administrador'
-import { AdminNuevoRecurso } from '../pages/admin/AdminNuevoRecurso'
 import { AdminEstadisticas } from '../pages/admin/AdminEstadisticas'
 import { AdminManageUsers } from '../pages/admin/AdminManageUsers'
 import { OpcionesParaReserva } from '../pages/cliente/OpcionesParaReserva'
 import { EditarPerfil } from '../pages/cliente/EditarPerfil'
+import { FormularioNuevoEdificio } from '../pages/admin/FormularioNuevoEdificio'
+import { FormularioNuevoEspacio } from '../pages/admin/FormularioNuevoEspacio'
 
 export const RoutesList = () => {
     return (
@@ -39,8 +40,12 @@ export const RoutesList = () => {
                             element={<AdminManageUsers />}
                         />
                         <Route
-                            path="/nuevoRecurso"
-                            element={<AdminNuevoRecurso />}
+                        path="/nuevo/edificio"
+                        element={<FormularioNuevoEdificio />}
+                        />
+                        <Route
+                            path="/nuevo/espacio"
+                            element={<FormularioNuevoEspacio />}
                         />
                         <Route
                             path="/estadisticas"

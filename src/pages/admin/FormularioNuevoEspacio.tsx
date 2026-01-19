@@ -1,8 +1,11 @@
-import { Button, MenuItem, Paper, Stack, TextField } from '@mui/material'
+import { Box, Button, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import type { IBuildingBySpace } from '../../types'
 import type { spaceType } from '../../types'
+import { Footer } from '../../componentes/Footer'
+import { NavAdmin } from '../../componentes/admin/NavAdmin'
+import fondo from '../../assets/foto-registro.jpg'
 
 export const FormularioNuevoEspacio = () => {
     const [buildings, setBuildings] = useState<IBuildingBySpace[]>([])
@@ -97,7 +100,7 @@ export const FormularioNuevoEspacio = () => {
 
             const finalPayload = {
                 ...formData,
-                pictureUrl: finalPictureUrl, // garantizamos que NO esté vacío
+                pictureUrl: finalPictureUrl,
             }
 
             const token = sessionStorage.getItem('authToken')
@@ -139,75 +142,110 @@ export const FormularioNuevoEspacio = () => {
     }
 
     return (
-        <Paper elevation={3} sx={{ p: 4, borderRadius: 3, maxWidth: 500 }}>
-            <h2 style={{ marginBottom: 20 }}>Nuevo Espacio</h2>
+        <Box
+            minHeight="100vh"
+            display="flex"
+            flexDirection="column"
+        >
 
-            <Stack spacing={2}>
-                <TextField
-                    select
-                    label="Edificio"
-                    name="building"
-                    value={formData.building}
-                    onChange={handleChange}
-                    fullWidth
-                >
-                    {buildings.map((b) => (
-                        <MenuItem key={b._id} value={b._id}>
-                            {b.name}
-                        </MenuItem>
-                    ))}
-                </TextField>
+            <NavAdmin />
 
-                <TextField
-                    select
-                    label="Tipo de Espacio"
-                    name="spaceType"
-                    value={formData.spaceType}
-                    onChange={handleChange}
-                    fullWidth
-                >
-                    {spaceTypes.map((tipo) => (
-                        <MenuItem key={tipo} value={tipo}>
-                            {tipo}
-                        </MenuItem>
-                    ))}
-                </TextField>
+            <Box
+                sx={{
+                    flexGrow: 1,
+                    backgroundImage: `url(${fondo})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    py: 4,
+                }}
+            >
+                <Paper elevation={3} sx={{ p: 4, borderRadius: 3, maxWidth: 500, width: '100%',border: '1px solid rgb(10, 10, 10)' }}>
+                    <Typography
+                        variant="h5"
+                        textAlign="center"
+                        mb={3}
+                        fontWeight="bold"
+                    >
+                        Nuevo Espacio
+                    </Typography>
 
-                <TextField
-                    label="Descripción"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    multiline
-                    rows={3}
-                    fullWidth
-                />
+                    <Stack spacing={2}>
+                        <TextField
+                            select
+                            label="Edificio"
+                            name="building"
+                            value={formData.building}
+                            onChange={handleChange}
+                            fullWidth
+                        >
+                            {buildings.map((b) => (
+                                <MenuItem key={b._id} value={b._id}>
+                                    {b.name}
+                                </MenuItem>
+                            ))}
+                        </TextField>
 
-                <TextField
-                    label="Capacidad"
-                    name="capacity"
-                    value={formData.capacity}
-                    onChange={handleChange}
-                    fullWidth
-                />
+                        <TextField
+                            select
+                            label="Tipo de Espacio"
+                            name="spaceType"
+                            value={formData.spaceType}
+                            onChange={handleChange}
+                            fullWidth
+                        >
+                            {spaceTypes.map((tipo) => (
+                                <MenuItem key={tipo} value={tipo}>
+                                    {tipo}
+                                </MenuItem>
+                            ))}
+                        </TextField>
 
-                <TextField
-                    label="Precio por Día"
-                    name="pricePerDay"
-                    value={formData.pricePerDay}
-                    onChange={handleChange}
-                    fullWidth
-                />
+                        <TextField
+                            label="Descripción"
+                            name="description"
+                            value={formData.description}
+                            onChange={handleChange}
+                            multiline
+                            rows={3}
+                            fullWidth
+                        />
 
-                <Button
-                    variant="contained"
-                    size="large"
-                    sx={{ mt: 2, borderRadius: 2 }}
-                    onClick={sendData}
-                >
-                    Guardar
-                </Button>
-            </Stack>
-        </Paper>
+                        <TextField
+                            label="Capacidad"
+                            name="capacity"
+                            value={formData.capacity}
+                            onChange={handleChange}
+                            fullWidth
+                        />
+
+                        <TextField
+                            label="Precio por Día"
+                            name="pricePerDay"
+                            value={formData.pricePerDay}
+                            onChange={handleChange}
+                            fullWidth
+                        />
+
+                        <Button
+                            variant="contained"
+                            size="medium"
+                            sx={{
+                                mt: 2,
+                                px: 5,
+                                alignSelf: 'center',
+                            }}
+                            onClick={sendData}
+                        >
+                            Guardar
+                        </Button>
+                    </Stack>
+                </Paper>
+            </Box>
+
+            <Footer />
+        </Box>
     )
 }
