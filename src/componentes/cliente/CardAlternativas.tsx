@@ -8,13 +8,13 @@ import CardActionArea from '@mui/material/CardActionArea'
 import CardActions from '@mui/material/CardActions'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
-import type { ISpace } from '../types'
-import { ReservaForm } from '../componentes/ReservaForm' // <-- tu formulario exportado como componente
+import type { ISpace } from '../../types'
+import { ReservaForm } from './ReservaForm' // <-- tu formulario exportado como componente
 import CloseIcon from '@mui/icons-material/Close'
 import { IconButton, CircularProgress } from '@mui/material'
-import '../styles/Amenities.css'
+import '../../styles/Amenities.css'
 import { PagoTarjeta } from './PagoTarjeta'
-import type { ReservationRequest } from '../types'
+import type { ReservationRequest } from '../../types'
 import axios, { AxiosError } from 'axios'
 
 type Props = {

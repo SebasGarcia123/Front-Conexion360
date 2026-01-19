@@ -223,21 +223,15 @@ export const Registro = () => {
                             </Grid>
 
                             {/* Nombre */}
-                            <Grid
-                                size={{ xs: 12, sm: 6 }}
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}
-                            >
+                            <Grid size={{ xs: 12, sm: 6 }}>
                                 <TextField
                                     required
                                     name="firstName"
                                     label="Nombre"
                                     type="text"
                                     variant="outlined"
+                                    fullWidth
                                     onChange={handleChange}
-                                    sx={{ width: 239, marginRight: 3 }}
                                 />
                             </Grid>
 
@@ -249,8 +243,8 @@ export const Registro = () => {
                                     label="Apellido"
                                     type="text"
                                     variant="outlined"
+                                    fullWidth
                                     onChange={handleChange}
-                                    sx={{ width: 239 }}
                                 />
                             </Grid>
 
@@ -281,9 +275,9 @@ export const Registro = () => {
                                     label="Teléfono"
                                     type="text"
                                     variant="outlined"
+                                    fullWidth
                                     onChange={handleChange}
-                                    sx={{ width: 239, marginRight: 3 }}
-                                    helperText="Sin O ni prefijo 15"
+                                    helperText="Sin 0 ni prefijo 15"
                                 />
                             </Grid>
 
@@ -295,8 +289,8 @@ export const Registro = () => {
                                     label="CUIT / CUIL"
                                     type="text"
                                     variant="outlined"
+                                    fullWidth
                                     onChange={handleChange}
-                                    sx={{ width: 239 }}
                                     helperText="Ingrese el número sin guiones ni espacios"
                                 />
                             </Grid>
