@@ -113,9 +113,16 @@ export const MisReservas = () => {
         getData()
     }, [])
 
-    const reservasFiltradas = verTodas
-    ? reservas
-    : reservas.filter(r => r.status === 'Pendiente')
+    const reservasFiltradas = (verTodas
+      ? reservas
+      : reservas.filter(r => r.status === 'Pendiente')
+    )
+
+    const reservasOrdenadas = [...reservasFiltradas].sort(
+      (a, b) =>
+        new Date(b.dateTo).getTime() -
+        new Date(a.dateTo).getTime()
+    )
 
     const faltaMenosDe24Hs = (fechaInicio: string | Date) => {
       const inicio = new Date(fechaInicio).getTime()
@@ -154,7 +161,7 @@ export const MisReservas = () => {
                       <Divider />
                     </Box>
                     <Box mt={4}>
-                    {reservasFiltradas.map((r) => (
+                    {reservasOrdenadas.map((r) => (
                       <CardMiReserva
                         key={r._id}
                         reservation={r}
