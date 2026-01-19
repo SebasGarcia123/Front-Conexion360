@@ -1,4 +1,4 @@
-import { NavAdmin } from '../../componentes/NavAdmin'
+import { NavAdmin } from '../../componentes/admin/NavAdmin'
 import { Footer } from '../../componentes/Footer'
 import { Box } from '@mui/material'
 import { CustomerTable } from '../../componentes/CustomerTable'

@@ -1,20 +1,19 @@
 import { useState } from 'react'
 import { Footer } from '../../componentes/Footer'
-import { NavAdmin } from '../../componentes/NavAdmin'
+import { NavAdmin } from '../../componentes/admin/NavAdmin'
 import { Box, Drawer, List, ListItemButton, ListItemText } from '@mui/material'
-import { FormularioNuevoEdificio } from '../../componentes/FormularioNuevoEdificio'
-import { FormularioNuevoEspacio } from '../../componentes/FormularioNuevoEspacio'
+import { FormularioNuevoEdificio } from './FormularioNuevoEdificio'
+import { FormularioNuevoEspacio } from './FormularioNuevoEspacio'
 
 const drawerWidth = 240
-const navbarHeight = 0 // altura estándar de MUI AppBar
-const footerHeight = '10vh' // lo que vos dijiste
+const navbarHeight = 0
+const footerHeight = '10vh'
 
 export const AdminNuevoRecurso = () => {
     const [selectedOption, setSelectedOption] = useState<string | null>(null)
 
     return (
         <>
-            {/* NAVBAR */}
             <NavAdmin />
 
             {/* CONTENEDOR PRINCIPAL (Drawer + contenido) */}

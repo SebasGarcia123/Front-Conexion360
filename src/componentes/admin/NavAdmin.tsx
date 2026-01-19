@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Button, Box } from '@mui/material'
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
-import { BotonLogout } from './BotonLogout'
+import logo from '../../assets/logo.png'
+import { BotonLogout } from '../BotonLogout'
 
 export const NavAdmin = () => {
     return (

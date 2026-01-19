@@ -1,8 +1,8 @@
 import { Button, MenuItem, Paper, Stack, TextField } from '@mui/material'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import type { IBuildingBySpace } from '../types'
-import type { spaceType } from '../types'
+import type { IBuildingBySpace } from '../../types'
+import type { spaceType } from '../../types'
 
 export const FormularioNuevoEspacio = () => {
     const [buildings, setBuildings] = useState<IBuildingBySpace[]>([])
