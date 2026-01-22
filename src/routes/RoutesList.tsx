@@ -14,6 +14,7 @@ import { OpcionesParaReserva } from '../pages/cliente/OpcionesParaReserva'
 import { EditarPerfil } from '../pages/cliente/EditarPerfil'
 import { FormularioNuevoEdificio } from '../pages/admin/FormularioNuevoEdificio'
 import { FormularioNuevoEspacio } from '../pages/admin/FormularioNuevoEspacio'
+import { EdicionUsuario } from '../pages/admin/EdicionUsuario'
 
 export const RoutesList = () => {
     return (
@@ -35,22 +36,11 @@ export const RoutesList = () => {
                     </Route>
                     <Route element={<PrivateRoutesAdmin />}>
                         <Route path="/admin" element={<Administrador />} />
-                        <Route
-                            path="/manageUsers"
-                            element={<AdminManageUsers />}
-                        />
-                        <Route
-                        path="/nuevo/edificio"
-                        element={<FormularioNuevoEdificio />}
-                        />
-                        <Route
-                            path="/nuevo/espacio"
-                            element={<FormularioNuevoEspacio />}
-                        />
-                        <Route
-                            path="/estadisticas"
-                            element={<AdminEstadisticas />}
-                        />
+                        <Route path="/manageUsers" element={<AdminManageUsers />} />
+                        <Route path="/edicionUsuario/:id" element={<EdicionUsuario />} />
+                        <Route path="/nuevo/edificio" element={<FormularioNuevoEdificio />} />
+                        <Route path="/nuevo/espacio" element={<FormularioNuevoEspacio />} />
+                        <Route path="/estadisticas" element={<AdminEstadisticas />} /> 
                     </Route>
                 </Routes>
             </BrowserRouter>

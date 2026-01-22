@@ -1,7 +1,7 @@
 import { NavAdmin } from '../../componentes/admin/NavAdmin'
 import { Footer } from '../../componentes/Footer'
 import { Box } from '@mui/material'
-import { CustomerTable } from '../../componentes/CustomerTable'
+import { TablaUsuarios } from '../../componentes/admin/TablaUsuarios'
 //import fondo from '../assets/foto-registro.jpg'
 
 export const AdminManageUsers = () => {
@@ -23,7 +23,7 @@ export const AdminManageUsers = () => {
                     flexGrow: 1,
                 }}
             >
-                <CustomerTable />
+                <TablaUsuarios />
             </Box>
             <Footer />
         </>

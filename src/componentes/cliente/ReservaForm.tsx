@@ -13,7 +13,7 @@ import dayjs, { Dayjs } from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import type { ISpace, RentType } from '../types'
+import type { ISpace, RentType } from '../../types'
 
 dayjs.extend(isBetween)
 

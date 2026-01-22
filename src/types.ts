@@ -23,12 +23,6 @@ export interface Reservation {
     dateFrom: string
     dateTo: string
     spaceId: string | ISpace
-        // | string
-        // | {
-        //       _id: string
-        //       spaceType: string
-        //       building: Building | string
-        //   }
     totalPrice: number
     isActive: boolean
     rentType: RentType
