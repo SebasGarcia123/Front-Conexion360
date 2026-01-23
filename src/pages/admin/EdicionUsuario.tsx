@@ -71,6 +71,13 @@ export const EdicionUsuario = () => {
   const hasErrors = Object.values(errors).some(Boolean)
 
   /* ----------------- CARGA INICIAL ----------------- */
+
+  useEffect(() => {
+  console.log('USER ROLE:', userData.role)
+  console.log('ROLES:', roles)
+}, [userData.role, roles])
+
+
   useEffect(() => {
     const loadUser = async () => {
       if (!token || !id) return navigate('/manageUsers')
@@ -102,6 +109,7 @@ export const EdicionUsuario = () => {
         const { data } = await axios.get('http://localhost:4000/roles', {
           headers: { Authorization: `Bearer ${token}` },
         })
+        console.log('ROLES BACK:', data)
         setRoles(data)
       } catch (err) {
         console.error(err)
