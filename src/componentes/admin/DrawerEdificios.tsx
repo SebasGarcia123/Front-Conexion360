@@ -14,14 +14,14 @@ export const DrawerEdificios = () => {
       }}
     >
       <List>
-        <ListItemButton onClick={() => navigate('/indicadores/edificios')}>
+        <ListItemButton onClick={() => navigate('/indicadores/edificios/reservas')}>
           <ListItemText primary="Reservas por edificio" />
         </ListItemButton>
 
         <Divider sx={{ backgroundColor: 'rgba(255,255,255,0.3)' }} />
 
-        <ListItemButton onClick={() => navigate('/indicadores/espacios')}>
-          <ListItemText primary="Indicadores de espacios" />
+        <ListItemButton onClick={() => navigate('/indicadores/edificios/valoracion')}>
+          <ListItemText primary="Valoracion por edificio" />
         </ListItemButton>
       </List>
     </Box>

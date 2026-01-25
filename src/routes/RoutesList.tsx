@@ -19,7 +19,8 @@ import { IndicadoresNegocio } from '../pages/admin/indicadores/IndicadoresNegoci
 import { IndicadoresReservas } from '../pages/admin/indicadores/IndicadoresReservas'
 import { IndicadoresLayout } from '../componentes/admin/IndicadoresLayout'
 import { DrawerEdificios } from '../componentes/admin/DrawerEdificios'
-import { EdificioMasReservas } from '../pages/admin/indicadores/EdificioMasReservas'
+import { ReservasPorEdificio } from '../pages/admin/indicadores/ReservasPorEdificio'
+import { ValoracionPorEdificio } from '../pages/admin/indicadores/ValoracionPorEdificio'
 
 export const RoutesList = () => {
     return (
@@ -50,7 +51,8 @@ export const RoutesList = () => {
                         <Route path="/indicadores/reservas" element={<IndicadoresReservas />} />
                         <Route element={<PrivateRoutesAdmin />}>
                         <Route path="/indicadores/edificios" element={<IndicadoresLayout drawer={<DrawerEdificios />} />}>
-                            <Route index element={<EdificioMasReservas />} />
+                            <Route path="reservas" element={<ReservasPorEdificio />} />
+                            <Route path="valoracion" element={<ValoracionPorEdificio />} />
                         </Route>
                         </Route>
                     </Route>

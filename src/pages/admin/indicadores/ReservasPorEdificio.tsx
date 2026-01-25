@@ -69,7 +69,7 @@ function buildChartData(
   }
 }
 
-export const EdificioMasReservas = () => {
+export const ReservasPorEdificio = () => {
   const [data, setData] = useState<ReservasPorEdificioAnio[]>([])
   const [buildings, setBuildings] = useState<Building[]>([])
   const [selectedBuilding, setSelectedBuilding] = useState<string>('')
@@ -109,7 +109,14 @@ export const EdificioMasReservas = () => {
 
   return (
     <Box>
-      <Typography variant="h6" mb={2}>Reservas por mes</Typography>
+      <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
+        <Typography variant="h4" mr={1}>
+            Reservas por mes
+        </Typography>
+        <Typography variant="body1">
+            (Cantidad de reservas por edificio por mes)
+        </Typography>
+        </Box>
 
       <FormControl sx={{ mb:2, minWidth:200 }}>
         <InputLabel>Edificio</InputLabel>
