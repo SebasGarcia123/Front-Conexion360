@@ -113,14 +113,90 @@ export const NavAdmin = () => {
                         </MenuItem>
                     </Menu>
                     
+                    {/* Estadisticas e indicadores */}
+
                     <Button
-                        component={Link}
-                        to="/estadisticas"
                         color="inherit"
-                        sx={{ mr: 3, fontSize: 15 }}
+                        onClick={handleOpen}
+                        sx={{
+                            mx: 2,
+                            fontSize: 15,
+                            minWidth: 120,      // 🔹 +50% aprox
+                            px: 2,              // padding horizontal
+                            justifyContent: 'center',
+                        }}
                     >
-                        Estadísticas
+                        Indicadores
                     </Button>
+
+
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        slotProps={{
+                            paper: {
+                                sx: {
+                                    backgroundColor: '#efeaeaff',
+                                    color: '#0265baff',
+                                    minWidth: 140,   // 🔹 +50% aprox
+                                },
+                            },
+                        }}
+                    >
+
+                        <MenuItem
+                            sx={{
+                                color: '#0265baff',
+                                fontSize: 15,
+                                '&:hover': {
+                                    backgroundColor: '#dcd6d6ff',
+                                },
+                            }}
+                            onClick={() => handleNavigate('/indicadores/edificios')}
+                        >
+                            EDIFICIOS
+                        </MenuItem>
+                        <Divider />
+                        <MenuItem
+                            sx={{
+                                color: '#0265baff',
+                                fontSize: 15,
+                                '&:hover': {
+                                    backgroundColor: '#dcd6d6ff',
+                                },
+                            }}
+                            onClick={() => handleNavigate('/indicadores/espacios')}
+                        >
+                            ESPACIOS
+                        </MenuItem>
+                         <Divider />
+                        <MenuItem
+                            sx={{
+                                color: '#0265baff',
+                                fontSize: 15,
+                                '&:hover': {
+                                    backgroundColor: '#dcd6d6ff',
+                                },
+                            }}
+                            onClick={() => handleNavigate('/indicadores/reservas')}
+                        >
+                            RESERVAS
+                        </MenuItem>
+                         <Divider />
+                        <MenuItem
+                            sx={{
+                                color: '#0265baff',
+                                fontSize: 15,
+                                '&:hover': {
+                                    backgroundColor: '#dcd6d6ff',
+                                },
+                            }}
+                            onClick={() => handleNavigate('/indicadores/negocio')}
+                        >
+                            NEGOCIO
+                        </MenuItem>
+                    </Menu>
                 </Box>
 
                 {/* Derecha */}

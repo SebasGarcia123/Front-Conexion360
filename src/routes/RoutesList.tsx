@@ -8,13 +8,18 @@ import { MisReservas } from '../pages/cliente/MisReservas'
 import { PrivateRoutesCliente } from './PrivateRoutesCliente'
 import { PrivateRoutesAdmin } from './PrivateRoutesAdmin'
 import { Administrador } from '../pages/admin/Administrador'
-import { AdminEstadisticas } from '../pages/admin/AdminEstadisticas'
 import { AdminManageUsers } from '../pages/admin/AdminManageUsers'
 import { OpcionesParaReserva } from '../pages/cliente/OpcionesParaReserva'
 import { EditarPerfil } from '../pages/cliente/EditarPerfil'
 import { FormularioNuevoEdificio } from '../pages/admin/FormularioNuevoEdificio'
 import { FormularioNuevoEspacio } from '../pages/admin/FormularioNuevoEspacio'
 import { EdicionUsuario } from '../pages/admin/EdicionUsuario'
+import { IndicadoresEspacios } from '../pages/admin/indicadores/IndicadoresEspacios'
+import { IndicadoresNegocio } from '../pages/admin/indicadores/IndicadoresNegocio'
+import { IndicadoresReservas } from '../pages/admin/indicadores/IndicadoresReservas'
+import { IndicadoresLayout } from '../componentes/admin/IndicadoresLayout'
+import { DrawerEdificios } from '../componentes/admin/DrawerEdificios'
+import { EdificioMasReservas } from '../pages/admin/indicadores/EdificioMasReservas'
 
 export const RoutesList = () => {
     return (
@@ -40,7 +45,14 @@ export const RoutesList = () => {
                         <Route path="/edicionUsuario/:id" element={<EdicionUsuario />} />
                         <Route path="/nuevo/edificio" element={<FormularioNuevoEdificio />} />
                         <Route path="/nuevo/espacio" element={<FormularioNuevoEspacio />} />
-                        <Route path="/estadisticas" element={<AdminEstadisticas />} /> 
+                        <Route path="/indicadores/espacios" element={<IndicadoresEspacios />} />
+                        <Route path="/indicadores/negocio" element={<IndicadoresNegocio />} />
+                        <Route path="/indicadores/reservas" element={<IndicadoresReservas />} />
+                        <Route element={<PrivateRoutesAdmin />}>
+                        <Route path="/indicadores/edificios" element={<IndicadoresLayout drawer={<DrawerEdificios />} />}>
+                            <Route index element={<EdificioMasReservas />} />
+                        </Route>
+                        </Route>
                     </Route>
                 </Routes>
             </BrowserRouter>
