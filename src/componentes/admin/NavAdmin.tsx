@@ -13,22 +13,31 @@ import { BotonLogout } from '../BotonLogout'
 import { useState } from 'react'
 
 export const NavAdmin = () => {
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-    const open = Boolean(anchorEl)
+    const [anchorNuevo, setAnchorNuevo] = useState<null | HTMLElement>(null)
+    const [anchorIndicadores, setAnchorIndicadores] = useState<null | HTMLElement>(null)
+
+    const openNuevo = Boolean(anchorNuevo)
+    const openIndicadores = Boolean(anchorIndicadores)
+
     const navigate = useNavigate()
 
-    const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget)
+    const handleOpenNuevo = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorNuevo(e.currentTarget)
     }
 
-    const handleClose = () => {
-        setAnchorEl(null)
+    const handleOpenIndicadores = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorIndicadores(e.currentTarget)
     }
 
-    const handleNavigate = (path: string) => {
+    const handleCloseNuevo = () => setAnchorNuevo(null)
+    const handleCloseIndicadores = () => setAnchorIndicadores(null)
+
+
+    const handleNavigate = (path: string, close: () => void) => {
         navigate(path)
-        handleClose()
+        close()
     }
+
 
     return (
         <AppBar
@@ -58,7 +67,7 @@ export const NavAdmin = () => {
                     {/* 🔽 Nuevo dropdown */}
                     <Button
                         color="inherit"
-                        onClick={handleOpen}
+                        onClick={handleOpenNuevo}
                         sx={{
                             mx: 2,
                             fontSize: 15,
@@ -72,9 +81,9 @@ export const NavAdmin = () => {
 
 
                     <Menu
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
+                        anchorEl={anchorNuevo}
+                        open={openNuevo}
+                        onClose={handleCloseNuevo}
                         slotProps={{
                             paper: {
                                 sx: {
@@ -94,7 +103,7 @@ export const NavAdmin = () => {
                                     backgroundColor: '#dcd6d6ff',
                                 },
                             }}
-                            onClick={() => handleNavigate('/nuevo/edificio')}
+                            onClick={() => handleNavigate('/nuevo/edificio', handleCloseNuevo)}
                         >
                             EDIFICIO
                         </MenuItem>
@@ -107,7 +116,7 @@ export const NavAdmin = () => {
                                     backgroundColor: '#dcd6d6ff',
                                 },
                             }}
-                            onClick={() => handleNavigate('/nuevo/espacio')}
+                            onClick={() => handleNavigate('/nuevo/espacio', handleCloseNuevo)}
                         >
                             ESPACIO
                         </MenuItem>
@@ -117,7 +126,7 @@ export const NavAdmin = () => {
 
                     <Button
                         color="inherit"
-                        onClick={handleOpen}
+                        onClick={handleOpenIndicadores}
                         sx={{
                             mx: 2,
                             fontSize: 15,
@@ -131,9 +140,9 @@ export const NavAdmin = () => {
 
 
                     <Menu
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
+                        anchorEl={anchorIndicadores}
+                        open={openIndicadores}
+                        onClose={handleCloseIndicadores}
                         slotProps={{
                             paper: {
                                 sx: {
@@ -153,7 +162,7 @@ export const NavAdmin = () => {
                                     backgroundColor: '#dcd6d6ff',
                                 },
                             }}
-                            onClick={() => handleNavigate('/indicadores/edificios')}
+                            onClick={() => handleNavigate('/indicadores/edificios', handleCloseIndicadores)}
                         >
                             EDIFICIOS
                         </MenuItem>
@@ -166,7 +175,7 @@ export const NavAdmin = () => {
                                     backgroundColor: '#dcd6d6ff',
                                 },
                             }}
-                            onClick={() => handleNavigate('/indicadores/espacios')}
+                            onClick={() => handleNavigate('/indicadores/espacios', handleCloseIndicadores)}
                         >
                             ESPACIOS
                         </MenuItem>
@@ -179,7 +188,7 @@ export const NavAdmin = () => {
                                     backgroundColor: '#dcd6d6ff',
                                 },
                             }}
-                            onClick={() => handleNavigate('/indicadores/reservas')}
+                            onClick={() => handleNavigate('/indicadores/reservas', handleCloseIndicadores)}
                         >
                             RESERVAS
                         </MenuItem>
@@ -192,7 +201,7 @@ export const NavAdmin = () => {
                                     backgroundColor: '#dcd6d6ff',
                                 },
                             }}
-                            onClick={() => handleNavigate('/indicadores/negocio')}
+                            onClick={() => handleNavigate('/indicadores/negocio', handleCloseIndicadores)}
                         >
                             NEGOCIO
                         </MenuItem>
