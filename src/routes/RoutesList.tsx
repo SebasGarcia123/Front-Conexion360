@@ -3,7 +3,7 @@ import { Home } from '../pages/home/Home'
 import { Login } from '../pages/Login'
 import { Registro } from '../pages/Registro'
 import { Cliente } from '../pages/cliente/Cliente'
-import { NuevaReserva } from '../pages/cliente/NuevaReserva'
+//import { NuevaReserva } from '../pages/cliente/NuevaReserva'
 import { MisReservas } from '../pages/cliente/MisReservas'
 import { PrivateRoutesCliente } from './PrivateRoutesCliente'
 import { PrivateRoutesAdmin } from './PrivateRoutesAdmin'
@@ -42,7 +42,7 @@ export const RoutesList = () => {
                     <Route element={<PrivateRoutesCliente />}>
                         <Route path="/cliente" element={<Cliente />} />
                         <Route path="/editarPerfil" element={<EditarPerfil />} />
-                        <Route path="/reserva" element={<NuevaReserva />} />
+                        {/* <Route path="/reserva" element={<NuevaReserva />} /> */}
                         <Route path="/mis-reservas" element={<MisReservas />} />
                         <Route
                             path="/espacios"

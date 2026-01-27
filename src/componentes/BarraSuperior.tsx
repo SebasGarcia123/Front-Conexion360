@@ -6,20 +6,12 @@ export const BarraSuperior = () => {
 
     const navigate = useNavigate()
 
-    const handleBack = () => {
-    if (window.history.length > 1) {
-        navigate(-1)
-    } else {
-        navigate('/', { replace: true })
-    }
-}
-
     return (
         <AppBar
             position="static"
             sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}
         >
-            <Toolbar sx={{ height: 70, alignItems: 'center' }}>
+            <Toolbar sx={{ height: 70, display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ flexGrow: 1 }}>
                     {/* Logo */}
                     <img
@@ -31,11 +23,12 @@ export const BarraSuperior = () => {
                 </Box>
                 <Button
                     color="primary"
-                    onClick={handleBack}
+                    onClick={() => navigate('/', { replace: true })}
                     variant="contained"
                 >
-                    Volver
+                Volver
                 </Button>
+
             </Toolbar>
         </AppBar>
     )
