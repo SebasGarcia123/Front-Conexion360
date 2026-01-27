@@ -14,13 +14,22 @@ import { EditarPerfil } from '../pages/cliente/EditarPerfil'
 import { FormularioNuevoEdificio } from '../pages/admin/FormularioNuevoEdificio'
 import { FormularioNuevoEspacio } from '../pages/admin/FormularioNuevoEspacio'
 import { EdicionUsuario } from '../pages/admin/EdicionUsuario'
-import { IndicadoresEspacios } from '../pages/admin/indicadores/IndicadoresEspacios'
-import { IndicadoresNegocio } from '../pages/admin/indicadores/IndicadoresNegocio'
-import { IndicadoresReservas } from '../pages/admin/indicadores/IndicadoresReservas'
 import { IndicadoresLayout } from '../componentes/admin/IndicadoresLayout'
 import { DrawerEdificios } from '../componentes/admin/DrawerEdificios'
+import { DrawerEspacios } from '../componentes/admin/DrawerEspacios'
+import { DrawerReservas } from '../componentes/admin/DrawerReservas.tsx'
+import { DrawerNegocio } from '../componentes/admin/DrawerNegocio'
 import { ReservasPorEdificio } from '../pages/admin/indicadores/ReservasPorEdificio'
 import { ValoracionPorEdificio } from '../pages/admin/indicadores/ValoracionPorEdificio'
+import { ValoracionPorEspacio } from '../pages/admin/indicadores/ValoracionPorEspacio'
+import { ReservasPorEspacio } from '../pages/admin/indicadores/ReservasPorEspacio'
+import { FacturacionPorEdificio } from '../pages/admin/indicadores/FacturacionPorEdificio'
+import { FacturacionPorEspacio } from '../pages/admin/indicadores/FacturacionPorEspacio'
+import { FacturacionTotal } from '../pages/admin/indicadores/FacturacionTotal'
+import { ReservasPromedioEdificio } from '../pages/admin/indicadores/ReservasPromedioEdificio'
+import { ReservasPromedioEspacio } from '../pages/admin/indicadores/ReservasPromedioEspacio'
+import { ReservasMejorValorada } from '../pages/admin/indicadores/ReservasMejorValorada'
+import { ReservasTotales } from '../pages/admin/indicadores/ReservasTotales'
 
 export const RoutesList = () => {
     return (
@@ -46,14 +55,24 @@ export const RoutesList = () => {
                         <Route path="/edicionUsuario/:id" element={<EdicionUsuario />} />
                         <Route path="/nuevo/edificio" element={<FormularioNuevoEdificio />} />
                         <Route path="/nuevo/espacio" element={<FormularioNuevoEspacio />} />
-                        <Route path="/indicadores/espacios" element={<IndicadoresEspacios />} />
-                        <Route path="/indicadores/negocio" element={<IndicadoresNegocio />} />
-                        <Route path="/indicadores/reservas" element={<IndicadoresReservas />} />
-                        <Route element={<PrivateRoutesAdmin />}>
                         <Route path="/indicadores/edificios" element={<IndicadoresLayout drawer={<DrawerEdificios />} />}>
                             <Route path="reservas" element={<ReservasPorEdificio />} />
                             <Route path="valoracion" element={<ValoracionPorEdificio />} />
                         </Route>
+                        <Route path="/indicadores/espacios" element={<IndicadoresLayout drawer={<DrawerEspacios />} />}>
+                            <Route path="reservas" element={<ReservasPorEspacio />} />
+                            <Route path="valoracion" element={<ValoracionPorEspacio />} />
+                        </Route>
+                        <Route path="/indicadores/reservas" element={<IndicadoresLayout drawer={<DrawerReservas />} />}>
+                            <Route path="promedio-edificio" element={<ReservasPromedioEdificio />} />
+                            <Route path="promedio-espacio" element={<ReservasPromedioEspacio />} />
+                            <Route path="mejor-valorada" element={<ReservasMejorValorada />} />
+                            <Route path="totales" element={<ReservasTotales />} />
+                        </Route>
+                        <Route path="/indicadores/negocio" element={<IndicadoresLayout drawer={<DrawerNegocio />} />}>
+                            <Route path="edificio" element={<FacturacionPorEdificio />} />
+                            <Route path="espacio" element={<FacturacionPorEspacio />} />
+                            <Route path="total" element={<FacturacionTotal />} />
                         </Route>
                     </Route>
                 </Routes>

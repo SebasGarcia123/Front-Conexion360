@@ -8,7 +8,7 @@ export const DrawerEdificios = () => {
     <Box
       sx={{
         height: '100%',
-        backgroundColor: '#0d47a1',
+        backgroundColor: '#2196f3',
         color: 'white',
         pt: 2,
       }}
