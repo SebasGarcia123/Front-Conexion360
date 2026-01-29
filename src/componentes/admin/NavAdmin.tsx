@@ -1,216 +1,226 @@
 import {
-    AppBar,
-    Toolbar,
-    Button,
-    Box,
-    Menu,
-    MenuItem,
-    Divider,
+  AppBar,
+  Toolbar,
+  Button,
+  Box,
+  Menu,
+  MenuItem,
+  Divider,
+  IconButton,
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemText,
 } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
 import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import logo from '../../assets/logo.png'
 import { BotonLogout } from '../BotonLogout'
-import { useState } from 'react'
+
+const drawerTextStyle = {
+  color: '#0265baff',
+  fontSize: 15,
+}
 
 export const NavAdmin = () => {
-    const [anchorNuevo, setAnchorNuevo] = useState<null | HTMLElement>(null)
-    const [anchorIndicadores, setAnchorIndicadores] = useState<null | HTMLElement>(null)
+  const [anchorNuevo, setAnchorNuevo] = useState<null | HTMLElement>(null)
+  const [anchorIndicadores, setAnchorIndicadores] = useState<null | HTMLElement>(null)
+  const [openDrawer, setOpenDrawer] = useState(false)
 
-    const openNuevo = Boolean(anchorNuevo)
-    const openIndicadores = Boolean(anchorIndicadores)
+  const navigate = useNavigate()
 
-    const navigate = useNavigate()
+  const openNuevo = Boolean(anchorNuevo)
+  const openIndicadores = Boolean(anchorIndicadores)
 
-    const handleOpenNuevo = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenNuevo = (e: React.MouseEvent<HTMLButtonElement>) =>
     setAnchorNuevo(e.currentTarget)
-    }
 
-    const handleOpenIndicadores = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenIndicadores = (e: React.MouseEvent<HTMLButtonElement>) =>
     setAnchorIndicadores(e.currentTarget)
-    }
 
-    const handleCloseNuevo = () => setAnchorNuevo(null)
-    const handleCloseIndicadores = () => setAnchorIndicadores(null)
+  const handleCloseNuevo = () => setAnchorNuevo(null)
+  const handleCloseIndicadores = () => setAnchorIndicadores(null)
 
+  const handleNavigate = (path: string, close?: () => void) => {
+    navigate(path)
+    close?.()
+    setOpenDrawer(false)
+  }
 
-    const handleNavigate = (path: string, close: () => void) => {
-        navigate(path)
-        close()
-    }
+  return (
+    <>
+      <AppBar
+        position="static"
+        sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}
+      >
+        <Toolbar sx={{ height: 70 }}>
+          {/* ☰ Mobile */}
+          <IconButton
+            onClick={() => setOpenDrawer(true)}
+            sx={{ display: { xs: 'flex', md: 'none' }, mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
 
+          {/* Logo */}
+          <img
+            src={logo}
+            alt="Logo"
+            width="200"
+            style={{ borderRadius: 5, marginRight: 30 }}
+          />
 
-    return (
-        <AppBar
-            position="static"
-            sx={{ px: 2, backgroundColor: '#efeaeaff', color: '#0265baff' }}
-        >
-            <Toolbar sx={{ height: 70 }}>
-                {/* Logo */}
-                <img
-                    src={logo}
-                    alt="Logo"
-                    width="200"
-                    style={{ borderRadius: '5px', marginRight: 30 }}
-                />
+          {/* MENÚ DESKTOP */}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'block' },
+            }}
+          >
+            <Button
+              component={Link}
+              to="/manageUsers"
+              color="inherit"
+              sx={{ mr: 5, fontSize: 15 }}
+            >
+              Administrar Usuarios
+            </Button>
 
-                {/* Links izquierda */}
-                <Box sx={{ flexGrow: 1 }}>
-                    <Button
-                        component={Link}
-                        to="/manageUsers"
-                        color="inherit"
-                        sx={{ mr: 5, fontSize: 15 }}
-                    >
-                        Administrar Usuarios
-                    </Button>
+            {/* Nuevo */}
+            <Button onClick={handleOpenNuevo} sx={{ mx: 2, fontSize: 15 }}>
+              Nuevo
+            </Button>
 
-                    {/* 🔽 Nuevo dropdown */}
-                    <Button
-                        color="inherit"
-                        onClick={handleOpenNuevo}
-                        sx={{
-                            mx: 2,
-                            fontSize: 15,
-                            minWidth: 120,      // 🔹 +50% aprox
-                            px: 2,              // padding horizontal
-                            justifyContent: 'center',
-                        }}
-                    >
-                        Nuevo
-                    </Button>
+            <Menu
+  anchorEl={anchorNuevo}
+  open={openNuevo}
+  onClose={handleCloseNuevo}
+  slotProps={{
+    paper: {
+      sx: {
+        backgroundColor: '#efeaeaff',
+        color: '#0265baff',
+        minWidth: 140,
+      },
+    },
+  }}
+>
+              <MenuItem onClick={() => handleNavigate('/nuevo/edificio', handleCloseNuevo)}>
+                EDIFICIO
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={() => handleNavigate('/nuevo/espacio', handleCloseNuevo)}>
+                ESPACIO
+              </MenuItem>
+            </Menu>
 
+            {/* Indicadores */}
+            <Button onClick={handleOpenIndicadores} sx={{ mx: 2, fontSize: 15 }}>
+              Indicadores
+            </Button>
 
-                    <Menu
-                        anchorEl={anchorNuevo}
-                        open={openNuevo}
-                        onClose={handleCloseNuevo}
-                        slotProps={{
-                            paper: {
-                                sx: {
-                                    backgroundColor: '#efeaeaff',
-                                    color: '#0265baff',
-                                    minWidth: 140,   // 🔹 +50% aprox
-                                },
-                            },
-                        }}
-                    >
+            <Menu
+  anchorEl={anchorIndicadores}
+  open={openIndicadores}
+  onClose={handleCloseIndicadores}
+  slotProps={{
+    paper: {
+      sx: {
+        backgroundColor: '#efeaeaff',
+        color: '#0265baff',
+        minWidth: 140,
+      },
+    },
+  }}
+>
 
-                        <MenuItem
-                            sx={{
-                                color: '#0265baff',
-                                fontSize: 15,
-                                '&:hover': {
-                                    backgroundColor: '#dcd6d6ff',
-                                },
-                            }}
-                            onClick={() => handleNavigate('/nuevo/edificio', handleCloseNuevo)}
-                        >
-                            EDIFICIO
-                        </MenuItem>
-                        <Divider />
-                        <MenuItem
-                            sx={{
-                                color: '#0265baff',
-                                fontSize: 15,
-                                '&:hover': {
-                                    backgroundColor: '#dcd6d6ff',
-                                },
-                            }}
-                            onClick={() => handleNavigate('/nuevo/espacio', handleCloseNuevo)}
-                        >
-                            ESPACIO
-                        </MenuItem>
-                    </Menu>
-                    
-                    {/* Estadisticas e indicadores */}
+              <MenuItem onClick={() => handleNavigate('/indicadores/edificios', handleCloseIndicadores)}>
+                EDIFICIOS
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={() => handleNavigate('/indicadores/espacios', handleCloseIndicadores)}>
+                ESPACIOS
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={() => handleNavigate('/indicadores/reservas', handleCloseIndicadores)}>
+                RESERVAS
+              </MenuItem>
+              <Divider />
+              <MenuItem onClick={() => handleNavigate('/indicadores/negocio', handleCloseIndicadores)}>
+                NEGOCIO
+              </MenuItem>
+            </Menu>
+          </Box>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <BotonLogout />
+        </Box>
+        </Toolbar>
+      </AppBar>
 
-                    <Button
-                        color="inherit"
-                        onClick={handleOpenIndicadores}
-                        sx={{
-                            mx: 2,
-                            fontSize: 15,
-                            minWidth: 120,      // 🔹 +50% aprox
-                            px: 2,              // padding horizontal
-                            justifyContent: 'center',
-                        }}
-                    >
-                        Indicadores
-                    </Button>
+      {/* DRAWER MOBILE */}
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        PaperProps={{
+          sx: {
+            backgroundColor: '#efeaeaff',
+            color: '#0265baff',
+          },
+        }}
+      >
+        <Box sx={{ width: 260 }}>
+          {/* Logo arriba */}
+          <Box sx={{ textAlign: 'center', py: 2 }}>
+            <img src={logo} alt="Logo" width="180" />
+          </Box>
 
+          <Divider />
 
-                    <Menu
-                        anchorEl={anchorIndicadores}
-                        open={openIndicadores}
-                        onClose={handleCloseIndicadores}
-                        slotProps={{
-                            paper: {
-                                sx: {
-                                    backgroundColor: '#efeaeaff',
-                                    color: '#0265baff',
-                                    minWidth: 140,   // 🔹 +50% aprox
-                                },
-                            },
-                        }}
-                    >
+          <List>
+            <ListItemButton onClick={() => handleNavigate('/manageUsers')}>
+              <ListItemText primary="Administrar Usuarios" sx={drawerTextStyle} />
+            </ListItemButton>
 
-                        <MenuItem
-                            sx={{
-                                color: '#0265baff',
-                                fontSize: 15,
-                                '&:hover': {
-                                    backgroundColor: '#dcd6d6ff',
-                                },
-                            }}
-                            onClick={() => handleNavigate('/indicadores/edificios', handleCloseIndicadores)}
-                        >
-                            EDIFICIOS
-                        </MenuItem>
-                        <Divider />
-                        <MenuItem
-                            sx={{
-                                color: '#0265baff',
-                                fontSize: 15,
-                                '&:hover': {
-                                    backgroundColor: '#dcd6d6ff',
-                                },
-                            }}
-                            onClick={() => handleNavigate('/indicadores/espacios', handleCloseIndicadores)}
-                        >
-                            ESPACIOS
-                        </MenuItem>
-                         <Divider />
-                        <MenuItem
-                            sx={{
-                                color: '#0265baff',
-                                fontSize: 15,
-                                '&:hover': {
-                                    backgroundColor: '#dcd6d6ff',
-                                },
-                            }}
-                            onClick={() => handleNavigate('/indicadores/reservas', handleCloseIndicadores)}
-                        >
-                            RESERVAS
-                        </MenuItem>
-                         <Divider />
-                        <MenuItem
-                            sx={{
-                                color: '#0265baff',
-                                fontSize: 15,
-                                '&:hover': {
-                                    backgroundColor: '#dcd6d6ff',
-                                },
-                            }}
-                            onClick={() => handleNavigate('/indicadores/negocio', handleCloseIndicadores)}
-                        >
-                            NEGOCIO
-                        </MenuItem>
-                    </Menu>
-                </Box>
+            <Divider />
 
-                {/* Derecha */}
-                <BotonLogout />
-            </Toolbar>
-        </AppBar>
-    )
+            <ListItemButton onClick={() => handleNavigate('/nuevo/edificio')}>
+              <ListItemText primary="Nuevo · Edificio" sx={drawerTextStyle} />
+            </ListItemButton>
+
+            <ListItemButton onClick={() => handleNavigate('/nuevo/espacio')}>
+              <ListItemText primary="Nuevo · Espacio" sx={drawerTextStyle} />
+            </ListItemButton>
+
+            <Divider />
+
+            <ListItemButton onClick={() => handleNavigate('/indicadores/edificios')}>
+              <ListItemText primary="Indicadores · Edificios" sx={drawerTextStyle} />
+            </ListItemButton>
+
+            <ListItemButton onClick={() => handleNavigate('/indicadores/espacios')}>
+              <ListItemText primary="Indicadores · Espacios" sx={drawerTextStyle} />
+            </ListItemButton>
+
+            <ListItemButton onClick={() => handleNavigate('/indicadores/reservas')}>
+              <ListItemText primary="Indicadores · Reservas" sx={drawerTextStyle} />
+            </ListItemButton>
+
+            <ListItemButton onClick={() => handleNavigate('/indicadores/negocio')}>
+              <ListItemText primary="Indicadores · Negocio" sx={drawerTextStyle} />
+            </ListItemButton>
+
+            <Divider sx={{ my: 1 }} />
+
+            {/* Logout SOLO mobile */}
+            <ListItemButton>
+              <BotonLogout />
+            </ListItemButton>
+          </List>
+        </Box>
+      </Drawer>
+    </>
+  )
 }
+
