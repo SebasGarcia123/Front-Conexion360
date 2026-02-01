@@ -7,6 +7,7 @@ export interface Building {
     latitude: number
     longitude: number
     postalCode: string
+    urlImage?: string
     isActive: boolean
 }
 

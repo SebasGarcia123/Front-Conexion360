@@ -26,6 +26,8 @@ import { FacturacionPorEdificio } from '../pages/admin/indicadores/FacturacionPo
 import { FacturacionPorEspacio } from '../pages/admin/indicadores/FacturacionPorEspacio'
 import { FacturacionTotal } from '../pages/admin/indicadores/FacturacionTotal'
 import { ReservasTotales } from '../pages/admin/indicadores/ReservasTotales'
+import { Edificios } from '../pages/admin/Edificios.tsx'
+import { Espacios } from '../pages/admin/Espacios.tsx'
 
 export const RoutesList = () => {
     return (
@@ -41,7 +43,6 @@ export const RoutesList = () => {
                             path="/editarPerfil"
                             element={<EditarPerfil />}
                         />
-                        {/* <Route path="/reserva" element={<NuevaReserva />} /> */}
                         <Route path="/mis-reservas" element={<MisReservas />} />
                         <Route
                             path="/espacios"
@@ -57,6 +58,14 @@ export const RoutesList = () => {
                         <Route
                             path="/edicionUsuario/:id"
                             element={<EdicionUsuario />}
+                        />
+                        <Route
+                            path="/admin/edificios"
+                            element={<Edificios />}
+                        />
+                        <Route
+                            path="/admin/espacios"
+                            element={<Espacios />}
                         />
                         <Route
                             path="/nuevo/edificio"

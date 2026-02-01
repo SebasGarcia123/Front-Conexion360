@@ -15,6 +15,8 @@ import { useState } from 'react'
 import { Footer } from '../../componentes/Footer'
 import fondo from '../../assets/foto-registro.jpg'
 import { NavAdmin } from '../../componentes/admin/NavAdmin'
+import { useNavigate } from 'react-router-dom'
+
 
 export const FormularioNuevoEdificio = () => {
     const [formData, setFormData] = useState({
@@ -29,6 +31,8 @@ export const FormularioNuevoEdificio = () => {
 
     const [errorModalOpen, setErrorModalOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+
+    const navigate = useNavigate()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -45,6 +49,7 @@ export const FormularioNuevoEdificio = () => {
             })
 
             alert('Edificio creado con éxito ✔')
+            navigate('/admin/edificios')
             setFormData({
                 name: '',
                 address: '',
