@@ -3,7 +3,6 @@ import logo from '../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
 
 export const BarraSuperior = () => {
-
     const navigate = useNavigate()
 
     return (
@@ -26,9 +25,8 @@ export const BarraSuperior = () => {
                     onClick={() => navigate('/', { replace: true })}
                     variant="contained"
                 >
-                Volver
+                    Volver
                 </Button>
-
             </Toolbar>
         </AppBar>
     )

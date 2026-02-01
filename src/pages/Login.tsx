@@ -11,14 +11,13 @@ export const Login = () => {
     const [userError, setUserError] = useState('')
     const [passwordError, setPasswordError] = useState('')
 
-
     const handleChange = ({
-    target: { value, name },
-        }: React.ChangeEvent<HTMLInputElement>) => {
-            setObjData({ ...objData, [name]: value })
-            if (name === 'user') setUserError('')
-            if (name === 'password') setPasswordError('')
-        }
+        target: { value, name },
+    }: React.ChangeEvent<HTMLInputElement>) => {
+        setObjData({ ...objData, [name]: value })
+        if (name === 'user') setUserError('')
+        if (name === 'password') setPasswordError('')
+    }
 
     const navigate = useNavigate()
 
@@ -112,7 +111,9 @@ export const Login = () => {
                             margin="normal"
                             onChange={handleChange}
                             error={Boolean(userError)}
-                            helperText={userError || 'Ingrese un usuario registrado'}
+                            helperText={
+                                userError || 'Ingrese un usuario registrado'
+                            }
                         />
                         <TextField
                             name="password"
@@ -123,7 +124,9 @@ export const Login = () => {
                             margin="normal"
                             onChange={handleChange}
                             error={Boolean(passwordError)}
-                            helperText={passwordError || 'Ingrese su contraseña'}
+                            helperText={
+                                passwordError || 'Ingrese su contraseña'
+                            }
                         />
                         {/* {error && (
             <Typography color="error" variant="body2" sx={{ mt: 1 }}>

@@ -1,4 +1,12 @@
-import { Box, Button, MenuItem, Paper, Stack, TextField, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    MenuItem,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import type { IBuildingBySpace } from '../../types'
@@ -142,12 +150,7 @@ export const FormularioNuevoEspacio = () => {
     }
 
     return (
-        <Box
-            minHeight="100vh"
-            display="flex"
-            flexDirection="column"
-        >
-
+        <Box minHeight="100vh" display="flex" flexDirection="column">
             <NavAdmin />
 
             <Box
@@ -162,7 +165,16 @@ export const FormularioNuevoEspacio = () => {
                     py: 4,
                 }}
             >
-                <Paper elevation={3} sx={{ p: 4, borderRadius: 3, maxWidth: 500, width: '100%',border: '1px solid rgb(10, 10, 10)' }}>
+                <Paper
+                    elevation={3}
+                    sx={{
+                        p: 4,
+                        borderRadius: 3,
+                        maxWidth: 500,
+                        width: '100%',
+                        border: '1px solid rgb(10, 10, 10)',
+                    }}
+                >
                     <Typography
                         variant="h5"
                         textAlign="center"

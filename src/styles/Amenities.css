@@ -1,4 +1,3 @@
-
 .services-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -8,9 +7,9 @@
 
 .service-card {
     display: flex;
-    flex-direction: column;   /* 👈 CLAVE */
-    align-items: center;      /* 👈 centra horizontal */
-    justify-content: center;  /* 👈 centra vertical */
+    flex-direction: column; /* 👈 CLAVE */
+    align-items: center; /* 👈 centra horizontal */
+    justify-content: center; /* 👈 centra vertical */
     gap: 16px;
 
     min-height: 200px;
@@ -26,7 +25,6 @@
         box-shadow 0.25s ease;
 }
 
-
 .service-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
@@ -37,10 +35,9 @@
     color: #1976d2;
 }
 
-
 .service-title {
     font-size: 1.2rem;
     font-weight: 600;
     color: #333;
-    text-align: center;   /* 👈 CLAVE */
+    text-align: center; /* 👈 CLAVE */
 }

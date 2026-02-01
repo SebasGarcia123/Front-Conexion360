@@ -35,7 +35,7 @@ export const TablaUsuarios = () => {
     const token = sessionStorage.getItem('authToken')
 
     const deactivateUser = async (id: string) => {
-    try {
+        try {
             await axios.patch(
                 `http://localhost:4000/users/${id}/deactivate`,
                 {},
@@ -48,26 +48,23 @@ export const TablaUsuarios = () => {
 
             // Actualizamos el estado local (soft delete)
             setUsers((prev) =>
-                prev.map((u) =>
-                    u._id === id ? { ...u, isActive: false } : u
-                )
+                prev.map((u) => (u._id === id ? { ...u, isActive: false } : u))
             )
         } catch (error) {
             console.error('Error al desactivar usuario', error)
         }
     }
 
-
     useEffect(() => {
-    const getUsers = async () => {
-        const res = await axios.get('http://localhost:4000/users', {
-            headers: { Authorization: `Bearer ${token}` },
-        })
-        setUsers(res.data)
-    }
+        const getUsers = async () => {
+            const res = await axios.get('http://localhost:4000/users', {
+                headers: { Authorization: `Bearer ${token}` },
+            })
+            setUsers(res.data)
+        }
 
-    getUsers()
-}, [token])
+        getUsers()
+    }, [token])
 
     /** 🔍 Filtrado + activos/inactivos */
     const filteredUsers = useMemo(() => {
@@ -105,10 +102,18 @@ export const TablaUsuarios = () => {
 
     const fixedHeaderContent = () => (
         <TableRow sx={{ backgroundColor: '#f5f5f5' }}>
-            <TableCell><strong>Usuario</strong></TableCell>
-            <TableCell><strong>Nombre</strong></TableCell>
-            <TableCell><strong>Apellido</strong></TableCell>
-            <TableCell><strong>Acciones</strong></TableCell>
+            <TableCell>
+                <strong>Usuario</strong>
+            </TableCell>
+            <TableCell>
+                <strong>Nombre</strong>
+            </TableCell>
+            <TableCell>
+                <strong>Apellido</strong>
+            </TableCell>
+            <TableCell>
+                <strong>Acciones</strong>
+            </TableCell>
         </TableRow>
     )
 
@@ -133,7 +138,7 @@ export const TablaUsuarios = () => {
                             variant="contained"
                             disabled
                             sx={{
-                                minWidth: 120,          // 🔥 mantiene ancho
+                                minWidth: 120, // 🔥 mantiene ancho
                                 bgcolor: '#e0e0e0',
                                 color: '#555',
                                 cursor: 'default',
@@ -150,16 +155,12 @@ export const TablaUsuarios = () => {
                     >
                         EDITAR
                     </Button>
-
                 </Stack>
             </TableCell>
-
-
         </>
     )
 
     return (
-        
         <Paper
             sx={{
                 height: 480,
@@ -192,9 +193,7 @@ export const TablaUsuarios = () => {
                     control={
                         <Checkbox
                             checked={showAll}
-                            onChange={(e) =>
-                                setShowAll(e.target.checked)
-                            }
+                            onChange={(e) => setShowAll(e.target.checked)}
                         />
                     }
                     label="Ver todos los usuarios"
@@ -210,4 +209,3 @@ export const TablaUsuarios = () => {
         </Paper>
     )
 }
-

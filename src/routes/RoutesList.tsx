@@ -37,7 +37,10 @@ export const RoutesList = () => {
                     <Route path="/login" element={<Login />} />
                     <Route element={<PrivateRoutesCliente />}>
                         <Route path="/cliente" element={<Cliente />} />
-                        <Route path="/editarPerfil" element={<EditarPerfil />} />
+                        <Route
+                            path="/editarPerfil"
+                            element={<EditarPerfil />}
+                        />
                         {/* <Route path="/reserva" element={<NuevaReserva />} /> */}
                         <Route path="/mis-reservas" element={<MisReservas />} />
                         <Route
@@ -47,25 +50,87 @@ export const RoutesList = () => {
                     </Route>
                     <Route element={<PrivateRoutesAdmin />}>
                         <Route path="/admin" element={<Administrador />} />
-                        <Route path="/manageUsers" element={<AdminManageUsers />} />
-                        <Route path="/edicionUsuario/:id" element={<EdicionUsuario />} />
-                        <Route path="/nuevo/edificio" element={<FormularioNuevoEdificio />} />
-                        <Route path="/nuevo/espacio" element={<FormularioNuevoEspacio />} />
-                        <Route path="/indicadores/edificios" element={<IndicadoresLayout drawer={<DrawerEdificios />} />}>
-                            <Route path="reservas" element={<ReservasPorEdificio />} />
-                            <Route path="valoracion" element={<ValoracionPorEdificio />} />
+                        <Route
+                            path="/manageUsers"
+                            element={<AdminManageUsers />}
+                        />
+                        <Route
+                            path="/edicionUsuario/:id"
+                            element={<EdicionUsuario />}
+                        />
+                        <Route
+                            path="/nuevo/edificio"
+                            element={<FormularioNuevoEdificio />}
+                        />
+                        <Route
+                            path="/nuevo/espacio"
+                            element={<FormularioNuevoEspacio />}
+                        />
+                        <Route
+                            path="/indicadores/edificios"
+                            element={
+                                <IndicadoresLayout
+                                    drawer={<DrawerEdificios />}
+                                />
+                            }
+                        >
+                            <Route
+                                path="reservas"
+                                element={<ReservasPorEdificio />}
+                            />
+                            <Route
+                                path="valoracion"
+                                element={<ValoracionPorEdificio />}
+                            />
                         </Route>
-                        <Route path="/indicadores/espacios" element={<IndicadoresLayout drawer={<DrawerEspacios />} />}>
-                            <Route path="reservas" element={<ReservasPorEspacio />} />
-                            <Route path="valoracion" element={<ValoracionPorEspacio />} />
+                        <Route
+                            path="/indicadores/espacios"
+                            element={
+                                <IndicadoresLayout
+                                    drawer={<DrawerEspacios />}
+                                />
+                            }
+                        >
+                            <Route
+                                path="reservas"
+                                element={<ReservasPorEspacio />}
+                            />
+                            <Route
+                                path="valoracion"
+                                element={<ValoracionPorEspacio />}
+                            />
                         </Route>
-                        <Route path="/indicadores/reservas" element={<IndicadoresLayout drawer={<DrawerReservas />} />}>
-                            <Route path="totales" element={<ReservasTotales />} />
+                        <Route
+                            path="/indicadores/reservas"
+                            element={
+                                <IndicadoresLayout
+                                    drawer={<DrawerReservas />}
+                                />
+                            }
+                        >
+                            <Route
+                                path="totales"
+                                element={<ReservasTotales />}
+                            />
                         </Route>
-                        <Route path="/indicadores/negocio" element={<IndicadoresLayout drawer={<DrawerNegocio />} />}>
-                            <Route path="edificio" element={<FacturacionPorEdificio />} />
-                            <Route path="espacio" element={<FacturacionPorEspacio />} />
-                            <Route path="total" element={<FacturacionTotal />} />
+                        <Route
+                            path="/indicadores/negocio"
+                            element={
+                                <IndicadoresLayout drawer={<DrawerNegocio />} />
+                            }
+                        >
+                            <Route
+                                path="edificio"
+                                element={<FacturacionPorEdificio />}
+                            />
+                            <Route
+                                path="espacio"
+                                element={<FacturacionPorEspacio />}
+                            />
+                            <Route
+                                path="total"
+                                element={<FacturacionTotal />}
+                            />
                         </Route>
                     </Route>
                 </Routes>

@@ -4,7 +4,7 @@ import { MapaEdificios } from './MapaEdificios'
 
 export const Ubicaciones = () => {
     return (
-        <Box sx={{ marginTop: '60px', height: 600}}>
+        <Box sx={{ marginTop: '60px', height: 600 }}>
             <Typography
                 variant="h3"
                 sx={{

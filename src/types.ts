@@ -29,7 +29,7 @@ export interface Reservation {
     status: status
 }
 
-export type status = 'Pendiente'| 'Por Valorar' | 'Cancelada' | 'Cumplida'
+export type status = 'Pendiente' | 'Por Valorar' | 'Cancelada' | 'Cumplida'
 
 export interface ReservationRequest {
     userId: string
@@ -104,10 +104,10 @@ export interface IOpinion {
 
 // JWT Payload
 export interface JWTPayload {
-  _id: string
-  email: string
-  role: string
-  iat?: number
-  exp?: number
-  iss?: string
+    _id: string
+    email: string
+    role: string
+    iat?: number
+    exp?: number
+    iss?: string
 }

@@ -4,7 +4,7 @@ import { CarrouselOpinion } from './CarrouselOpinion'
 
 export const Opiniones = () => {
     return (
-        <Box sx = {{backgroundColor: '#efe9e9ff', height: 600}}>
+        <Box sx={{ backgroundColor: '#efe9e9ff', height: 600 }}>
             <Typography
                 variant="h3"
                 sx={{
@@ -13,7 +13,7 @@ export const Opiniones = () => {
                     mt: '60px',
                     mb: '60px',
                     p: 4,
-                    height: '600'
+                    height: '600',
                 }}
             >
                 Lo que dicen quienes nos eligen

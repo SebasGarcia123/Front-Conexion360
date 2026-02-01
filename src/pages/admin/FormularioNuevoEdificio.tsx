@@ -1,4 +1,15 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Paper, Stack, TextField, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Paper,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material'
 import axios from 'axios'
 import { useState } from 'react'
 import { Footer } from '../../componentes/Footer'
@@ -18,7 +29,6 @@ export const FormularioNuevoEdificio = () => {
 
     const [errorModalOpen, setErrorModalOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
-
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -47,27 +57,20 @@ export const FormularioNuevoEdificio = () => {
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 setErrorMessage(
-                error.response?.data?.message ||
-                'Error al crear el edificio ❌'
+                    error.response?.data?.message ||
+                        'Error al crear el edificio ❌'
                 )
                 setErrorModalOpen(true)
             } else {
                 setErrorMessage('Error desconocido')
                 setErrorModalOpen(true)
             }
-            }
-
+        }
     }
 
     return (
-        <Box
-            minHeight="100vh"
-            display="flex"
-            flexDirection="column"
-        >
-
+        <Box minHeight="100vh" display="flex" flexDirection="column">
             <NavAdmin />
-
 
             <Box
                 sx={{
@@ -83,7 +86,13 @@ export const FormularioNuevoEdificio = () => {
             >
                 <Paper
                     elevation={3}
-                    sx={{ p: 4, borderRadius: 3, maxWidth: 500, width: '100%',border: '1px solid rgb(10, 10, 10)' }}
+                    sx={{
+                        p: 4,
+                        borderRadius: 3,
+                        maxWidth: 500,
+                        width: '100%',
+                        border: '1px solid rgb(10, 10, 10)',
+                    }}
                 >
                     <Typography
                         variant="h5"
@@ -94,15 +103,49 @@ export const FormularioNuevoEdificio = () => {
                         Nuevo Edificio
                     </Typography>
 
-
                     <Stack spacing={2}>
-                        <TextField label="Nombre" name="name" value={formData.name} onChange={handleChange} />
-                        <TextField label="Dirección" name="address" value={formData.address} onChange={handleChange} />
-                        <TextField label="Ciudad" name="city" value={formData.city} onChange={handleChange} />
-                        <TextField label="País" name="country" value={formData.country} onChange={handleChange} />
-                        <TextField label="Latitud" name="latitude" value={formData.latitude} onChange={handleChange} />
-                        <TextField label="Longitud" name="longitude" value={formData.longitude} onChange={handleChange} />
-                        <TextField label="Código Postal" name="postalCode" value={formData.postalCode} onChange={handleChange} />
+                        <TextField
+                            label="Nombre"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Dirección"
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Ciudad"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="País"
+                            name="country"
+                            value={formData.country}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Latitud"
+                            name="latitude"
+                            value={formData.latitude}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Longitud"
+                            name="longitude"
+                            value={formData.longitude}
+                            onChange={handleChange}
+                        />
+                        <TextField
+                            label="Código Postal"
+                            name="postalCode"
+                            value={formData.postalCode}
+                            onChange={handleChange}
+                        />
 
                         <Button
                             variant="contained"
@@ -116,32 +159,27 @@ export const FormularioNuevoEdificio = () => {
                         >
                             Guardar
                         </Button>
-
-
                     </Stack>
                 </Paper>
                 <Dialog
-  open={errorModalOpen}
-  onClose={() => setErrorModalOpen(false)}
->
-  <DialogTitle>Error</DialogTitle>
+                    open={errorModalOpen}
+                    onClose={() => setErrorModalOpen(false)}
+                >
+                    <DialogTitle>Error</DialogTitle>
 
-  <DialogContent>
-    <Typography>
-      {errorMessage}
-    </Typography>
-  </DialogContent>
+                    <DialogContent>
+                        <Typography>{errorMessage}</Typography>
+                    </DialogContent>
 
-  <DialogActions>
-    <Button
-      onClick={() => setErrorModalOpen(false)}
-      variant="contained"
-    >
-      Aceptar
-    </Button>
-  </DialogActions>
-</Dialog>
-
+                    <DialogActions>
+                        <Button
+                            onClick={() => setErrorModalOpen(false)}
+                            variant="contained"
+                        >
+                            Aceptar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Box>
 
             <Footer />

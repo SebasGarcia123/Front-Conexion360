@@ -1,65 +1,75 @@
 import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Rating,
-  CardMedia,
+    Card,
+    CardContent,
+    Typography,
+    Box,
+    Rating,
+    CardMedia,
 } from '@mui/material'
 import type { IOpinion } from '../../types'
 
 interface CardOpinionProps {
-  opinion: IOpinion
+    opinion: IOpinion
 }
 
 export const CardOpinion = ({ opinion }: CardOpinionProps) => {
-  const ratingValue = opinion.valoration
+    const ratingValue = opinion.valoration
 
-  return (
-    <Box px={1}>
-      <Card sx={{ minHeight: 380, display: 'flex', flexDirection: 'column', maxWidth: 320 }}>
-        
-        {/* Imagen del espacio */}
-        <CardMedia
-          component="img"
-          height="140"
-          image={opinion.space.pictureUrl}
-          alt="Espacio"
-        />
+    return (
+        <Box px={1}>
+            <Card
+                sx={{
+                    minHeight: 380,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    maxWidth: 320,
+                }}
+            >
+                {/* Imagen del espacio */}
+                <CardMedia
+                    component="img"
+                    height="140"
+                    image={opinion.space.pictureUrl}
+                    alt="Espacio"
+                />
 
-        <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-          {/* Valoración */}
-          <Rating
-            value={ratingValue}
-            precision={0.5}
-            readOnly
-          />
+                <CardContent
+                    sx={{
+                        flexGrow: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
+                    {/* Valoración */}
+                    <Rating value={ratingValue} precision={0.5} readOnly />
 
-          {/* Comentario */}
-          <Typography variant="body2" sx={{ 
-            mt: 1,
-            mb: 2,
-            flexGrow: 1,
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}>
-            “{opinion.comment}”
-          </Typography>
+                    {/* Comentario */}
+                    <Typography
+                        variant="body2"
+                        sx={{
+                            mt: 1,
+                            mb: 2,
+                            flexGrow: 1,
+                            display: '-webkit-box',
+                            WebkitLineClamp: 3,
+                            WebkitBoxOrient: 'vertical',
+                            overflow: 'hidden',
+                        }}
+                    >
+                        “{opinion.comment}”
+                    </Typography>
 
-          {/* Nombre */}
-          <Typography variant="subtitle1" fontWeight="bold">
-            {opinion.name}
-          </Typography>
+                    {/* Nombre */}
+                    <Typography variant="subtitle1" fontWeight="bold">
+                        {opinion.name}
+                    </Typography>
 
-          {/* Cargo y empresa */}
-          <Typography variant="body2" color="text.secondary">
-            {opinion.position} · {opinion.company}
-          </Typography>
-        </CardContent>
-      </Card>
-    </Box>
-  )
+                    {/* Cargo y empresa */}
+                    <Typography variant="body2" color="text.secondary">
+                        {opinion.position} · {opinion.company}
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Box>
+    )
 }
-

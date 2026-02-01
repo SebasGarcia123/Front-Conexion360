@@ -30,10 +30,7 @@ export default function CardAlternativas({ space }: Props) {
     // estados para crear reserva
     const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const building = typeof space.building === 'object'
-                    ? space.building
-                    : null
-
+    const building = typeof space.building === 'object' ? space.building : null
 
     const handleFinishReservation = async () => {
         if (!reservationData) {
@@ -54,7 +51,6 @@ export default function CardAlternativas({ space }: Props) {
             setOpenPayment(false)
             setReservationData(null)
             console.log('building raw:', space.building)
-
         } catch (error) {
             const err = error as AxiosError
             console.error(
@@ -78,7 +74,7 @@ export default function CardAlternativas({ space }: Props) {
                     flexDirection: 'column',
                     transition: '0.2s',
                     '&:hover': { transform: 'scale(1.05)' },
-                                }}
+                }}
             >
                 <CardActionArea sx={{ flexGrow: 1 }}>
                     <CardMedia
@@ -107,7 +103,6 @@ export default function CardAlternativas({ space }: Props) {
                         >
                             {building?.city ?? '—'}
                         </Typography>
-                        
 
                         <Typography
                             variant="h6"
@@ -132,11 +127,13 @@ export default function CardAlternativas({ space }: Props) {
                     </CardContent>
                 </CardActionArea>
 
-                <CardActions sx={{
-                                mt: 'auto',
-                                justifyContent: 'start',
-                                pb: 2,
-                                }}>
+                <CardActions
+                    sx={{
+                        mt: 'auto',
+                        justifyContent: 'start',
+                        pb: 2,
+                    }}
+                >
                     <Button
                         size="large"
                         color="primary"

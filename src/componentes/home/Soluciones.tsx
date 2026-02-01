@@ -81,7 +81,7 @@ export const Soluciones = () => {
 
                 {/* Carrousel */}
                 <Box sx={{ width: '65%', mt: 3 }}>
-                    <Slider {...carouselSettings}  arrows={false}>
+                    <Slider {...carouselSettings} arrows={false}>
                         <Box>
                             <img
                                 src="/src/assets/Comedor.png"

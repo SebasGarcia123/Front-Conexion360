@@ -38,7 +38,6 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
     const [errors, setErrors] = useState<PaymentErrors>({})
     const [loading, setLoading] = useState(false)
 
-
     //Validacion de datos cargados
     const validate = () => {
         const newErrors: PaymentErrors = {}
@@ -105,8 +104,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
             setLoading(false)
             setCompleted(true)
         }, 2000)
-        }
-
+    }
 
     // --------------------------
     // 🔄 Reset cuando se cierra
@@ -294,13 +292,15 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
                             disabled={loading} // deshabilitar mientras carga
                         >
                             {loading ? (
-                            <CircularProgress size={24} sx={{ color: 'white' }} />
+                                <CircularProgress
+                                    size={24}
+                                    sx={{ color: 'white' }}
+                                />
                             ) : (
-                            'Confirmar pago'
+                                'Confirmar pago'
                             )}
                         </Button>
-                        </Grid>
-
+                    </Grid>
                 </Grid>
             ) : (
                 <Box sx={{ textAlign: 'center', py: 5 }}>
