@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Paper, Stack, TextField, Typography } from '@mui/material'
 import axios from 'axios'
 import { useState } from 'react'
 import { Footer } from '../../componentes/Footer'
@@ -15,6 +15,10 @@ export const FormularioNuevoEdificio = () => {
         latitude: '',
         longitude: '',
     })
+
+    const [errorModalOpen, setErrorModalOpen] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
+
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -41,13 +45,18 @@ export const FormularioNuevoEdificio = () => {
                 longitude: '',
             })
         } catch (error: unknown) {
-            console.log(error)
-            if(axios.isAxiosError(error)){
-            alert(error.response?.data?.message || 'Error al crear el edificio ❌')
-            } else{
-                alert('Error desconocido')
+            if (axios.isAxiosError(error)) {
+                setErrorMessage(
+                error.response?.data?.message ||
+                'Error al crear el edificio ❌'
+                )
+                setErrorModalOpen(true)
+            } else {
+                setErrorMessage('Error desconocido')
+                setErrorModalOpen(true)
             }
-        }
+            }
+
     }
 
     return (
@@ -111,6 +120,28 @@ export const FormularioNuevoEdificio = () => {
 
                     </Stack>
                 </Paper>
+                <Dialog
+  open={errorModalOpen}
+  onClose={() => setErrorModalOpen(false)}
+>
+  <DialogTitle>Error</DialogTitle>
+
+  <DialogContent>
+    <Typography>
+      {errorMessage}
+    </Typography>
+  </DialogContent>
+
+  <DialogActions>
+    <Button
+      onClick={() => setErrorModalOpen(false)}
+      variant="contained"
+    >
+      Aceptar
+    </Button>
+  </DialogActions>
+</Dialog>
+
             </Box>
 
             <Footer />
