@@ -112,3 +112,8 @@ export interface JWTPayload {
     exp?: number
     iss?: string
 }
+
+export interface ISpaceAdmin extends Omit<ISpace, 'building'> {
+  building: IBuildingBySpace
+}
+
