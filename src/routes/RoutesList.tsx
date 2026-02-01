@@ -3,7 +3,6 @@ import { Home } from '../pages/home/Home'
 import { Login } from '../pages/Login'
 import { Registro } from '../pages/Registro'
 import { Cliente } from '../pages/cliente/Cliente'
-//import { NuevaReserva } from '../pages/cliente/NuevaReserva'
 import { MisReservas } from '../pages/cliente/MisReservas'
 import { PrivateRoutesCliente } from './PrivateRoutesCliente'
 import { PrivateRoutesAdmin } from './PrivateRoutesAdmin'
@@ -26,9 +25,6 @@ import { ReservasPorEspacio } from '../pages/admin/indicadores/ReservasPorEspaci
 import { FacturacionPorEdificio } from '../pages/admin/indicadores/FacturacionPorEdificio'
 import { FacturacionPorEspacio } from '../pages/admin/indicadores/FacturacionPorEspacio'
 import { FacturacionTotal } from '../pages/admin/indicadores/FacturacionTotal'
-import { ReservasPromedioEdificio } from '../pages/admin/indicadores/ReservasPromedioEdificio'
-import { ReservasPromedioEspacio } from '../pages/admin/indicadores/ReservasPromedioEspacio'
-import { ReservasMejorValorada } from '../pages/admin/indicadores/ReservasMejorValorada'
 import { ReservasTotales } from '../pages/admin/indicadores/ReservasTotales'
 
 export const RoutesList = () => {
@@ -64,9 +60,6 @@ export const RoutesList = () => {
                             <Route path="valoracion" element={<ValoracionPorEspacio />} />
                         </Route>
                         <Route path="/indicadores/reservas" element={<IndicadoresLayout drawer={<DrawerReservas />} />}>
-                            <Route path="promedio-edificio" element={<ReservasPromedioEdificio />} />
-                            <Route path="promedio-espacio" element={<ReservasPromedioEspacio />} />
-                            <Route path="mejor-valorada" element={<ReservasMejorValorada />} />
                             <Route path="totales" element={<ReservasTotales />} />
                         </Route>
                         <Route path="/indicadores/negocio" element={<IndicadoresLayout drawer={<DrawerNegocio />} />}>
