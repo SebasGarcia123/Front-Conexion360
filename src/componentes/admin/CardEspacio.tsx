@@ -5,6 +5,7 @@ import {
   Typography,
   Box,
   Button,
+  Chip,
 } from '@mui/material'
 
 interface CardEspacioProps {
@@ -14,6 +15,7 @@ interface CardEspacioProps {
   city: string
   capacity: number
   pricePerDay: number
+  isActive: boolean
   onEdit: () => void
 }
 
@@ -24,6 +26,7 @@ export const CardEspacio = ({
   city,
   capacity,
   pricePerDay,
+  isActive,
   onEdit,
 }: CardEspacioProps) => {
   return (
@@ -34,10 +37,17 @@ export const CardEspacio = ({
         borderRadius: 3,
         boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
         transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+
+        // 👇 CLAVE
+        opacity: isActive ? 1 : 0.5,
+        filter: isActive ? 'none' : 'grayscale(100%)',
+
         '&:hover': {
           transform: 'translateY(-4px)',
           boxShadow: '0 12px 32px rgba(0,0,0,0.18)',
+          opacity: isActive ? 1 : 0.65,
         },
+
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -64,9 +74,19 @@ export const CardEspacio = ({
         }}
       >
         <Box>
-          <Typography variant="subtitle1" fontWeight={600} noWrap>
-            {buildingName}
-          </Typography>
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Typography variant="subtitle1" fontWeight={600} noWrap>
+              {buildingName}
+            </Typography>
+
+            {!isActive && (
+              <Chip
+                label="Inactivo"
+                size="small"
+                variant="outlined"
+              />
+            )}
+          </Box>
 
           <Typography variant="body2" color="text.secondary" noWrap>
             {address}
@@ -98,3 +118,4 @@ export const CardEspacio = ({
     </Card>
   )
 }
+

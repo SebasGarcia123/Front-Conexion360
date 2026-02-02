@@ -28,6 +28,7 @@ import { FacturacionTotal } from '../pages/admin/indicadores/FacturacionTotal'
 import { ReservasTotales } from '../pages/admin/indicadores/ReservasTotales'
 import { Edificios } from '../pages/admin/Edificios.tsx'
 import { Espacios } from '../pages/admin/Espacios.tsx'
+import { EditarEspacio } from '../pages/admin/EditarEspacio.tsx'
 
 export const RoutesList = () => {
     return (
@@ -74,6 +75,10 @@ export const RoutesList = () => {
                         <Route
                             path="/nuevo/espacio"
                             element={<FormularioNuevoEspacio />}
+                        />
+                        <Route
+                            path="/editar/espacio/:id"
+                            element={<EditarEspacio />}
                         />
                         <Route
                             path="/indicadores/edificios"
