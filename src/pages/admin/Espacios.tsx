@@ -23,7 +23,7 @@ export const Espacios = () => {
         if (!token) return
 
         const { data } = await axios.get<ISpaceAdmin[]>(
-          'http://localhost:4000/spaces',
+          'http://localhost:4000/spaces/admin',
           { headers: { Authorization: `Bearer ${token}` } }
         )
 
@@ -70,6 +70,7 @@ export const Espacios = () => {
                 address={space.building.address}
                 city={space.building.city}
                 capacity={space.capacity}
+                isActive={space.isActive}
                 pricePerDay={space.pricePerDay}
                 onEdit={() => navigate(`/editar/espacio/${space._id}`)}
                 />

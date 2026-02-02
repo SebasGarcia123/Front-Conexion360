@@ -6,6 +6,10 @@ import {
     Stack,
     TextField,
     Typography,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
 } from '@mui/material'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -14,10 +18,13 @@ import type { spaceType } from '../../types'
 import { Footer } from '../../componentes/Footer'
 import { NavAdmin } from '../../componentes/admin/NavAdmin'
 import fondo from '../../assets/foto-registro.jpg'
+import { useNavigate } from 'react-router-dom'
 
 export const FormularioNuevoEspacio = () => {
     const [buildings, setBuildings] = useState<IBuildingBySpace[]>([])
     const spaceTypes: spaceType[] = ['Piso', 'Oficina', 'Escritorio co-working']
+    const navigate = useNavigate()
+    const [openSuccess, setOpenSuccess] = useState(false)
     const [formData, setFormData] = useState({
         pictureUrl: '',
         building: '',
@@ -47,6 +54,11 @@ export const FormularioNuevoEspacio = () => {
         const typePrefix = spaceTypeMap[spaceType] || 'piso'
 
         return `http://localhost:4000/images/${typePrefix}${buildingPrefix}.png`
+    }
+
+    const handleSuccessClose = () => {
+        setOpenSuccess(false)
+        navigate('/admin/espacios')
     }
 
     useEffect(() => {
@@ -125,7 +137,7 @@ export const FormularioNuevoEspacio = () => {
             )
 
             if (res.status === 201) {
-                alert('Espacio creado con éxito ✔')
+                setOpenSuccess(true)
                 setFormData({
                     pictureUrl: '',
                     building: '',
@@ -258,6 +270,22 @@ export const FormularioNuevoEspacio = () => {
             </Box>
 
             <Footer />
+            <Dialog open={openSuccess} onClose={handleSuccessClose}>
+  <DialogTitle>Espacio creado </DialogTitle>
+
+  <DialogContent>
+    <Typography>
+      El espacio fue creado con éxito.
+    </Typography>
+  </DialogContent>
+
+  <DialogActions>
+    <Button onClick={handleSuccessClose} variant="contained">
+      Aceptar
+    </Button>
+  </DialogActions>
+</Dialog>
+
         </Box>
     )
 }

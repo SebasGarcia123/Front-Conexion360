@@ -31,12 +31,19 @@ export const FormularioNuevoEdificio = () => {
 
     const [errorModalOpen, setErrorModalOpen] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
+    const [openSuccess, setOpenSuccess] = useState(false)
 
     const navigate = useNavigate()
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
+
+    const handleSuccessClose = () => {
+        setOpenSuccess(false)
+        navigate('/admin/edificios')
+    }
+
 
     const sendData = async () => {
         try {
@@ -48,8 +55,7 @@ export const FormularioNuevoEdificio = () => {
                 },
             })
 
-            alert('Edificio creado con éxito ✔')
-            navigate('/admin/edificios')
+            setOpenSuccess(true)
             setFormData({
                 name: '',
                 address: '',
@@ -166,6 +172,27 @@ export const FormularioNuevoEdificio = () => {
                         </Button>
                     </Stack>
                 </Paper>
+                
+                {/* Modal de Edificio creado */}
+
+                <Dialog open={openSuccess} onClose={handleSuccessClose}>
+                <DialogTitle>Edificio creado</DialogTitle>
+
+                <DialogContent>
+                    <Typography>
+                    El edificio fue creado con éxito.
+                    </Typography>
+                </DialogContent>
+
+                <DialogActions>
+                    <Button onClick={handleSuccessClose} variant="contained">
+                    Aceptar
+                    </Button>
+                </DialogActions>
+                </Dialog>
+
+                {/* Modal de error */}
+
                 <Dialog
                     open={errorModalOpen}
                     onClose={() => setErrorModalOpen(false)}
