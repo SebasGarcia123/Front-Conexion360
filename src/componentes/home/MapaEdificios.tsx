@@ -41,10 +41,25 @@ export const MapaEdificios = () => {
                     }}
                     onCloseClick={() => setSelected(null)}
                 >
-                    <div>
-                        <h3>{selected.name}</h3>
-                        <p>{selected.address}</p>
-                    </div>
+                    <div style={{ maxWidth: 220 }}>
+            <h3 style={{ margin: '0 0 8px 0' }}>{selected.name}</h3>
+
+            {selected.urlImage && (
+                <img
+                    src={selected.urlImage}
+                    alt={selected.name}
+                    style={{
+                        width: '100%',
+                        height: 120,
+                        objectFit: 'cover',
+                        borderRadius: 8,
+                        marginBottom: 6,
+                    }}
+                />
+            )}
+
+            <p style={{ margin: 0 }}>{selected.address}</p>
+        </div>
                 </InfoWindow>
             )}
         </GoogleMap>

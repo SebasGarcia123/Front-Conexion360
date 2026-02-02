@@ -6,9 +6,8 @@ import { Divider } from '@mui/material'
 import { useLoadScript } from '@react-google-maps/api'
 import { Opiniones } from '../../componentes/home/Opiniones'
 import { Soluciones } from '../../componentes/home/Soluciones'
-//import { Ubicaciones } from '../../componentes/home/Ubicaciones';
+import { Ubicaciones } from '../../componentes/home/Ubicaciones';
 import { Servicios } from '../../componentes/home/Servicios'
-//import principal from '../../assets/principal.jpg'
 import foto_portada from '../../assets/foto_portada1.jpg'
 
 export const Home = () => {
@@ -39,7 +38,7 @@ export const Home = () => {
 
                         mt: '100px',
                         mb: '10px',
-                        py: 6, // padding vertical para que el fondo se luzca
+                        py: 6,
                         px: 4,
 
                         background:
@@ -64,7 +63,6 @@ export const Home = () => {
                         sx={{
                             width: '100%',
                             maxWidth: '1600px',
-                            //borderRadius: '12px',
                             boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                         }}
                     />
@@ -97,7 +95,7 @@ export const Home = () => {
 
                 {/* Ubicaciones */}
                 <Box sx={{ backgroundColor: '#efe9e9ff' }}>
-                    {/* <section id="ubicaciones">< Ubicaciones /></section> */}
+                    <section id="ubicaciones">< Ubicaciones /></section>
                 </Box>
 
                 <Box sx={{ width: '100%', mt: 5 }}>
