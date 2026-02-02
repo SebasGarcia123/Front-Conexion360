@@ -5,11 +5,13 @@ Aplicación web desarrollada con React, TypeScript y Vite para Programación 3.
 
 ## Tecnologías principales
 - React + TypeScript
+- Node js
 - Vite 
 - React Router
 - Mui Material
 - Axios para consumo de API
 - ESLint + TypeScript Rules
+- Mongo DB
 
 ## Requisitos
 
@@ -26,7 +28,7 @@ Tener instaladas las siguientes herramientas:
 Cloná el repositorio:
 
 ```
-git clone <(https://github.com/SebasGarcia123/Front-Conexion360.git)>
+git clone <https://github.com/SebasGarcia123/Front-Conexion360.git>
 cd Front-Conexion360
 ```
 Instalá dependencias
