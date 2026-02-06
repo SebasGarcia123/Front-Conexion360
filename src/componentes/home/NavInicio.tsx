@@ -65,6 +65,9 @@ export const NavInicio = () => {
             <Button href="#servicios" color="inherit">
               Servicios
             </Button>
+            <Button href="#contacto" color="inherit">
+              Contacto
+            </Button>
           </Box>
 
           {/* BOTONES DERECHA (desktop) */}

@@ -8,6 +8,8 @@ import { Opiniones } from '../../componentes/home/Opiniones'
 import { Soluciones } from '../../componentes/home/Soluciones'
 import { Ubicaciones } from '../../componentes/home/Ubicaciones';
 import { Servicios } from '../../componentes/home/Servicios'
+import { ContactoConexion360 } from '../../componentes/home/Contacto'
+
 import foto_portada from '../../assets/foto_portada1.jpg'
 
 export const Home = () => {
@@ -107,6 +109,13 @@ export const Home = () => {
                     <section id="servicios">
                         <Servicios />
                     </section>
+                </Box>
+
+                {/* Contacto */}
+                <Box sx={{ backgroundColor: 'rgb(233, 234, 239)' }}>
+                <section id="contacto">
+                    <ContactoConexion360 />
+                </section>
                 </Box>
                 <Footer />
             </Box>

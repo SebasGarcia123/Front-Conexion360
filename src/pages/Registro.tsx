@@ -86,18 +86,23 @@ export const Registro = () => {
                 },
                 body: JSON.stringify(objData),
             })
-            if (response.status === 400) {
-                const responseData = await response.json()
-                console.log(responseData.errors)
-                const errorMessages = (responseData.errors as ValidationError[])
-                    .map((error) => [error.path, error.msg])
-                    .reduce(
-                        (acc, [path, msg]) => ({ ...acc, [path]: msg }),
-                        {} as Record<string, string>
-                    )
-                setErrors(errorMessages)
-                throw new Error('Error al enviar los datos de registro')
-            }
+            if (!response.ok) {
+  const responseData = await response.json()
+
+  if (responseData.errors) {
+    const errorMessages = (responseData.errors as ValidationError[])
+      .map((error) => [error.path, error.msg])
+      .reduce(
+        (acc, [path, msg]) => ({ ...acc, [path]: msg }),
+        {} as Record<string, string>
+      )
+
+    setErrors(errorMessages)
+  }
+
+  throw new Error('Error al enviar los datos de registro')
+}
+
 
             navigate('/login')
         } catch (error) {
