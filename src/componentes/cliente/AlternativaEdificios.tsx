@@ -7,7 +7,7 @@ import {
     FormLabel,
     CircularProgress,
 } from '@mui/material'
-import type { Building } from '../types'
+import type { Building } from '../../types'
 
 interface AlternativaEdificiosProps {
     value: string[] // <- IDs seleccionados (controlado por el padre)

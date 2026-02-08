@@ -138,7 +138,7 @@ export const TablaUsuarios = () => {
                             variant="contained"
                             disabled
                             sx={{
-                                minWidth: 120, // 🔥 mantiene ancho
+                                minWidth: 120,
                                 bgcolor: '#e0e0e0',
                                 color: '#555',
                                 cursor: 'default',

@@ -9,7 +9,7 @@ import CardActions from '@mui/material/CardActions'
 import Modal from '@mui/material/Modal'
 import Box from '@mui/material/Box'
 import type { ISpace } from '../../types'
-import { ReservaForm } from './ReservaForm' // <-- tu formulario exportado como componente
+import { ReservaForm } from './ReservaForm'
 import CloseIcon from '@mui/icons-material/Close'
 import { IconButton, CircularProgress } from '@mui/material'
 import '../../styles/Amenities.css'
@@ -50,7 +50,6 @@ export default function CardAlternativas({ space }: Props) {
             setIsSubmitting(false)
             setOpenPayment(false)
             setReservationData(null)
-            console.log('building raw:', space.building)
         } catch (error) {
             const err = error as AxiosError
             console.error(
@@ -63,7 +62,6 @@ export default function CardAlternativas({ space }: Props) {
 
     return (
         <>
-            {/* card */}
             <Card
                 sx={{
                     maxWidth: 300,
@@ -169,9 +167,8 @@ export default function CardAlternativas({ space }: Props) {
 
                     <ReservaForm
                         space={space}
-                        //onClose={() => setOpen(false)}
                         onGoToPayment={(data) => {
-                            setReservationData(data) // ← guardo los datos
+                            setReservationData(data)
                             setOpen(false)
                             setOpenPayment(true)
                         }}
@@ -199,7 +196,6 @@ export default function CardAlternativas({ space }: Props) {
                             setOpenPayment(false)
                         }}
                         onFinish={() => {
-                            // Pago confirmado: creamos la reserva en el backend
                             handleFinishReservation()
                         }}
                     />

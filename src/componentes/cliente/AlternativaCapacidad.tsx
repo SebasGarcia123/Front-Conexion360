@@ -25,7 +25,7 @@ export default function AlternativaCapacidad({
             updated = [...value, range]
         }
 
-        onChange(updated) // 👈 devolvemos al padre
+        onChange(updated)
     }
 
     return (

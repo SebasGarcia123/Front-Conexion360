@@ -73,8 +73,6 @@ export const EdicionUsuario = () => {
     /* ----------------- CARGA INICIAL ----------------- */
 
     useEffect(() => {
-        console.log('USER ROLE:', userData.role)
-        console.log('ROLES:', roles)
     }, [userData.role, roles])
 
     useEffect(() => {
@@ -114,7 +112,6 @@ export const EdicionUsuario = () => {
                         headers: { Authorization: `Bearer ${token}` },
                     }
                 )
-                console.log('ROLES BACK:', data)
                 setRoles(data)
             } catch (err) {
                 console.error(err)

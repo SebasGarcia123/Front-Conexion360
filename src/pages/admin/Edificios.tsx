@@ -33,7 +33,6 @@ export const Edificios = () => {
           'http://localhost:4000/buildings/',
           { headers: { Authorization: `Bearer ${token}` } }
         )
-        console.log(data)
 
         setBuildings(data)
       } catch (err) {
@@ -49,7 +48,7 @@ export const Edificios = () => {
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
-      {/* NAV */}
+
       <NavAdmin />
 
       {/* CONTENIDO */}
@@ -99,7 +98,6 @@ export const Edificios = () => {
 
       </Box>
 
-      {/* FOOTER */}
       <Footer />
     </Box>
   )

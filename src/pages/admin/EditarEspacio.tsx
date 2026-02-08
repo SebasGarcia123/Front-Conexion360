@@ -128,14 +128,14 @@ export const EditarEspacio = () => {
             minHeight: '83vh',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center', // 👈 CENTRADO VERTICAL
+            alignItems: 'center',
         }}
         >
         <Box
             sx={{
-                maxWidth: 480,   // 👈 más chico
+                maxWidth: 480,
                 width: '100%',
-                p: 3,            // 👈 menos padding
+                p: 3,
                 borderRadius: 3,
                 backgroundColor: 'rgba(243,245,246,0.9)',
             }}

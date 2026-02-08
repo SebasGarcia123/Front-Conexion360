@@ -92,7 +92,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
     }
 
     // --------------------------
-    // 🔥 Confirmar pago
+    // Confirmar pago
     // --------------------------
     const handleSubmit = () => {
         if (!validate()) return
@@ -107,7 +107,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
     }
 
     // --------------------------
-    // 🔄 Reset cuando se cierra
+    // Reset cuando se cierra
     // --------------------------
     const resetForm = () => {
         setCardHolder('')
@@ -116,7 +116,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
         setYear('')
         setCvv('')
         setCompleted(false)
-        setErrors({}) // válido: {} es PaymentErrors vacío
+        setErrors({})
     }
 
     const formatCardNumber = (num: string) => {
@@ -128,7 +128,7 @@ export const PagoTarjeta: React.FC<PagoTarjetaProps> = ({
 
     return (
         <Box sx={{ width: '100%', maxWidth: 600, margin: '0 auto' }}>
-            {/* ❌ BOTÓN CERRAR */}
+            {/* BOTÓN CERRAR */}
             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                     onClick={() => {

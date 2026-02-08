@@ -17,17 +17,10 @@ import AlternativaCapacidad from '../../componentes/cliente/AlternativaCapacidad
 import AlternativaFechas from '../../componentes/cliente/AlternativaFechas'
 
 export const OpcionesParaReserva = () => {
-    /* =========================
-     DATA
-  ========================= */
 
     const [spaces, setSpaces] = useState<ISpace[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
-
-    /* =========================
-     FILTROS (valores)
-  ========================= */
 
     const [filtroEdificios, setFiltroEdificio] = useState<string[]>([])
     const [filtroEspacios, setFiltroEspacio] = useState<string[]>([])
@@ -36,17 +29,9 @@ export const OpcionesParaReserva = () => {
     const [dateDesde, setDateDesde] = useState<Date | null>(null)
     const [dateHasta, setDateHasta] = useState<Date | null>(null)
 
-    /* =========================
-     FILTROS (interacción)
-  ========================= */
-
     const [edificiosTocados, setEdificiosTocados] = useState(false)
     const [espaciosTocados, setEspaciosTocados] = useState(false)
     const [capacidadTocada, setCapacidadTocada] = useState(false)
-
-    /* =========================
-     CARGA DE ESPACIOS
-  ========================= */
 
     useEffect(() => {
         const getSpaces = async () => {
@@ -125,7 +110,6 @@ export const OpcionesParaReserva = () => {
         setFiltroEspacio(tiposEspacio)
         setFiltroCapacidad(capacidades)
 
-        // MUY IMPORTANTE
         setEdificiosTocados(false)
         setEspaciosTocados(false)
         setCapacidadTocada(false)
@@ -141,7 +125,6 @@ export const OpcionesParaReserva = () => {
             return spaces
         }
 
-        // tocó un filtro y lo dejó vacío → nada
         if (edificiosTocados && filtroEdificios.length === 0) return []
         if (espaciosTocados && filtroEspacios.length === 0) return []
         if (capacidadTocada && filtroCapacidad.length === 0) return []

@@ -74,18 +74,10 @@ function buildChartData(
     data: ValoracionPorEdificioAnio[],
     buildingId: string
 ): { chartData: ChartRow[]; years: number[]; buildingName: string } {
-    console.log('🧮 buildChartData called')
-    console.log('➡️ buildingId seleccionado:', buildingId)
-    console.log(
-        '➡️ buildingIds disponibles:',
-        data.map((d) => d.buildingId)
-    )
 
     const buildingData = data.filter(
         (d) => String(d.buildingId) === String(buildingId)
     )
-
-    console.log('➡️ buildingData filtrado:', buildingData)
 
     if (!buildingData.length) {
         console.warn('⚠️ No hay datos para este edificio')
@@ -97,8 +89,6 @@ function buildChartData(
     const years = Array.from(new Set(buildingData.map((d) => d.year)))
         .sort((a, b) => a - b)
         .slice(-5)
-
-    console.log('➡️ años detectados:', years)
 
     const chartData: ChartRow[] = MONTHS.map((monthName, idx) => {
         const row: ChartRow = { month: monthName }
@@ -115,8 +105,6 @@ function buildChartData(
         return row
     })
 
-    console.log('➡️ chartData final:', chartData)
-
     return { chartData, years, buildingName }
 }
 
@@ -125,7 +113,6 @@ function buildChartData(
 ======================= */
 
 export const ValoracionPorEdificio = () => {
-    console.log('🟢 RENDER ValoracionPorEdificio')
 
     const [data, setData] = useState<ValoracionPorEdificioAnio[]>([])
     const [buildings, setBuildings] = useState<Building[]>([])
@@ -143,8 +130,6 @@ export const ValoracionPorEdificio = () => {
                     return
                 }
 
-                console.log('📡 Fetching data...')
-
                 const [resData, resBuildings] = await Promise.all([
                     axios.get<ValoracionPorEdificioAnio[]>(
                         'http://localhost:4000/indicadores/edificios/valoracion-mensual',
@@ -155,17 +140,10 @@ export const ValoracionPorEdificio = () => {
                     }),
                 ])
 
-                console.log('✅ Data indicadores:', resData.data)
-                console.log('✅ Buildings:', resBuildings.data)
-
                 setData(resData.data)
                 setBuildings(resBuildings.data)
 
                 if (resBuildings.data.length > 0) {
-                    console.log(
-                        '🏢 selectedBuilding inicial:',
-                        resBuildings.data[0]._id
-                    )
                     setSelectedBuilding(resBuildings.data[0]._id)
                 }
             } catch (err) {
@@ -181,7 +159,6 @@ export const ValoracionPorEdificio = () => {
     /* -------- Datos del gráfico -------- */
 
     const { chartData, years, buildingName } = useMemo(() => {
-        console.log('🔁 useMemo recalculando')
         return buildChartData(data, selectedBuilding)
     }, [data, selectedBuilding])
 
@@ -221,7 +198,6 @@ export const ValoracionPorEdificio = () => {
                     value={selectedBuilding}
                     label="Edificio"
                     onChange={(e) => {
-                        console.log('🏢 Cambio edificio:', e.target.value)
                         setSelectedBuilding(e.target.value)
                     }}
                 >

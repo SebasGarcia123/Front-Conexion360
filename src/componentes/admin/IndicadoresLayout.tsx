@@ -1,4 +1,4 @@
-// layouts/IndicadoresLayout.tsx
+
 import { Box, CssBaseline, Toolbar } from '@mui/material'
 import type { ReactNode } from 'react'
 import { NavAdmin } from './NavAdmin'

@@ -7,7 +7,7 @@ import {
     FormLabel,
     CircularProgress,
 } from '@mui/material'
-import type { ISpace } from '../types'
+import type { ISpace } from '../../types'
 
 interface AlternativaEspaciosProps {
     value: string[]

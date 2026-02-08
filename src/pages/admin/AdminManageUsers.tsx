@@ -2,7 +2,6 @@ import { NavAdmin } from '../../componentes/admin/NavAdmin'
 import { Footer } from '../../componentes/Footer'
 import { Box } from '@mui/material'
 import { TablaUsuarios } from '../../componentes/admin/TablaUsuarios'
-//import fondo from '../assets/foto-registro.jpg'
 
 export const AdminManageUsers = () => {
     return (
@@ -10,7 +9,6 @@ export const AdminManageUsers = () => {
             <NavAdmin />
             <Box
                 sx={{
-                    //backgroundImage: `url(${fondo})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',

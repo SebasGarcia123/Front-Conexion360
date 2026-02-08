@@ -61,11 +61,6 @@ export const Login = () => {
 
     const message = err.response.data?.message
 
-    console.log('STATUS:', err.response.status)
-    console.log('DATA:', err.response.data)
-    console.log('MESSAGE:', err.response.data?.message)
-
-
     if (message === 'Usuario no existe') {
       setUserError('El usuario no existe')
       return

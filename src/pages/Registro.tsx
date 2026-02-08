@@ -112,7 +112,6 @@ export const Registro = () => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        console.log('Datos del formulario:', objData)
         senData()
     }
 

@@ -40,14 +40,14 @@ export const CarrouselOpinion = () => {
         getOpinions()
     }, [])
 
-    if (loading) return null // o un loader
+    if (loading) return null
 
     return (
         <Box
             sx={{
                 width: '100%',
                 px: { xs: 2, md: 8 },
-                overflow: 'visible', // 👈 CLAVE
+                overflow: 'visible',
                 position: 'relative',
             }}
         >
