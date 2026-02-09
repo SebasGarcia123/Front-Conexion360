@@ -271,21 +271,18 @@ export const FormularioNuevoEspacio = () => {
 
             <Footer />
             <Dialog open={openSuccess} onClose={handleSuccessClose}>
-  <DialogTitle>Espacio creado </DialogTitle>
+                <DialogTitle>Espacio creado </DialogTitle>
 
-  <DialogContent>
-    <Typography>
-      El espacio fue creado con éxito.
-    </Typography>
-  </DialogContent>
+                <DialogContent>
+                    <Typography>El espacio fue creado con éxito.</Typography>
+                </DialogContent>
 
-  <DialogActions>
-    <Button onClick={handleSuccessClose} variant="contained">
-      Aceptar
-    </Button>
-  </DialogActions>
-</Dialog>
-
+                <DialogActions>
+                    <Button onClick={handleSuccessClose} variant="contained">
+                        Aceptar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     )
 }

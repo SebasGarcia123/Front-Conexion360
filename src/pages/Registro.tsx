@@ -87,22 +87,23 @@ export const Registro = () => {
                 body: JSON.stringify(objData),
             })
             if (!response.ok) {
-  const responseData = await response.json()
+                const responseData = await response.json()
 
-  if (responseData.errors) {
-    const errorMessages = (responseData.errors as ValidationError[])
-      .map((error) => [error.path, error.msg])
-      .reduce(
-        (acc, [path, msg]) => ({ ...acc, [path]: msg }),
-        {} as Record<string, string>
-      )
+                if (responseData.errors) {
+                    const errorMessages = (
+                        responseData.errors as ValidationError[]
+                    )
+                        .map((error) => [error.path, error.msg])
+                        .reduce(
+                            (acc, [path, msg]) => ({ ...acc, [path]: msg }),
+                            {} as Record<string, string>
+                        )
 
-    setErrors(errorMessages)
-  }
+                    setErrors(errorMessages)
+                }
 
-  throw new Error('Error al enviar los datos de registro')
-}
-
+                throw new Error('Error al enviar los datos de registro')
+            }
 
             navigate('/login')
         } catch (error) {

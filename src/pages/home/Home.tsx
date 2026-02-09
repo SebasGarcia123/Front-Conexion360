@@ -6,7 +6,7 @@ import { Divider } from '@mui/material'
 import { useLoadScript } from '@react-google-maps/api'
 import { Opiniones } from '../../componentes/home/Opiniones'
 import { Soluciones } from '../../componentes/home/Soluciones'
-import { Ubicaciones } from '../../componentes/home/Ubicaciones';
+import { Ubicaciones } from '../../componentes/home/Ubicaciones'
 import { Servicios } from '../../componentes/home/Servicios'
 import { ContactoConexion360 } from '../../componentes/home/Contacto'
 
@@ -97,7 +97,9 @@ export const Home = () => {
 
                 {/* Ubicaciones */}
                 <Box sx={{ backgroundColor: '#efe9e9ff' }}>
-                    <section id="ubicaciones">< Ubicaciones /></section>
+                    <section id="ubicaciones">
+                        <Ubicaciones />
+                    </section>
                 </Box>
 
                 <Box sx={{ width: '100%', mt: 5 }}>
@@ -113,9 +115,9 @@ export const Home = () => {
 
                 {/* Contacto */}
                 <Box sx={{ backgroundColor: 'rgb(233, 234, 239)' }}>
-                <section id="contacto">
-                    <ContactoConexion360 />
-                </section>
+                    <section id="contacto">
+                        <ContactoConexion360 />
+                    </section>
                 </Box>
                 <Footer />
             </Box>

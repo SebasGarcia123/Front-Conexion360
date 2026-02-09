@@ -17,7 +17,6 @@ import AlternativaCapacidad from '../../componentes/cliente/AlternativaCapacidad
 import AlternativaFechas from '../../componentes/cliente/AlternativaFechas'
 
 export const OpcionesParaReserva = () => {
-
     const [spaces, setSpaces] = useState<ISpace[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)

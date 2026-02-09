@@ -114,6 +114,5 @@ export interface JWTPayload {
 }
 
 export interface ISpaceAdmin extends Omit<ISpace, 'building'> {
-  building: IBuildingBySpace
+    building: IBuildingBySpace
 }
-

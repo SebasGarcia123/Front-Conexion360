@@ -64,10 +64,7 @@ export const RoutesList = () => {
                             path="/admin/edificios"
                             element={<Edificios />}
                         />
-                        <Route
-                            path="/admin/espacios"
-                            element={<Espacios />}
-                        />
+                        <Route path="/admin/espacios" element={<Espacios />} />
                         <Route
                             path="/nuevo/edificio"
                             element={<FormularioNuevoEdificio />}

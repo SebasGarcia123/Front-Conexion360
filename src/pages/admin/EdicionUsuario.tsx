@@ -72,8 +72,7 @@ export const EdicionUsuario = () => {
 
     /* ----------------- CARGA INICIAL ----------------- */
 
-    useEffect(() => {
-    }, [userData.role, roles])
+    useEffect(() => {}, [userData.role, roles])
 
     useEffect(() => {
         const loadUser = async () => {

@@ -74,7 +74,6 @@ function buildChartData(
     data: ValoracionPorEdificioAnio[],
     buildingId: string
 ): { chartData: ChartRow[]; years: number[]; buildingName: string } {
-
     const buildingData = data.filter(
         (d) => String(d.buildingId) === String(buildingId)
     )
@@ -113,7 +112,6 @@ function buildChartData(
 ======================= */
 
 export const ValoracionPorEdificio = () => {
-
     const [data, setData] = useState<ValoracionPorEdificioAnio[]>([])
     const [buildings, setBuildings] = useState<Building[]>([])
     const [selectedBuilding, setSelectedBuilding] = useState('')

@@ -17,7 +17,6 @@ import fondo from '../../assets/foto-registro.jpg'
 import { NavAdmin } from '../../componentes/admin/NavAdmin'
 import { useNavigate } from 'react-router-dom'
 
-
 export const FormularioNuevoEdificio = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -43,7 +42,6 @@ export const FormularioNuevoEdificio = () => {
         setOpenSuccess(false)
         navigate('/admin/edificios')
     }
-
 
     const sendData = async () => {
         try {
@@ -172,23 +170,26 @@ export const FormularioNuevoEdificio = () => {
                         </Button>
                     </Stack>
                 </Paper>
-                
+
                 {/* Modal de Edificio creado */}
 
                 <Dialog open={openSuccess} onClose={handleSuccessClose}>
-                <DialogTitle>Edificio creado</DialogTitle>
+                    <DialogTitle>Edificio creado</DialogTitle>
 
-                <DialogContent>
-                    <Typography>
-                    El edificio fue creado con éxito.
-                    </Typography>
-                </DialogContent>
+                    <DialogContent>
+                        <Typography>
+                            El edificio fue creado con éxito.
+                        </Typography>
+                    </DialogContent>
 
-                <DialogActions>
-                    <Button onClick={handleSuccessClose} variant="contained">
-                    Aceptar
-                    </Button>
-                </DialogActions>
+                    <DialogActions>
+                        <Button
+                            onClick={handleSuccessClose}
+                            variant="contained"
+                        >
+                            Aceptar
+                        </Button>
+                    </DialogActions>
                 </Dialog>
 
                 {/* Modal de error */}
