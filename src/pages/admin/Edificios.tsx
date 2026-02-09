@@ -14,6 +14,7 @@ interface Building {
   city: string
   country: string
   urlImage: string
+  isActive: boolean
 }
 
 export const Edificios = () => {
@@ -23,40 +24,34 @@ export const Edificios = () => {
 
   const navigate = useNavigate()
 
+  const fetchBuildings = async () => {
+    try {
+      const token = sessionStorage.getItem('authToken')
+      if (!token) return
+
+      const { data } = await axios.get<Building[]>(
+        'http://localhost:4000/buildings/admin',
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+
+      setBuildings(data)
+    } catch (err) {
+      console.error(err)
+      setError('No se pudieron cargar los edificios')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchBuildings = async () => {
-      try {
-        const token = sessionStorage.getItem('authToken')
-        if (!token) return
-        const { data } = await axios.get<Building[]>(
-          'http://localhost:4000/buildings/',
-          { headers: { Authorization: `Bearer ${token}` } }
-        )
-
-        setBuildings(data)
-      } catch (err) {
-        console.error(err)
-        setError('No se pudieron cargar los edificios')
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchBuildings()
   }, [])
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
-
       <NavAdmin />
 
-      {/* CONTENIDO */}
-      <Box
-        flexGrow={1}
-        px={4}
-        py={3}
-      >
+      <Box flexGrow={1} px={4} py={3}>
         <Typography variant="h5" fontWeight={600} mb={3}>
           Edificios
         </Typography>
@@ -74,28 +69,26 @@ export const Edificios = () => {
         )}
 
         {!loading && !error && (
-  <Box
-    display="flex"
-    flexWrap="wrap"
-    gap={3}
-  >
-    {buildings.map((b) => (
-      <CardEdificio
-        key={b._id}
-        urlImage={b.urlImage}
-        name={b.name}
-        address={b.address}
-        city={b.city}
-        country={b.country}
-      />
-    ))}
+          <Box display="flex" flexWrap="wrap" gap={3}>
+            {buildings.map((b) => (
+              <CardEdificio
+                key={b._id}
+                id={b._id}
+                urlImage={b.urlImage}
+                name={b.name}
+                address={b.address}
+                city={b.city}
+                country={b.country}
+                isActive={b.isActive}
+                onUpdated={fetchBuildings}
+              />
+            ))}
 
-    <CardCrearEdificio
-      onClick={() => navigate("/nuevo/edificio")}
-    />
-  </Box>
-)}
-
+            <CardCrearEdificio
+              onClick={() => navigate('/nuevo/edificio')}
+            />
+          </Box>
+        )}
       </Box>
 
       <Footer />
