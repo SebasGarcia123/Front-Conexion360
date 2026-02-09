@@ -42,7 +42,7 @@ export const ReservaForm = ({ space, onGoToPayment }: Props) => {
             if (!space?._id) return
             const token = sessionStorage.getItem('authToken')
             const r = await axios.get(
-                `http://localhost:4000/reservations/space/${space._id}`,
+                `http://localhost:4000/spaces/reservations/space/${space._id}`,
                 { headers: { Authorization: `Bearer ${token}` } }
             )
             setReservasExistentes(r.data)
